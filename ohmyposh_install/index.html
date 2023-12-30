@@ -35,7 +35,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http://Agmes47.github.io/ohmyposh_install/"
-        },"genre": "posts","wordcount":  434 ,
+        },"genre": "posts","wordcount":  733 ,
         "url": "http://Agmes47.github.io/ohmyposh_install/","datePublished": "2023-12-30T19:43:57+08:00","dateModified": "2023-12-30T19:43:57+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -131,7 +131,7 @@
             <div class="post-meta-line">
                 <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/authors/aclius/" title="Author" rel=" author" class="author">Aclius</a>
                 </span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-30">2023-12-30</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-30">2023-12-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;434 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-30">2023-12-30</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-30">2023-12-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;733 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="true">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -149,10 +149,18 @@
                   <ul>
                     <li><a href="#1-install-ohmyposh">(1) Install OhMyPosh</a></li>
                     <li><a href="#2-install-a-font">(2) Install a font</a></li>
-                    <li><a href="#3prompt">(3)Prompt</a></li>
+                    <li><a href="#3-prompt">(3) Prompt</a></li>
                     <li><a href="#4-costomize">(4) Costomize</a></li>
                   </ul>
                 </li>
+                <li><a href="#2-wsl2">2. WSL2</a>
+                  <ul>
+                    <li><a href="#1-homebrew-failed">(1) Homebrew (failed)</a></li>
+                    <li><a href="#2-download-ohmyposh-binary-file-in-github">(2) Download OhMyPosh binary file in github</a></li>
+                    <li><a href="#3-customize">(3) Customize</a></li>
+                  </ul>
+                </li>
+                <li><a href="#postscripse">Postscripse</a></li>
               </ul>
             </li>
           </ul>
@@ -188,8 +196,8 @@
 <p>Use default shortcut &lsquo;Ctrl + Shift + ,&rsquo; to open the &lsquo;setting.json&rsquo; file and add the name of the font I&rsquo;ve just downloaded as the document says. After that, the error  immediately occured as:</p>
 <img src="file:///C:/Users/荣耀/AppData/Roaming/marktext/images/2023-12-30-20-19-45-image.png" title="" alt="" width="403">
 <p>After trying other different fonts I still got the same result, so I try to download([download page](<a href="https://www.nerdfonts.com/font-downloads" target="_blank" rel="noopener noreferrer">Nerd Fonts - Iconic font aggregator, glyphs/icons collection, &amp; fonts patcher</a>)) and manually install a font and finally succeed(remember to add it in the &lsquo;setting.json&rsquo; as before after install your font).</p>
-<h6 id="3prompt" class="headerLink">
-    <a href="#3prompt" class="header-mark"></a>(3)Prompt</h6><p>Use this command to create a profile for your Powershell if you haven&rsquo;t got one</p>
+<h6 id="3-prompt" class="headerLink">
+    <a href="#3-prompt" class="header-mark"></a>(3) Prompt</h6><p>Use this command to create a profile for your Powershell if you haven&rsquo;t got one</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -248,6 +256,59 @@
 </div>
 </div><h6 id="4-costomize" class="headerLink">
     <a href="#4-costomize" class="header-mark"></a>(4) Costomize</h6><p>Check all the [themes](<a href="https://ohmyposh.dev/docs/themes" target="_blank" rel="noopener noreferrer">Themes | Oh My Posh</a>) available, select one and then edit the <strong>PROFILE</strong>, replace the &ldquo;~/custom.omp.json&rdquo; with &ldquo;$env:POSH_THEMES_PATH/theme_name.omp.json&rdquo;. For example, &ldquo;env:POSH_THEMES_PATH/aliens.omp.json&rdquo;. Fianlly dot sourcing the <strong>PROFILE</strong> like before(If you donot witness the effect, just restart your Powershell).</p>
+<h5 id="2-wsl2" class="headerLink">
+    <a href="#2-wsl2" class="header-mark"></a>2. WSL2</h5><h6 id="1-homebrew-failed" class="headerLink">
+    <a href="#1-homebrew-failed" class="header-mark"></a>(1) Homebrew (failed)</h6><p>I tried to install the Homebrew(check out the official [page](<a href="https://brew.sh/" target="_blank" rel="noopener noreferrer">Homebrew — The Missing Package Manager for macOS (or Linux)</a>)) first but it kept telling me that there&rsquo;s some wrong with my 7890 port(I&rsquo;m using a proxy to achieve a relatively fast speed). Then I spend a good hours to find out ways to install Homebrew on my WSL2 and finally gave up. By the way, I&rsquo;ve got some [methods](<a href="https://blog.csdn.net/hn_tzy/article/details/88903642" target="_blank" rel="noopener noreferrer">提高ubuntu下访问github的速度_ubuntu git ip加速-CSDN博客</a>) to boast up the downloading speed on github(worked for me though).</p>
+<h6 id="2-download-ohmyposh-binary-file-in-github" class="headerLink">
+    <a href="#2-download-ohmyposh-binary-file-in-github" class="header-mark"></a>(2) Download OhMyPosh binary file in github</h6><p>[Reference](<a href="https://blog.csdn.net/hys__handsome/article/details/125697108" target="_blank" rel="noopener noreferrer">PowerShell和WSL for Ubuntu安装oh-my-posh_wsl ubuntu 配置oh-my-posd-CSDN博客</a>). Due to the mysterious awfle connection between my WSL2 and github, I went to the github release [page](<a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases" target="_blank" rel="noopener noreferrer">Releases · JanDeDobbeleer/oh-my-posh (github.com)</a>) and downloaded the <a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.3.0/posh-linux-arm64" target="_blank" rel="noopener noreferrer">posh-linux-arm64</a> and then moved it to &lsquo;/usr/local/bin/oh-my-posh&rsquo; and used &lsquo;chmod + x&rsquo; to make it  executable(Assume you&rsquo;ve known some basic Linux commands).</p>
+<h6 id="3-customize" class="headerLink">
+    <a href="#3-customize" class="header-mark"></a>(3) Customize</h6><p>create a folder to store your theme on your current user&rsquo;s path</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir ~/.poshthemes
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>for the same reason above I have to download the theme.zip file manually(in the same page also and if you couldn&rsquo;t find it, I&rsquo;ve got <a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.3.0/themes.zip" target="_blank" rel="noopener noreferrer">it</a> for you), and then unzip it in the folder I just created.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">unzip ~/.poshthemes/theme.zip -d ~/.poshthemes
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>make them all readable and writtable</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod u+rw ~/.poshthemes/*.omp.*
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>then you could delete the zip file if you like</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm ~/.poshthemes/theme.zip
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>To enable OhMyPosh auto-start, add the following line at the end of &lsquo;/etc/profile&rsquo;. (remember to replace the &rsquo;theme_name&rsquo; with a real one)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">eval &#34;$(oh-my-posh --init --shell bash --config ~/.poshthemes/theme_name.omp.json)&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="postscripse" class="headerLink">
+    <a href="#postscripse" class="header-mark"></a>Postscripse</h5><p>All the themes seem too garish for me and just change back to default after all the working. Just for fun. Limited to the author&rsquo;s knowledge, there might be some wrong stuff on blog which you might need to corret them by yourself.</p>
 </div>
 
         
