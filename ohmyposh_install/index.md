@@ -73,8 +73,6 @@ Then dot sourcing the my profile script
 
 Check all the [themes]([Themes | Oh My Posh](https://ohmyposh.dev/docs/themes)) available, select one and then edit the **PROFILE**, replace the "~/custom.omp.json" with "$env:POSH_THEMES_PATH/theme_name.omp.json". For example, "env:POSH_THEMES_PATH/aliens.omp.json". Fianlly dot sourcing the **PROFILE** like before(If you donot witness the effect, just restart your Powershell).
 
-
-
 ##### 2. WSL2
 
 ###### (1) Homebrew (failed)
@@ -83,7 +81,7 @@ I tried to install the Homebrew(check out the official [page]([Homebrew — The 
 
 ###### (2) Download OhMyPosh binary file in github
 
-[Reference]([PowerShell和WSL for Ubuntu安装oh-my-posh_wsl ubuntu 配置oh-my-posd-CSDN博客](https://blog.csdn.net/hys__handsome/article/details/125697108)). Due to the mysterious awfle connection between my WSL2 and github, I went to the github release [page]([Releases · JanDeDobbeleer/oh-my-posh (github.com)](https://github.com/JanDeDobbeleer/oh-my-posh/releases)) and downloaded the [posh-linux-arm64](https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.3.0/posh-linux-arm64) and then moved it to '/usr/local/bin/oh-my-posh' and used 'chmod + x' to make it  executable(Assume you've known some basic Linux commands). 
+[Reference]([PowerShell和WSL for Ubuntu安装oh-my-posh_wsl ubuntu 配置oh-my-posd-CSDN博客](https://blog.csdn.net/hys__handsome/article/details/125697108)). Due to the mysterious awfle connection between my WSL2 and github, I went to the github release [page]([Releases · JanDeDobbeleer/oh-my-posh (github.com)](https://github.com/JanDeDobbeleer/oh-my-posh/releases)) and downloaded the [posh-linux-arm64](https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.3.0/posh-linux-arm64) and then moved it to '/usr/local/bin/oh-my-posh' and used `chmod + x` to make it  executable(Assuming you've known some basic Linux commands). 
 
 ###### (3) Customize
 
@@ -93,7 +91,7 @@ create a folder to store your theme on your current user's path
 mkdir ~/.poshthemes
 ```
 
-for the same reason above I have to download the theme.zip file manually(in the same page also and if you couldn't find it, I've got [it](https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.3.0/themes.zip) for you), and then unzip it in the folder I just created.
+for the same reason above I have to download the theme.zip file manually(in the same page also and if you couldn't find it, I've got [it](https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.3.0/themes.zip) for you), and then `unzip` it in the folder I just created.
 
 ```bash
 unzip ~/.poshthemes/theme.zip -d ~/.poshthemes
@@ -116,8 +114,6 @@ To enable OhMyPosh auto-start, add the following line at the end of '/etc/profil
 ```
 eval "$(oh-my-posh --init --shell bash --config ~/.poshthemes/theme_name.omp.json)"
 ```
-
-
 
 ##### Postscripse
 
