@@ -7,8 +7,26 @@
     <title>How to use OhMyPosh to decorate your terminal</title>
     <link>http://Agmes47.github.io/ohmyposh_install/</link>
     <pubDate>Sat, 30 Dec 2023 19:43:57 &#43;0800</pubDate><author>
-        <name>Alice</name>
+        <name>Aclius</name>
     </author><guid>http://Agmes47.github.io/ohmyposh_install/</guid>
     <description><![CDATA[1. PowershellAt the beginning, I was trying to implement it on WindowsPowershell and result in a mess which I&rsquo;ve forgot(For more information about the differences between them, please check out this [page](Differences between Windows PowerShell 5.1 and PowerShell 7.x - PowerShell | Microsoft Learn)). Then I strictly follow steps on the official [document](Introduction | Oh My Posh) while at the same time still encounter some problems. Here I will show the proper way I&rsquo;ve tried on to complete this task.]]></description>
+</item><item>
+    <title>Some configurations</title>
+    <link>http://Agmes47.github.io/config/</link>
+    <pubDate>Sat, 02 Jan 2010 16:49:08 &#43;0800</pubDate><author>
+        <name>Aclius</name>
+    </author><guid>http://Agmes47.github.io/config/</guid>
+    <description><![CDATA[Go&rsquo;s configuration in VScodeProblem: Could not download VScode plugins of Go due to a famous firewall(I guess). here is the [reference](一招完美解决vscode安装go插件失败问题_installing github.com/cweill/gotests/gotests@v1.6.-CSDN博客).
+Solvation:
+This is the old version(abandoned):
+1 2 go env -w GO111MODULE=on go env -w GOPROXY=https://goproxy.io,direct Open cmd or powershell and run the following commands:
+1 2 go env -w GO111MODULE=on go env -w GOPROXY=https://proxy.golang.com.cn,direct Then restart VScode and install the Go plugins again, you should succeed.]]></description>
+</item><item>
+    <title>Having Fun</title>
+    <link>http://Agmes47.github.io/rules/</link>
+    <pubDate>Sat, 01 Jan 2000 00:00:00 &#43;0800</pubDate><author>
+                        <name>Aclius</name><uri>https://bing.com</uri><email>segma@cock.email</email></author><guid>http://Agmes47.github.io/rules/</guid>
+    <description><![CDATA[Rule 1:Any rule can be elaborately created, modified and discarded except rule 1.
+Rule 2:Left hand is baned.]]></description>
 </item></channel>
 </rss>
