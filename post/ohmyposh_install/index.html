@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="generator" content="Hugo 0.121.1">
+		<title>How to use OhMyPosh to decorate your terminal - Manis</title>
+
+		<meta name="description" content="1. Powershell At the beginning, I was trying to implement it on WindowsPowershell and result in a mess which I&rsquo;ve forgot(For more information about the differences between them, please check out this [page](Differences between Windows PowerShell 5.1 and PowerShell 7.x - PowerShell | Microsoft Learn)). Then I strictly follow steps on the official [document](Introduction | Oh My Posh) while at the same time still encounter some problems. Here I will show the proper way I&rsquo;ve tried on to complete this task.">
+
+
+		
+	
+		
+
+
+
+
+<link rel="stylesheet" href="/css/ui.css">
+
+	
+		
+
+		<script defer src="/js/dark-mode.js"></script>
+		<link disabled id="dark-mode-theme" rel="stylesheet" href="/css/dark.css">
+		<link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono|Lato|Raleway">
+
+		
+	</head>
+
+<body>
+<header class="container no-print">
+	<div class="u-header">
+		<nav class="bar">
+	<ul><li>
+			<a href="/">
+				<img class="icon-text" src="/img/prev.svg"/>
+			</a>
+		</li><li><img class="icon-text" id="dark-mode-toggle" src="/img/moon-regular.svg" alt="Toggle Dark Mode"></a></li><li><a href="/about">About</a></li><li><a href="/post/">Post</a></li></ul>
+</nav>
+
+	</div>
+</header>
+<main class="container">
+
+<article>
+	<header><hgroup id="brand">
+	<h1>How to use OhMyPosh to decorate your terminal</h1>
+	<h5>
+		
+		<time datetime="2023-12-30 19:43:57 &#43;0800 CST">Dec 30, 2023</time>
+		<span class="no-print">
+			<span>
+	</h5>
+	
+</hgroup>
+<hr class="sep" />
+</header>
+	<h5 id="1-powershell">1. Powershell</h5>
+<p>At the beginning, I was trying to implement it on WindowsPowershell and result in a mess which I&rsquo;ve forgot(For more information about the differences between them, please check out this [page](<a href="https://learn.microsoft.com/en-us/powershell/scripting/whats-new/differences-from-windows-powershell?view=powershell-7.3">Differences between Windows PowerShell 5.1 and PowerShell 7.x - PowerShell | Microsoft Learn</a>)). Then I strictly follow steps on the official [document](<a href="https://ohmyposh.dev/docs/">Introduction | Oh My Posh</a>) while at  the same time still encounter some problems. Here I will show the proper way I&rsquo;ve tried on to complete this task.</p>
+<h6 id="1-install-ohmyposh">(1) Install OhMyPosh</h6>
+<p>Open Powershell and execute the command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">winget</span> <span class="n">install</span> <span class="n">JanDeDobbeleer</span><span class="p">.</span><span class="py">OhMyPosh</span> <span class="n">-s</span> <span class="n">winget</span>
+</span></span></code></pre></div><h6 id="2-install-a-font">(2) Install a font</h6>
+<p>The way official document recommands didn&rsquo;t apply to me, when I execute the  command as adminstrator:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">oh-my</span><span class="n">-posh</span> <span class="n">font</span> <span class="n">install</span>
+</span></span></code></pre></div><p>And then select a ramdon one from the list:</p>
+<!-- raw HTML omitted -->
+<p>Use default shortcut &lsquo;Ctrl + Shift + ,&rsquo; to open the &lsquo;setting.json&rsquo; file and add the name of the font I&rsquo;ve just downloaded as the document says. After that, the error  immediately occured as:</p>
+<!-- raw HTML omitted -->
+<p>After trying other different fonts I still got the same result, so I try to download([download page](<a href="https://www.nerdfonts.com/font-downloads">Nerd Fonts - Iconic font aggregator, glyphs/icons collection, &amp; fonts patcher</a>)) and manually install a font and finally succeed(remember to add it in the &lsquo;setting.json&rsquo; as before after install your font).</p>
+<h6 id="3-prompt">(3) Prompt</h6>
+<p>Use this command to create a profile for your Powershell if you haven&rsquo;t got one</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">New-Item</span> <span class="n">-Path</span> <span class="nv">$PROFILE</span> <span class="n">-Type</span> <span class="n">File</span> <span class="n">-Force</span>
+</span></span></code></pre></div><p>Use this command to open the profile you just create with notepad.exe</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">notepad</span> <span class="nv">$PROFILE</span>
+</span></span></code></pre></div><p>Then I add the following line to my profile as the document said(it didn&rsquo;t apply to me)</p>
+<pre tabindex="0"><code>oh-my-posh init pwsh | Invoke-Expression
+</code></pre><p>After that, some errors occured(sorry about forgetting them, but adding the OhMyPosh.exe to my Anti-Virus software&rsquo;s whitelist didn&rsquo;t help any). For some good hours I finally found the proper solution on a platform(Thank you, bilibili comments) that I was almost desperate to look for. And the problem is that I got some unicode characters in my OhMyPosh.exe path(if you&rsquo;re curious, they are&quot;鑽ｈ€&quot;). The solution is in the [OhMyPosh FAQ page](<a href="https://ohmyposh.dev/docs/faq">FAQ | Oh My Posh</a>). Just simply change the line I&rsquo;ve put in profile to the following one.</p>
+<pre tabindex="0"><code>$previousOutputEncoding = [Console]::OutputEncoding
+[Console]::OutputEncoding = [Text.Encoding]::UTF8
+try {
+    oh-my-posh init pwsh --config ~/custom.omp.json | Invoke-Expression
+} finally {
+    [Console]::OutputEncoding = $previousOutputEncoding
+}
+</code></pre><p>Then dot sourcing the my profile script</p>
+<pre tabindex="0"><code>. $PROFILE
+</code></pre><h6 id="4-costomize">(4) Costomize</h6>
+<p>Check all the [themes](<a href="https://ohmyposh.dev/docs/themes">Themes | Oh My Posh</a>) available, select one and then edit the <strong>PROFILE</strong>, replace the &ldquo;~/custom.omp.json&rdquo; with &ldquo;$env:POSH_THEMES_PATH/theme_name.omp.json&rdquo;. For example, &ldquo;env:POSH_THEMES_PATH/aliens.omp.json&rdquo;. Fianlly dot sourcing the <strong>PROFILE</strong> like before(If you donot witness the effect, just restart your Powershell).</p>
+<h5 id="2-wsl2">2. WSL2</h5>
+<h6 id="1-homebrew-failed">(1) Homebrew (failed)</h6>
+<p>I tried to install the Homebrew(check out the official [page](<a href="https://brew.sh/">Homebrew — The Missing Package Manager for macOS (or Linux)</a>)) first but it kept telling me that there&rsquo;s some wrong with my 7890 port(I&rsquo;m using a proxy to achieve a relatively fast speed). Then I spend a good hours to find out ways to install Homebrew on my WSL2 and finally gave up. By the way, I&rsquo;ve got some [methods](<a href="https://blog.csdn.net/hn_tzy/article/details/88903642">提高ubuntu下访问github的速度_ubuntu git ip加速-CSDN博客</a>) to boast up the downloading speed on github(worked for me though).</p>
+<h6 id="2-download-ohmyposh-binary-file-in-github">(2) Download OhMyPosh binary file in github</h6>
+<p>[Reference](<a href="https://blog.csdn.net/hys__handsome/article/details/125697108">PowerShell和WSL for Ubuntu安装oh-my-posh_wsl ubuntu 配置oh-my-posd-CSDN博客</a>). Due to the mysterious awfle connection between my WSL2 and github, I went to the github release [page](<a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases">Releases · JanDeDobbeleer/oh-my-posh (github.com)</a>) and downloaded the <a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.3.0/posh-linux-arm64">posh-linux-arm64</a> and then moved it to &lsquo;/usr/local/bin/oh-my-posh&rsquo; and used <code>chmod + x</code> to make it  executable(Assuming you&rsquo;ve known some basic Linux commands).</p>
+<h6 id="3-customize">(3) Customize</h6>
+<p>create a folder to store your theme on your current user&rsquo;s path</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir ~/.poshthemes
+</span></span></code></pre></div><p>for the same reason above I have to download the theme.zip file manually(in the same page also and if you couldn&rsquo;t find it, I&rsquo;ve got <a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.3.0/themes.zip">it</a> for you), and then <code>unzip</code> it in the folder I just created.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">unzip ~/.poshthemes/theme.zip -d ~/.poshthemes
+</span></span></code></pre></div><p>make them all readable and writtable</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod u+rw ~/.poshthemes/*.omp.*
+</span></span></code></pre></div><p>then you could delete the zip file if you like</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm ~/.poshthemes/theme.zip
+</span></span></code></pre></div><p>To enable OhMyPosh auto-start, add the following line at the end of &lsquo;/etc/profile&rsquo;. (remember to replace the &rsquo;theme_name&rsquo; with a real one)</p>
+<pre tabindex="0"><code>eval &#34;$(oh-my-posh --init --shell bash --config ~/.poshthemes/theme_name.omp.json)&#34;
+</code></pre><h5 id="postscripse">Postscripse</h5>
+<p>All the themes seem too garish for me and just change back to default after all the working. Just for fun. Limited to the author&rsquo;s knowledge, there might be some wrong stuff on blog which you might need to corret them by yourself.</p>
+
+</article>
+<nav class="no-print post-nav">
+
+	<a class="prev-post" href="https://agmes47.github.io/post/config/">
+		<img class="icon-text" src="/img/prev.svg"/>Some configurations</a>
+
+
+	<a class="next-post" href="https://agmes47.github.io/post/wapargox/">WAP only IPV6 HK &#43; ARGOX<img class="icon-text" src="/img/next.svg"/>
+	</a>
+
+</nav>
+
+
+
+
+
+			<hr class="sep" />
+		</main>
+		<footer class="container no-print">
+			<div class="u-footer">
+				
+<a href="mailto:mail@yurizal-san.com"><img class="icon-social" src="/img/email.svg" alt="Email Me!"/></a>
+
+
+<a href="https://github.com/yursan9/"><img class="icon-social" src="/img/github.svg" alt="Github"/></a>
+
+
+<a href="https://twitter.com/yuri_boya"><img class="icon-social" src="/img/twitter.svg" alt="Twitter"/></a>
+
+<a href="https://agmes47.github.io/index.xml" target="_blank"><img class="icon-social" src="/img/feed.svg" alt="Feed"></a>
+
+
+				<p>
+					
+					Theme used: <a href="https://github.com/yursan9/manis-hugo-theme">Manis</a><br>
+					
+					
+					&copy; 2019 Yurizal Susanto
+					
+					
+					| <a href="/about/license">License</a>
+					
+				</p>
+				
+				<a href="#brand">
+					<img class="icon-text" src="/img/toup.svg" alt="To Up"/>
+					<span>Back to Up</span>
+				</a>
+				
+			</div>
+		</footer>
+		
+	</body>
+</html>
+

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="generator" content="Hugo 0.121.1">
+		<title>Having Fun - Manis</title>
+
+		<meta name="description" content="Random Keyboard got locked A cat standing on my keyboard for a good amount of seconds and the keyboard got locked afer instant sharp &lsquo;di&rsquo; sound. The solution is press the right Shift key for more than 8 seconds. Reference: https://www.zhihu.com/question/539981785#
+Linux Basic adduser and useradd are different. Use adduser. So applied to other similar commands, I guess.
+Scripts Reprinted from https://blog.xueli.lol/Linux/13.html
+Debian basic configuration
+apt update -y &amp;&amp; apt upgrade -y &amp;&amp; apt install -y wget curl vim lsof sudo Alpine basic configuraion">
+
+
+		
+	
+		
+
+
+
+
+<link rel="stylesheet" href="/css/ui.css">
+
+	
+		
+
+		<script defer src="/js/dark-mode.js"></script>
+		<link disabled id="dark-mode-theme" rel="stylesheet" href="/css/dark.css">
+		<link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono|Lato|Raleway">
+
+		
+	</head>
+
+<body>
+<header class="container no-print">
+	<div class="u-header">
+		<nav class="bar">
+	<ul><li>
+			<a href="/">
+				<img class="icon-text" src="/img/prev.svg"/>
+			</a>
+		</li><li><img class="icon-text" id="dark-mode-toggle" src="/img/moon-regular.svg" alt="Toggle Dark Mode"></a></li><li><a href="/about">About</a></li><li><a href="/post/">Post</a></li></ul>
+</nav>
+
+	</div>
+</header>
+<main class="container">
+
+<article>
+	<header><hgroup id="brand">
+	<h1>Having Fun</h1>
+	<h5>
+		
+		<time datetime="2000-01-01 00:00:00 &#43;0800 CST">Jan 01, 2000</time>
+		<span class="no-print">
+			<span>
+	</h5>
+	
+</hgroup>
+<hr class="sep" />
+</header>
+	<h2 id="random">Random</h2>
+<h6 id="keyboard-got-locked">Keyboard got locked</h6>
+<p>A cat standing on my keyboard for a good amount of seconds and the keyboard got locked afer instant sharp &lsquo;di&rsquo; sound. The solution is press the right <code>Shift</code> key for more than 8 seconds. Reference: <a href="https://www.zhihu.com/question/539981785#">https://www.zhihu.com/question/539981785#</a></p>
+<h2 id="linux">Linux</h2>
+<h4 id="basic">Basic</h4>
+<p><code>adduser</code> and <code>useradd</code> are different. Use <code>adduser</code>. So applied to other similar commands, I guess.</p>
+<h4 id="scripts">Scripts</h4>
+<p>Reprinted from <a href="https://blog.xueli.lol/Linux/13.html">https://blog.xueli.lol/Linux/13.html</a></p>
+<p>Debian basic configuration</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt update -y <span class="o">&amp;&amp;</span> apt upgrade -y <span class="o">&amp;&amp;</span> apt install -y wget curl vim lsof sudo
+</span></span></code></pre></div><p>Alpine basic configuraion</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apk update <span class="o">&amp;&amp;</span> apk upgrade <span class="o">&amp;&amp;</span> apk add wget curl vim lsof sudo git bash
+</span></span></code></pre></div><p>swap</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/ChellyL/swap_change/main/swap.sh <span class="o">&amp;&amp;</span> bash swap.sh
+</span></span></code></pre></div><p>BBR</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget -N --no-check-certificate <span class="s2">&#34;https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh&#34;</span> <span class="o">&amp;&amp;</span> chmod +x tcp.sh <span class="o">&amp;&amp;</span> ./tcp.sh
+</span></span></code></pre></div><p>Install docker</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -fsSL https://get.docker.com <span class="p">|</span> bash -s docker
+</span></span><span class="line"><span class="cl">systemctl start docker
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> docker
+</span></span></code></pre></div><p>netflix detecting</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget -O nf https://github.com/sjlleo/netflix-verify/releases/download/2.01/nf_2.01_linux_amd64 <span class="o">&amp;&amp;</span> chmod +x nf <span class="o">&amp;&amp;</span> clear <span class="o">&amp;&amp;</span> ./nf
+</span></span></code></pre></div><p>x-ui</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh<span class="o">)</span>
+</span></span></code></pre></div><p>nezha panel</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -L https://raw.githubusercontent.com/naiba/nezha/master/script/install.sh  -o nezha.sh <span class="o">&amp;&amp;</span> chmod +x nezha.sh <span class="o">&amp;&amp;</span> sudo ./nezha.sh
+</span></span></code></pre></div><p>aurora panel</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>curl -fsSL https://raw.githubusercontent.com/Aurora-Admin-Panel/deploy/main/install.sh<span class="o">)</span>
+</span></span></code></pre></div><p>vps accessing</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -L https://gitlab.com/spiritysdx/za/-/raw/main/ecs.sh -o ecs.sh <span class="o">&amp;&amp;</span> chmod +x ecs.sh <span class="o">&amp;&amp;</span> bash ecs.sh
+</span></span></code></pre></div><h2 id="thoughts">Thoughts</h2>
+<p>Rules also remind me of the hibitions which lead to some kind of contrary effects.</p>
+<p>Depends on how you think.</p>
+
+</article>
+<nav class="no-print post-nav">
+
+
+	<a class="next-post" href="https://agmes47.github.io/post/config/">Some configurations<img class="icon-text" src="/img/next.svg"/>
+	</a>
+
+</nav>
+
+
+
+
+
+			<hr class="sep" />
+		</main>
+		<footer class="container no-print">
+			<div class="u-footer">
+				
+<a href="mailto:mail@yurizal-san.com"><img class="icon-social" src="/img/email.svg" alt="Email Me!"/></a>
+
+
+<a href="https://github.com/yursan9/"><img class="icon-social" src="/img/github.svg" alt="Github"/></a>
+
+
+<a href="https://twitter.com/yuri_boya"><img class="icon-social" src="/img/twitter.svg" alt="Twitter"/></a>
+
+<a href="https://agmes47.github.io/index.xml" target="_blank"><img class="icon-social" src="/img/feed.svg" alt="Feed"></a>
+
+
+				<p>
+					
+					Theme used: <a href="https://github.com/yursan9/manis-hugo-theme">Manis</a><br>
+					
+					
+					&copy; 2019 Yurizal Susanto
+					
+					
+					| <a href="/about/license">License</a>
+					
+				</p>
+				
+				<a href="#brand">
+					<img class="icon-text" src="/img/toup.svg" alt="To Up"/>
+					<span>Back to Up</span>
+				</a>
+				
+			</div>
+		</footer>
+		
+	</body>
+</html>
+

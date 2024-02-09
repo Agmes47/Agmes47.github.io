@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="generator" content="Hugo 0.121.1">
+		<title>Some configurations - Manis</title>
+
+		<meta name="description" content="Go&rsquo;s configuration in VScode [Setting up Go in Windows](配置 Visual Studio Code for Go 开发 - Go on Azure | Microsoft Learn)
+Problem: Could not download VScode plugins of Go due to a famous firewall(I guess). here is the [reference](一招完美解决vscode安装go插件失败问题_installing github.com/cweill/gotests/gotests@v1.6.-CSDN博客).
+Solvation:
+This is the old version(abandoned):
+go env -w GO111MODULE=on go env -w GOPROXY=https://goproxy.io,direct Open cmd or powershell and run the following commands:
+go env -w GO111MODULE=on go env -w GOPROXY=https://proxy.">
+
+
+		
+	
+		
+
+
+
+
+<link rel="stylesheet" href="/css/ui.css">
+
+	
+		
+
+		<script defer src="/js/dark-mode.js"></script>
+		<link disabled id="dark-mode-theme" rel="stylesheet" href="/css/dark.css">
+		<link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono|Lato|Raleway">
+
+		
+	</head>
+
+<body>
+<header class="container no-print">
+	<div class="u-header">
+		<nav class="bar">
+	<ul><li>
+			<a href="/">
+				<img class="icon-text" src="/img/prev.svg"/>
+			</a>
+		</li><li><img class="icon-text" id="dark-mode-toggle" src="/img/moon-regular.svg" alt="Toggle Dark Mode"></a></li><li><a href="/about">About</a></li><li><a href="/post/">Post</a></li></ul>
+</nav>
+
+	</div>
+</header>
+<main class="container">
+
+<article>
+	<header><hgroup id="brand">
+	<h1>Some configurations</h1>
+	<h5>
+		
+		<time datetime="2010-01-02 16:49:08 &#43;0800 CST">Jan 02, 2010</time>
+		<span class="no-print">
+			-
+				
+				<a href="/tags/configurations">configurations</a>
+				<span>
+	</h5>
+	
+</hgroup>
+<hr class="sep" />
+</header>
+	<h3 id="gos-configuration-in-vscode">Go&rsquo;s configuration in VScode</h3>
+<p>[Setting up Go in Windows](<a href="https://learn.microsoft.com/zh-cn/azure/developer/go/configure-visual-studio-code">配置 Visual Studio Code for Go 开发 - Go on Azure | Microsoft Learn</a>)</p>
+<p><strong>Problem</strong>: Could not download VScode plugins of Go due to a famous firewall(I guess). here is the [reference](<a href="https://blog.csdn.net/qq_41065919/article/details/107710144">一招完美解决vscode安装go插件失败问题_installing github.com/cweill/gotests/gotests@v1.6.-CSDN博客</a>).</p>
+<p>Solvation:</p>
+<p>This is the old version(abandoned):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">go</span> <span class="n">env</span> <span class="n">-w</span> <span class="n">GO111MODULE</span><span class="p">=</span><span class="n">on</span>
+</span></span><span class="line"><span class="cl"><span class="n">go</span> <span class="n">env</span> <span class="n">-w</span> <span class="n">GOPROXY</span><span class="p">=</span><span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">goproxy</span><span class="p">.</span><span class="n">io</span><span class="p">,</span><span class="n">direct</span>
+</span></span></code></pre></div><p>Open cmd or powershell and run the following commands:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">go</span> <span class="n">env</span> <span class="n">-w</span> <span class="n">GO111MODULE</span><span class="p">=</span><span class="n">on</span>
+</span></span><span class="line"><span class="cl"><span class="n">go</span> <span class="n">env</span> <span class="n">-w</span> <span class="n">GOPROXY</span><span class="p">=</span><span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">proxy</span><span class="p">.</span><span class="py">golang</span><span class="p">.</span><span class="py">com</span><span class="p">.</span><span class="n">cn</span><span class="p">,</span><span class="n">direct</span>
+</span></span></code></pre></div><p>Then restart VScode and install the Go plugins again, you should succeed.</p>
+<h3 id="modify-powershells-default-lauch-size-in-window11">Modify Powershell&rsquo;s default lauch size in Window11</h3>
+<p>Can&rsquo;t believe these old ways and nonsense on the Internet even though it&rsquo;s pretty easy. Open Powershell and then right click the window bar and go into <strong>settings</strong>. Scroll down and find out the <strong>Lauch size</strong></p>
+<h3 id="install-mysql-and-modify-password-for-user-root">Install Mysql and modify password for user root</h3>
+<p>Update the package tool:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt update
+</span></span></code></pre></div><p>Download and install Mysql([reference](<a href="https://zhuanlan.zhihu.com/p/550946252">Ubuntu（WSL2）安装MySQL数据库 - 知乎 (zhihu.com)</a>))</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt install mysql-server -y
+</span></span></code></pre></div><p>To update the user <strong>root</strong>&rsquo;s password in mysql, switch to <strong>root</strong> in Linux ([reference](<a href="https://blog.csdn.net/james_8/article/details/113375068">Ubuntu 20.04首次安装Mysql登录密码问题_ubuntu 启动mysql服务要输入密码-CSDN博客</a>))</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">su root
+</span></span></code></pre></div><p>Use your Linux <strong>root</strong> password to login mysql as <strong>root</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mysql -u root -p
+</span></span></code></pre></div><p>Ensure the way of login as <strong>root</strong> with password never expires</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="n">EXPIRE</span><span class="w"> </span><span class="n">NEVER</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>Use the mysql_native_password plugin and alter the password of root in Mysql as you like (in this example, the new password is &rsquo;love&rsquo;). For more about the plugin, check in [reference](<a href="https://dev.mysql.com/doc/refman/8.0/en/sha256-pluggable-authentication.html">MySQL :: MySQL 8.0 Reference Manual :: 6.4.1.3 SHA-256 Pluggable Authentication</a>).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">mysql_native_password</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;love&#39;</span><span class="w">
+</span></span></span></code></pre></div><p>Refreshing to ensure the new priviledges</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">FLUSH</span><span class="w"> </span><span class="n">PRIVILEDGES</span><span class="w">
+</span></span></span></code></pre></div><p>Then you can use your new password to login with the following command</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo mysql -u root -p
+</span></span></code></pre></div><p>For more knowledge, a brief [introduction](<a href="https://zhuanlan.zhihu.com/p/146502753">MySQL基本架构 - 知乎 (zhihu.com)</a>) to the C/S framework of Mysql.</p>
+<h6 id="go-sql-driver">Go-sql-driver</h6>
+<p>If you&rsquo;re learning about  Go accessing a relational database [tutorial](<a href="https://go.dev/doc/tutorial/database-access">Tutorial: Accessing a relational database - The Go Programming Language</a>), you should add the  following code after the initiation of <code>cfg</code>. For more information, please check on [page](<a href="https://github.com/go-sql-driver/mysql/issues/625">Add support for sha256_password pluggable authentication · Issue #625 · go-sql-driver/mysql (github.com)</a>).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">cfg</span><span class="p">.</span><span class="nx">Params</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;allowNativePasswords&#34;</span><span class="p">:</span> <span class="s">&#34;true&#34;</span><span class="p">}</span>
+</span></span></code></pre></div><h3 id="conflict-of-ublcok-visual-modeu-and-upasteu-using-vim-in-wsl">Conflict of <!-- raw HTML omitted -->blcok visual mode<!-- raw HTML omitted --> and <!-- raw HTML omitted -->paste<!-- raw HTML omitted --> using vim in WSL</h3>
+<p>Open a windows terminal, and press <code>ctrl + shift + ,</code> to open <code>settings.json</code>. Then comment the following line:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">&#34;actions&#34;</span><span class="err">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="err">...</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// { &#34;command&#34;: {&#34;action&#34;: &#34;paste&#34;, ...}, &#34;keys&#34;: &#34;ctrl+v&#34; }, &lt;------ THIS LINE
+</span></span></span></code></pre></div><p>After doing this, you can switch to visual block mode as usual and paste with <code>CTRL + SHIFT + v</code>. For more information, please check out the [reference](<a href="https://stackoverflow.com/questions/61824177/visual-block-mode-not-working-in-vim-with-c-v-on-wslwindows-10">copy paste - Visual-Block mode not working in Vim with C-v on WSL@Windows 10 - Stack Overflow</a>).</p>
+<h6 id="anecdote">Anecdote</h6>
+<p>Before I found the kludge above, I&rsquo;ve tried to modify the <code>~/.vimrc</code>. In my case, I wan&rsquo;t have such a file in my user path <code>~/</code> initially. So I created one and add <code>map &lt;C+K&gt; &lt;C+V&gt;</code> into the it and then run <code>source ~/.vimrc</code> which resulted in error: <!-- raw HTML omitted -->-bash: /home/user_name/.vimrc: line 1: syntax error near unexpected token <code>&lt;' -bash: /home/user_name/.vimrc: line 1: </code>map &lt;C+K&gt; &lt;C+V&gt;&rsquo;<!-- raw HTML omitted -->. So I give up this way and just deleted the line I&rsquo;ve added in and preserve the <code>~/.vimrc</code>. After the problem was solved, I continued learning Go using <strong>vi</strong> and suddenly found the auto indentation with which I felt comfortable failed. This was way more painful than the conflict between  paste and block vision and I was anxiously to it. Firstly I thought it was dued to the modification I had done in windows terminal&rsquo;s <code>settings.json</code> file and I found the original version online and recovered it(Next time if I&rsquo;m going to modify such kind of file I should copy a backup before implementing any modification.). But it doesn&rsquo;t help. And then I tried to add <code>set autoindent</code> into <code>~/.vimrc</code>. It kind of worked but not as the same as what I&rsquo;ve been used to.(Seems like a fixed but not flexible indentation as the original one. I mean, the orignal one knows I writting Go codes.) After hours of searching and thinking, I thought maybe <code>~/.vimrc</code> is the root cause since it was the first thing I had tried to add to relative configuration. So I just simply deleted it and it worked. Evething was back. I guessed <code>~/.vimrc</code> would take over the configuraion of <strong>vi</strong> or <strong>vim</strong> even it&rsquo;s empty which means do nothing that lead to the disfunction of auto indentaion. Go&rsquo;s own rules would then prevail after the deletion of <code>~/.vimrc</code>.</p>
+<h3 id="choco-and-make">Choco and make</h3>
+<p><a href="%5Bwindows%E4%B8%8B%E5%AE%89%E8%A3%85make%EF%BC%8C%E4%BD%BF%E7%94%A8makefile%E6%96%87%E4%BB%B6-%E9%98%BF%E9%87%8C%E4%BA%91%E5%BC%80%E5%8F%91%E8%80%85%E7%A4%BE%E5%8C%BA%5D(https://developer.aliyun.com/article/1212970)">Source</a></p>
+<p>Operating system: <strong>windows 11</strong></p>
+<p>Terminal: <strong>Powershell</strong></p>
+<h6 id="install-chocolatey">Install Chocolatey</h6>
+<p>Open powershell as administrator and execute the following</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">iex </span><span class="p">((</span><span class="nb">new-object</span> <span class="n">net</span><span class="p">.</span><span class="n">webclient</span><span class="p">).</span><span class="py">DownloadString</span><span class="p">(</span><span class="s1">&#39;https://chocolatey.org/install.ps1&#39;</span><span class="p">))</span>
+</span></span></code></pre></div><h6 id="using-chocolatey-to-install-make">Using Chocolatey to install make</h6>
+<p>You may need to reopen powershell as administrator after installing Chocolatey and run the following</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">choco</span> <span class="n">install</span> <span class="n">make</span>
+</span></span></code></pre></div>
+</article>
+<nav class="no-print post-nav">
+
+	<a class="prev-post" href="https://agmes47.github.io/post/random/">
+		<img class="icon-text" src="/img/prev.svg"/>Having Fun</a>
+
+
+	<a class="next-post" href="https://agmes47.github.io/post/ohmyposh_install/">How to use OhMyPosh to decorate your terminal<img class="icon-text" src="/img/next.svg"/>
+	</a>
+
+</nav>
+
+
+
+
+
+			<hr class="sep" />
+		</main>
+		<footer class="container no-print">
+			<div class="u-footer">
+				
+<a href="mailto:mail@yurizal-san.com"><img class="icon-social" src="/img/email.svg" alt="Email Me!"/></a>
+
+
+<a href="https://github.com/yursan9/"><img class="icon-social" src="/img/github.svg" alt="Github"/></a>
+
+
+<a href="https://twitter.com/yuri_boya"><img class="icon-social" src="/img/twitter.svg" alt="Twitter"/></a>
+
+<a href="https://agmes47.github.io/index.xml" target="_blank"><img class="icon-social" src="/img/feed.svg" alt="Feed"></a>
+
+
+				<p>
+					
+					Theme used: <a href="https://github.com/yursan9/manis-hugo-theme">Manis</a><br>
+					
+					
+					&copy; 2019 Yurizal Susanto
+					
+					
+					| <a href="/about/license">License</a>
+					
+				</p>
+				
+				<a href="#brand">
+					<img class="icon-text" src="/img/toup.svg" alt="To Up"/>
+					<span>Back to Up</span>
+				</a>
+				
+			</div>
+		</footer>
+		
+	</body>
+</html>
+

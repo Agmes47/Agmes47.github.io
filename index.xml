@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Manis</title>
+    <link>https://agmes47.github.io/</link>
+    <description>Recent content on Manis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; 2019 Yurizal Susanto</copyright>
+    <lastBuildDate>Wed, 31 Jan 2024 09:37:19 +0800</lastBuildDate>
+    <atom:link href="https://agmes47.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Install g4f in Debian12</title>
+      <link>https://agmes47.github.io/post/g4f/</link>
+      <pubDate>Wed, 31 Jan 2024 09:37:19 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/g4f/</guid>
+      <description>Set up Python environment in Debian 12/11/10 source&#xA;Update packages&#xA;sudo apt update &amp;amp;&amp;amp; sudo apt upgrade Install the required packages for the compilation of Python source code&#xA;sudo apt install wget build-essential libncursesw5-dev libssl-dev \ libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev Download python 3.11&#xA;wget https://www.python.org/ftp/python/3.11.3/Python-3.11.7.tgz Extract archive&#xA;tar xzf Python-3.11.7.tgz Prepare for the installation&#xA;cd Python-3.11.7 ./configure --enable-optimizations Build and install&#xA;make -j 4 make altinstall Install g4f source</description>
+    </item>
+    <item>
+      <title>Naive</title>
+      <link>https://agmes47.github.io/post/naive/</link>
+      <pubDate>Sat, 27 Jan 2024 13:45:31 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/naive/</guid>
+      <description>Server Update and upgrade apt update &amp;amp;&amp;amp; apt upgrade Prerequisite Make sure the memory of your machine is larger than 1 GB. You may try swap if not.&#xA;A domain name that has been resolved(no CND).&#xA;Network tools for downloading apt-get install socat Installing Go environment wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz #replace &amp;#39;go1.21.1.linux-amd64.tar.gz&amp;#39; with the new go version tar -C /usr/local -xzf go1.21.1.linux-amd64.tar.gz #replace &amp;#39;go1.21.1.linux-amd64.tar.gz&amp;#39; with the new go version export PATH=&amp;#34;/usr/local/go/bin:$PATH&amp;#34; #temporary environment variable go env -w GO111MODULE=on #Set the Go module model as default behavior rm -f go1.</description>
+    </item>
+    <item>
+      <title>Vmess &#43; CF &#43; WEB</title>
+      <link>https://agmes47.github.io/post/vmesscfweb/</link>
+      <pubDate>Mon, 22 Jan 2024 23:50:01 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/vmesscfweb/</guid>
+      <description>Prerequisite A vps running x-ui, a domain utilizing Cloudflare for DNS resolution and CDN services.&#xA;Step 1 In x-ui, add an inbound.&#xA;protocol: vmess listening address: 127.0.0.1 port: random #---------- #add a user #---------- network: ws path: /example #replace &amp;#39;example&amp;#39; with something you can memorize Step 2 Copy the configuration link and import into v2ray. And make the following modification.&#xA;address: *.*.*.* #the IP of your vps port: 443 #80 if not going to use https protocol tls: tls Step 3 Modify the configuration of nginx(default path: /etc/nginx/sites-available/default)</description>
+    </item>
+    <item>
+      <title>Connection to Github with SSH</title>
+      <link>https://agmes47.github.io/post/github_ssh/</link>
+      <pubDate>Sun, 21 Jan 2024 12:25:29 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/github_ssh/</guid>
+      <description>Create a depository on local git init Set username and email git config --global user.name &amp;#34;luminary&amp;#34; git config --global user.email &amp;#34;luminary@g.com&amp;#34; Generate a new SSH key ssh-keygen -t ed25519 -C &amp;#34;your_email@example.com&amp;#34; Adding the SSH key to the ssh-agent In a new admin elevated PowerShell window, ensure the ssh-agent is running. You can start it manually:&#xA;# start the ssh-agent in the background Get-Service -Name ssh-agent | Set-Service -StartupType Manual Start-Service ssh-agent In a terminal window without elevated permissions, add your SSH private key to the ssh-agent.</description>
+    </item>
+    <item>
+      <title>CC &#43; hy2</title>
+      <link>https://agmes47.github.io/post/hy2/</link>
+      <pubDate>Sat, 20 Jan 2024 16:50:56 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/hy2/</guid>
+      <description>Related links V2ray: https://github.com/2dust/v2rayN/releases/latest&#xA;Hysteria 2下载：https://github.com/apernet/hysteria/releases&#xA;Hysteria 2文档：https://v2.hysteria.network/zh/&#xA;Install hysteria 2 bash &amp;lt;(curl -fsSL https://get.hy2.sh/) Generate Self-Signed Certification openssl req -x509 -nodes -newkey ec:&amp;lt;(openssl ecparam -name prime256v1) -keyout /etc/hysteria/server.key -out /etc/hysteria/server.crt -subj &amp;#34;/CN=bing.com&amp;#34; -days 36500 &amp;amp;&amp;amp; sudo chown hysteria /etc/hysteria/server.key &amp;amp;&amp;amp; sudo chown hysteria /etc/hysteria/server.crt All the commands might need #启动Hysteria2 systemctl start hysteria-server.service #重启Hysteria2 systemctl restart hysteria-server.service #查看Hysteria2状态 systemctl status hysteria-server.service #停止Hysteria2 systemctl stop hysteria-server.service #设置开机自启 systemctl enable hysteria-server.service #查看日志 journalctl -u hysteria-server.</description>
+    </item>
+    <item>
+      <title>WAP only IPV6 HK &#43; ARGOX</title>
+      <link>https://agmes47.github.io/post/wapargox/</link>
+      <pubDate>Mon, 15 Jan 2024 22:29:58 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/wapargox/</guid>
+      <description>WARP Install warp(choose every default option)&#xA;[reference](fscarmen/warp-sh: WARP script is move to: https://gitlab.com/fscarmen/warp (github.com))&#xA;wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh &amp;amp;&amp;amp; bash menu.sh [option] [lisence/url/token] ARGOX Install argox&#xA;[reference](fscarmen/ArgoX: Argo Xray for VPS one-click script. 一键脚本 (github.com))&#xA;bash &amp;lt;(wget -qO- https://raw.githubusercontent.com/fscarmen/argox/main/argox.sh) For more details, please visit this [video](如何在ipv6的vps上搭建科学上网的节点 ipv6的vps节点搭建教程 - YouTube).&#xA;Problem The node won&amp;rsquo;t work after restarting the machine even if argo and xray will run after booting. My rough solution for this problem is reinstalling argox.</description>
+    </item>
+    <item>
+      <title>How to use OhMyPosh to decorate your terminal</title>
+      <link>https://agmes47.github.io/post/ohmyposh_install/</link>
+      <pubDate>Sat, 30 Dec 2023 19:43:57 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/ohmyposh_install/</guid>
+      <description>1. Powershell At the beginning, I was trying to implement it on WindowsPowershell and result in a mess which I&amp;rsquo;ve forgot(For more information about the differences between them, please check out this [page](Differences between Windows PowerShell 5.1 and PowerShell 7.x - PowerShell | Microsoft Learn)). Then I strictly follow steps on the official [document](Introduction | Oh My Posh) while at the same time still encounter some problems. Here I will show the proper way I&amp;rsquo;ve tried on to complete this task.</description>
+    </item>
+    <item>
+      <title>Some configurations</title>
+      <link>https://agmes47.github.io/post/config/</link>
+      <pubDate>Sat, 02 Jan 2010 16:49:08 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/config/</guid>
+      <description>Go&amp;rsquo;s configuration in VScode [Setting up Go in Windows](配置 Visual Studio Code for Go 开发 - Go on Azure | Microsoft Learn)&#xA;Problem: Could not download VScode plugins of Go due to a famous firewall(I guess). here is the [reference](一招完美解决vscode安装go插件失败问题_installing github.com/cweill/gotests/gotests@v1.6.-CSDN博客).&#xA;Solvation:&#xA;This is the old version(abandoned):&#xA;go env -w GO111MODULE=on go env -w GOPROXY=https://goproxy.io,direct Open cmd or powershell and run the following commands:&#xA;go env -w GO111MODULE=on go env -w GOPROXY=https://proxy.</description>
+    </item>
+    <item>
+      <title>Having Fun</title>
+      <link>https://agmes47.github.io/post/random/</link>
+      <pubDate>Sat, 01 Jan 2000 00:00:00 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/random/</guid>
+      <description>Random Keyboard got locked A cat standing on my keyboard for a good amount of seconds and the keyboard got locked afer instant sharp &amp;lsquo;di&amp;rsquo; sound. The solution is press the right Shift key for more than 8 seconds. Reference: https://www.zhihu.com/question/539981785#&#xA;Linux Basic adduser and useradd are different. Use adduser. So applied to other similar commands, I guess.&#xA;Scripts Reprinted from https://blog.xueli.lol/Linux/13.html&#xA;Debian basic configuration&#xA;apt update -y &amp;amp;&amp;amp; apt upgrade -y &amp;amp;&amp;amp; apt install -y wget curl vim lsof sudo Alpine basic configuraion</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="generator" content="Hugo 0.121.1">
+		<title>Vmess &#43; CF &#43; WEB - Manis</title>
+
+		<meta name="description" content="Prerequisite A vps running x-ui, a domain utilizing Cloudflare for DNS resolution and CDN services.
+Step 1 In x-ui, add an inbound.
+protocol: vmess listening address: 127.0.0.1 port: random #---------- #add a user #---------- network: ws path: /example #replace &#39;example&#39; with something you can memorize Step 2 Copy the configuration link and import into v2ray. And make the following modification.
+address: *.*.*.* #the IP of your vps port: 443 #80 if not going to use https protocol tls: tls Step 3 Modify the configuration of nginx(default path: /etc/nginx/sites-available/default)">
+
+
+		
+	
+		
+
+
+
+
+<link rel="stylesheet" href="/css/ui.css">
+
+	
+		
+
+		<script defer src="/js/dark-mode.js"></script>
+		<link disabled id="dark-mode-theme" rel="stylesheet" href="/css/dark.css">
+		<link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono|Lato|Raleway">
+
+		
+	</head>
+
+<body>
+<header class="container no-print">
+	<div class="u-header">
+		<nav class="bar">
+	<ul><li>
+			<a href="/">
+				<img class="icon-text" src="/img/prev.svg"/>
+			</a>
+		</li><li><img class="icon-text" id="dark-mode-toggle" src="/img/moon-regular.svg" alt="Toggle Dark Mode"></a></li><li><a href="/about">About</a></li><li><a href="/post/">Post</a></li></ul>
+</nav>
+
+	</div>
+</header>
+<main class="container">
+
+<article>
+	<header><hgroup id="brand">
+	<h1>Vmess &#43; CF &#43; WEB</h1>
+	<h5>
+		
+		<time datetime="2024-01-22 23:50:01 &#43;0800 CST">Jan 22, 2024</time>
+		<span class="no-print">
+			<span>
+	</h5>
+	
+</hgroup>
+<hr class="sep" />
+</header>
+	<h4 id="prerequisite">Prerequisite</h4>
+<p>A vps running x-ui, a domain utilizing Cloudflare for DNS resolution and CDN services.</p>
+<h4 id="step-1">Step 1</h4>
+<p>In x-ui, add an inbound.</p>
+<pre tabindex="0"><code>protocol: vmess
+listening address: 127.0.0.1
+port: random
+#----------
+#add a user
+#----------
+network: ws
+path: /example #replace &#39;example&#39; with something you can memorize
+</code></pre><h4 id="step-2">Step 2</h4>
+<p>Copy the configuration link and import into v2ray. And make the following modification.</p>
+<pre tabindex="0"><code>address: *.*.*.*     #the IP of your vps
+port: 443         #80 if not going to use https protocol
+tls: tls
+</code></pre><h4 id="step-3">Step 3</h4>
+<p>Modify the configuration of nginx(default path: <code>/etc/nginx/sites-available/default</code>)</p>
+<pre tabindex="0"><code>server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /var/www/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+
+        location / {
+                proxy_pass https://www.bing.com;
+                proxy_ssl_server_name on;
+                proxy_redirect off;
+                sub_filter_once off;
+                sub_filter &#34;www.bing.com&#34; $server_name;
+                proxy_set_header Host &#34;www.bing.com&#34;;
+                proxy_set_header Referer $http_referer;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header User-Agent $http_user_agent;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto https;
+                proxy_set_header Accept-Encoding &#34;&#34;;
+                proxy_set_header Accept-Language &#34;zh-CN&#34;;
+        }
+        location /example {                        #replace the path
+                proxy_redirect off;
+                proxy_pass http://127.0.0.1:52321;     #replace the port num
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection &#34;upgrade&#34;;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+        }
+</code></pre><p>Reference: <a href="https://bulianglin.com/archives/guide.html">https://bulianglin.com/archives/guide.html</a></p>
+<h5 id="journey">Journey</h5>
+<p>Installed nginx, avoiding confliction with hysteria which is listening on port 443. (No problem, nginx can start fluently.)</p>
+<p>Modified the configuration of nginx within the help of chatgpt. (Too simple if not telling it  that I was using websocket protocol. And I was missing the <code>proxy_set_header Connection &quot;upgrade&quot;;</code> part for such a long time, which made nginx reture 400 to the client.)</p>
+<p>Clearified the websocket path and user id in x-ui. (Made a xray proccess listen on a port and its ws path should be the same with the path of client v2ray node and nginx passing rules path. One is for authentification and anther is for redirecting. User id is also for authentification.)</p>
+
+</article>
+<nav class="no-print post-nav">
+
+	<a class="prev-post" href="https://agmes47.github.io/post/github_ssh/">
+		<img class="icon-text" src="/img/prev.svg"/>Connection to Github with SSH</a>
+
+
+	<a class="next-post" href="https://agmes47.github.io/post/naive/">Naive<img class="icon-text" src="/img/next.svg"/>
+	</a>
+
+</nav>
+
+
+
+
+
+			<hr class="sep" />
+		</main>
+		<footer class="container no-print">
+			<div class="u-footer">
+				
+<a href="mailto:mail@yurizal-san.com"><img class="icon-social" src="/img/email.svg" alt="Email Me!"/></a>
+
+
+<a href="https://github.com/yursan9/"><img class="icon-social" src="/img/github.svg" alt="Github"/></a>
+
+
+<a href="https://twitter.com/yuri_boya"><img class="icon-social" src="/img/twitter.svg" alt="Twitter"/></a>
+
+<a href="https://agmes47.github.io/index.xml" target="_blank"><img class="icon-social" src="/img/feed.svg" alt="Feed"></a>
+
+
+				<p>
+					
+					Theme used: <a href="https://github.com/yursan9/manis-hugo-theme">Manis</a><br>
+					
+					
+					&copy; 2019 Yurizal Susanto
+					
+					
+					| <a href="/about/license">License</a>
+					
+				</p>
+				
+				<a href="#brand">
+					<img class="icon-text" src="/img/toup.svg" alt="To Up"/>
+					<span>Back to Up</span>
+				</a>
+				
+			</div>
+		</footer>
+		
+	</body>
+</html>
+

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="generator" content="Hugo 0.121.1">
+		<title>Connection to Github with SSH - Manis</title>
+
+		<meta name="description" content="Create a depository on local git init Set username and email git config --global user.name &#34;luminary&#34; git config --global user.email &#34;luminary@g.com&#34; Generate a new SSH key ssh-keygen -t ed25519 -C &#34;your_email@example.com&#34; Adding the SSH key to the ssh-agent In a new admin elevated PowerShell window, ensure the ssh-agent is running. You can start it manually:
+# start the ssh-agent in the background Get-Service -Name ssh-agent | Set-Service -StartupType Manual Start-Service ssh-agent In a terminal window without elevated permissions, add your SSH private key to the ssh-agent.">
+
+
+		
+	
+		
+
+
+
+
+<link rel="stylesheet" href="/css/ui.css">
+
+	
+		
+
+		<script defer src="/js/dark-mode.js"></script>
+		<link disabled id="dark-mode-theme" rel="stylesheet" href="/css/dark.css">
+		<link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono|Lato|Raleway">
+
+		
+	</head>
+
+<body>
+<header class="container no-print">
+	<div class="u-header">
+		<nav class="bar">
+	<ul><li>
+			<a href="/">
+				<img class="icon-text" src="/img/prev.svg"/>
+			</a>
+		</li><li><img class="icon-text" id="dark-mode-toggle" src="/img/moon-regular.svg" alt="Toggle Dark Mode"></a></li><li><a href="/about">About</a></li><li><a href="/post/">Post</a></li></ul>
+</nav>
+
+	</div>
+</header>
+<main class="container">
+
+<article>
+	<header><hgroup id="brand">
+	<h1>Connection to Github with SSH</h1>
+	<h5>
+		
+		<time datetime="2024-01-21 12:25:29 &#43;0800 CST">Jan 21, 2024</time>
+		<span class="no-print">
+			<span>
+	</h5>
+	
+</hgroup>
+<hr class="sep" />
+</header>
+	<h5 id="create-a-depository-on-local">Create a depository on local</h5>
+<pre tabindex="0"><code class="language-git" data-lang="git">git init
+</code></pre><h5 id="set-username-and-email">Set username and email</h5>
+<pre tabindex="0"><code class="language-git" data-lang="git">git config --global user.name &#34;luminary&#34;
+git config --global user.email &#34;luminary@g.com&#34;
+</code></pre><h5 id="generate-a-new-ssh-key">Generate a new SSH key</h5>
+<pre tabindex="0"><code class="language-git" data-lang="git">ssh-keygen -t ed25519 -C &#34;your_email@example.com&#34;
+</code></pre><h5 id="adding-the-ssh-key-to-the-ssh-agent">Adding the SSH key to the ssh-agent</h5>
+<p>In a new <em>admin elevated</em> PowerShell window, ensure the ssh-agent is running. You can start it manually:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># start the ssh-agent in the background</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-Service</span> <span class="n">-Name</span> <span class="nb">ssh-agent</span> <span class="p">|</span> <span class="nb">Set-Service</span> <span class="n">-StartupType</span> <span class="n">Manual</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Start-Service</span> <span class="nb">ssh-agent</span>
+</span></span></code></pre></div><p>In a terminal window without elevated permissions, add your SSH private key to the ssh-agent. If you created your key with a different name, or if you are adding an existing key that has a different name, replace <em>id_ed25519</em> in the command with the name of your private key file.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">ssh-add</span> <span class="n">c:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">YOU</span><span class="p">\.</span><span class="n">ssh</span><span class="p">\</span><span class="n">id_ed25519</span>
+</span></span></code></pre></div><h5 id="adding-a-new-ssh-key-to-github-account">Adding a new SSH key to Github account</h5>
+<p>Open your github personal <strong>settings</strong> and choose the <strong>SSH and GPG keys</strong>. Then click the <strong>New SSH key</strong> button, give your key a <strong>title</strong> as you like and paste all the contents of the <strong>id_ed25519.pub</strong> file into the <strong>key</strong> section. Finally click the <strong>Add SSH key</strong> button to complete adding.</p>
+<h5 id="test-ssh-connection">Test SSH connection</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh -T git@github.com
+</span></span></code></pre></div><p> If it works then it would inform you that:</p>
+<p><code>Hi user! You've successfully authenticated, but GitHub does not provide shell access.</code></p>
+<h5 id="postscript">Postscript</h5>
+<p>If it still can&rsquo;t connect to github through SSH, create a <code>~/user/.ssh/config</code> file if not exists and add the following:</p>
+<pre tabindex="0"><code>Host github.com
+ Hostname ssh.github.com
+ Port 22
+</code></pre><p>check out this [page](<a href="https://stackoverflow.com/questions/15589682/ssh-connect-to-host-github-com-port-22-connection-timed-out">git - ssh: connect to host github.com port 22: Connection timed out - Stack Overflow</a>) for more information.</p>
+<h6 id="source">Source</h6>
+<p>This paper is refered from [it](<a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">Connecting to GitHub with SSH - GitHub Docs</a>).</p>
+
+</article>
+<nav class="no-print post-nav">
+
+	<a class="prev-post" href="https://agmes47.github.io/post/hy2/">
+		<img class="icon-text" src="/img/prev.svg"/>CC &#43; hy2</a>
+
+
+	<a class="next-post" href="https://agmes47.github.io/post/vmesscfweb/">Vmess &#43; CF &#43; WEB<img class="icon-text" src="/img/next.svg"/>
+	</a>
+
+</nav>
+
+
+
+
+
+			<hr class="sep" />
+		</main>
+		<footer class="container no-print">
+			<div class="u-footer">
+				
+<a href="mailto:mail@yurizal-san.com"><img class="icon-social" src="/img/email.svg" alt="Email Me!"/></a>
+
+
+<a href="https://github.com/yursan9/"><img class="icon-social" src="/img/github.svg" alt="Github"/></a>
+
+
+<a href="https://twitter.com/yuri_boya"><img class="icon-social" src="/img/twitter.svg" alt="Twitter"/></a>
+
+<a href="https://agmes47.github.io/index.xml" target="_blank"><img class="icon-social" src="/img/feed.svg" alt="Feed"></a>
+
+
+				<p>
+					
+					Theme used: <a href="https://github.com/yursan9/manis-hugo-theme">Manis</a><br>
+					
+					
+					&copy; 2019 Yurizal Susanto
+					
+					
+					| <a href="/about/license">License</a>
+					
+				</p>
+				
+				<a href="#brand">
+					<img class="icon-text" src="/img/toup.svg" alt="To Up"/>
+					<span>Back to Up</span>
+				</a>
+				
+			</div>
+		</footer>
+		
+	</body>
+</html>
+

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="generator" content="Hugo 0.121.1">
+		<title>Install g4f in Debian12 - Manis</title>
+
+		<meta name="description" content="Set up Python environment in Debian 12/11/10 source
+Update packages
+sudo apt update &amp;&amp; sudo apt upgrade Install the required packages for the compilation of Python source code
+sudo apt install wget build-essential libncursesw5-dev libssl-dev \ libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev Download python 3.11
+wget https://www.python.org/ftp/python/3.11.3/Python-3.11.7.tgz Extract archive
+tar xzf Python-3.11.7.tgz Prepare for the installation
+cd Python-3.11.7 ./configure --enable-optimizations Build and install
+make -j 4 make altinstall Install g4f source">
+
+
+		
+	
+		
+
+
+
+
+<link rel="stylesheet" href="/css/ui.css">
+
+	
+		
+
+		<script defer src="/js/dark-mode.js"></script>
+		<link disabled id="dark-mode-theme" rel="stylesheet" href="/css/dark.css">
+		<link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono|Lato|Raleway">
+
+		
+	</head>
+
+<body>
+<header class="container no-print">
+	<div class="u-header">
+		<nav class="bar">
+	<ul><li>
+			<a href="/">
+				<img class="icon-text" src="/img/prev.svg"/>
+			</a>
+		</li><li><img class="icon-text" id="dark-mode-toggle" src="/img/moon-regular.svg" alt="Toggle Dark Mode"></a></li><li><a href="/about">About</a></li><li><a href="/post/">Post</a></li></ul>
+</nav>
+
+	</div>
+</header>
+<main class="container">
+
+<article>
+	<header><hgroup id="brand">
+	<h1>Install g4f in Debian12</h1>
+	<h5>
+		
+		<time datetime="2024-01-31 09:37:19 &#43;0800 CST">Jan 31, 2024</time>
+		<span class="no-print">
+			<span>
+	</h5>
+	
+</hgroup>
+<hr class="sep" />
+</header>
+	<h4 id="set-up-python-environment-in-debian-121110">Set up Python environment in Debian 12/11/10</h4>
+<p><a href="https://tecadmin.net/how-to-install-python-3-11-on-debian/">source</a></p>
+<p>Update packages</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update <span class="o">&amp;&amp;</span> sudo apt upgrade 
+</span></span></code></pre></div><p>Install the required packages for the compilation of Python source code</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install wget build-essential libncursesw5-dev libssl-dev <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev  
+</span></span></code></pre></div><p>Download python 3.11</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://www.python.org/ftp/python/3.11.3/Python-3.11.7.tgz 
+</span></span></code></pre></div><p>Extract archive</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tar xzf Python-3.11.7.tgz 
+</span></span></code></pre></div><p>Prepare for the installation</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> Python-3.11.7 
+</span></span><span class="line"><span class="cl">./configure --enable-optimizations 
+</span></span></code></pre></div><p>Build and install</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">make -j <span class="m">4</span>
+</span></span><span class="line"><span class="cl">make altinstall 
+</span></span></code></pre></div><h4 id="install-g4f">Install g4f</h4>
+<p><a href="https://github.com/xtekky/gpt4free?tab=readme-ov-file#or">source</a></p>
+<p>Create a directory and <code>cd</code> in it. Clone the github repository</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/xtekky/gpt4free.git
+</span></span></code></pre></div><p>Navigate to the project directory</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> gpt4free
+</span></span></code></pre></div><p>(Recommended) Create a Python virtual environment: You can follow the <a href="https://docs.python.org/3/tutorial/venv.html">Python official documentation</a> for virtual environments.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python3 -m venv venv_name
+</span></span></code></pre></div><p>Activate the virtual environment</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">source</span> venv/bin/activate
+</span></span></code></pre></div><p>Install all used Python packages from <code>requirements.txt</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install -r requirements.txt
+</span></span></code></pre></div><p>Create a example.py and paste the following</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">g4f.gui</span> <span class="kn">import</span> <span class="n">run_gui</span>
+</span></span><span class="line"><span class="cl"><span class="n">run_gui</span><span class="p">()</span>
+</span></span></code></pre></div><p>Run it</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python example.py
+</span></span></code></pre></div>
+</article>
+<nav class="no-print post-nav">
+
+	<a class="prev-post" href="https://agmes47.github.io/post/naive/">
+		<img class="icon-text" src="/img/prev.svg"/>Naive</a>
+
+
+</nav>
+
+
+
+
+
+			<hr class="sep" />
+		</main>
+		<footer class="container no-print">
+			<div class="u-footer">
+				
+<a href="mailto:mail@yurizal-san.com"><img class="icon-social" src="/img/email.svg" alt="Email Me!"/></a>
+
+
+<a href="https://github.com/yursan9/"><img class="icon-social" src="/img/github.svg" alt="Github"/></a>
+
+
+<a href="https://twitter.com/yuri_boya"><img class="icon-social" src="/img/twitter.svg" alt="Twitter"/></a>
+
+<a href="https://agmes47.github.io/index.xml" target="_blank"><img class="icon-social" src="/img/feed.svg" alt="Feed"></a>
+
+
+				<p>
+					
+					Theme used: <a href="https://github.com/yursan9/manis-hugo-theme">Manis</a><br>
+					
+					
+					&copy; 2019 Yurizal Susanto
+					
+					
+					| <a href="/about/license">License</a>
+					
+				</p>
+				
+				<a href="#brand">
+					<img class="icon-text" src="/img/toup.svg" alt="To Up"/>
+					<span>Back to Up</span>
+				</a>
+				
+			</div>
+		</footer>
+		
+	</body>
+</html>
+
