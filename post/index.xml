@@ -7,8 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; 2019 Yurizal Susanto</copyright>
-    <lastBuildDate>Wed, 31 Jan 2024 09:37:19 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 21 Feb 2024 18:39:50 +0800</lastBuildDate>
     <atom:link href="https://agmes47.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Serverstatus</title>
+      <link>https://agmes47.github.io/post/serverstatus/</link>
+      <pubDate>Wed, 21 Feb 2024 18:39:50 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/serverstatus/</guid>
+      <description>Build a server monitor Source Project: serverstatus by cppla&#xA;I personally mainly referenced this blog post&#xA;Server Install docker and docker compose&#xA;curl -fsSL https://get.docker.com -o get-docker.sh &amp;amp;&amp;amp; sh ./get-docker.sh Check if docker successfully installeddocker compose version&#xA;docker -v # Some like &amp;#39;Docker version 23.0.2, build 569dd73&amp;#39; docker compose version # Some like &amp;#39;Docker Compose version v2.17.2&amp;#39; Download two configuration files: serverstatus-config.json and serverstatus-monthtraffic . Modify them according to your situation.</description>
+    </item>
+    <item>
+      <title>Vpses</title>
+      <link>https://agmes47.github.io/post/vpses/</link>
+      <pubDate>Fri, 16 Feb 2024 22:53:00 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/vpses/</guid>
+      <description>Vmiss CN.HK.INTL.Basic (14cad/year) 短链&#xA;版本：2024.02.04 更新日志：VPS融合怪测试(集百家之长) &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;基础信息查询&amp;ndash;感谢所有开源项目&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; CPU 型号 : Intel Core Processor (Broadwell, IBRS) CPU 核心数 : 1 CPU 频率 : 2599.996 MHz CPU 缓存 : L1: 64.00 KB / L2: 4.00 MB / L3: 16.00 MB 硬盘空间 : 1.76 GiB / 9.81 GiB 启动盘路径 : /dev/vda1 内存 : 131.56 MiB / 979.00 MiB Swap : 1.01 MiB / 1024.00 MiB 系统在线时间 : 0 days, 6 hour 38 min 负载 : 0.</description>
+    </item>
     <item>
       <title>Install g4f in Debian12</title>
       <link>https://agmes47.github.io/post/g4f/</link>
@@ -38,14 +52,14 @@
       <description>Create a depository on local git init Set username and email git config --global user.name &amp;#34;luminary&amp;#34; git config --global user.email &amp;#34;luminary@g.com&amp;#34; Generate a new SSH key ssh-keygen -t ed25519 -C &amp;#34;your_email@example.com&amp;#34; Adding the SSH key to the ssh-agent In a new admin elevated PowerShell window, ensure the ssh-agent is running. You can start it manually:&#xA;# start the ssh-agent in the background Get-Service -Name ssh-agent | Set-Service -StartupType Manual Start-Service ssh-agent In a terminal window without elevated permissions, add your SSH private key to the ssh-agent.</description>
     </item>
     <item>
-      <title>CC &#43; hy2</title>
+      <title>hy2</title>
       <link>https://agmes47.github.io/post/hy2/</link>
       <pubDate>Sat, 20 Jan 2024 16:50:56 +0800</pubDate>
       <guid>https://agmes47.github.io/post/hy2/</guid>
       <description>Related links V2ray: https://github.com/2dust/v2rayN/releases/latest&#xA;Hysteria 2下载：https://github.com/apernet/hysteria/releases&#xA;Hysteria 2文档：https://v2.hysteria.network/zh/&#xA;Install hysteria 2 bash &amp;lt;(curl -fsSL https://get.hy2.sh/) Generate Self-Signed Certification openssl req -x509 -nodes -newkey ec:&amp;lt;(openssl ecparam -name prime256v1) -keyout /etc/hysteria/server.key -out /etc/hysteria/server.crt -subj &amp;#34;/CN=bing.com&amp;#34; -days 36500 &amp;amp;&amp;amp; sudo chown hysteria /etc/hysteria/server.key &amp;amp;&amp;amp; sudo chown hysteria /etc/hysteria/server.crt All the commands might need #启动Hysteria2 systemctl start hysteria-server.service #重启Hysteria2 systemctl restart hysteria-server.service #查看Hysteria2状态 systemctl status hysteria-server.service #停止Hysteria2 systemctl stop hysteria-server.service #设置开机自启 systemctl enable hysteria-server.service #查看日志 journalctl -u hysteria-server.</description>
     </item>
     <item>
-      <title>WAP only IPV6 HK &#43; ARGOX</title>
+      <title>Warp &#43; ARGOX</title>
       <link>https://agmes47.github.io/post/wapargox/</link>
       <pubDate>Mon, 15 Jan 2024 22:29:58 +0800</pubDate>
       <guid>https://agmes47.github.io/post/wapargox/</guid>
@@ -67,10 +81,10 @@
     </item>
     <item>
       <title>Having Fun</title>
-      <link>https://agmes47.github.io/post/random/</link>
+      <link>https://agmes47.github.io/post/havingfun/</link>
       <pubDate>Sat, 01 Jan 2000 00:00:00 +0800</pubDate>
-      <guid>https://agmes47.github.io/post/random/</guid>
-      <description>Random Keyboard got locked A cat standing on my keyboard for a good amount of seconds and the keyboard got locked afer instant sharp &amp;lsquo;di&amp;rsquo; sound. The solution is press the right Shift key for more than 8 seconds. Reference: https://www.zhihu.com/question/539981785#&#xA;Linux Basic adduser and useradd are different. Use adduser. So applied to other similar commands, I guess.&#xA;Scripts Reprinted from https://blog.xueli.lol/Linux/13.html&#xA;Debian basic configuration&#xA;apt update -y &amp;amp;&amp;amp; apt upgrade -y &amp;amp;&amp;amp; apt install -y wget curl vim lsof sudo Alpine basic configuraion</description>
+      <guid>https://agmes47.github.io/post/havingfun/</guid>
+      <description>How was this blog builded [source](如何用 GitHub Pages + Hugo 搭建个人博客 · 小绵尾巴 (cuttontail.blog))&#xA;[theme](Manis | Hugo Themes (gohugo.io))&#xA;Random Keyboard got locked A cat standing on my keyboard for a good amount of seconds and the keyboard got locked afer instant sharp &amp;lsquo;di&amp;rsquo; sound. The solution is press the right Shift key for more than 8 seconds. Reference: https://www.zhihu.com/question/539981785#&#xA;VPS Basic Add a new user adduser and useradd are different.</description>
     </item>
   </channel>
 </rss>

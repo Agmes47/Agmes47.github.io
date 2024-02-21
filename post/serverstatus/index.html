@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="generator" content="Hugo 0.121.1">
+		<title>Serverstatus - Manis</title>
+
+		<meta name="description" content="Build a server monitor Source Project: serverstatus by cppla
+I personally mainly referenced this blog post
+Server Install docker and docker compose
+curl -fsSL https://get.docker.com -o get-docker.sh &amp;&amp; sh ./get-docker.sh Check if docker successfully installeddocker compose version
+docker -v # Some like &#39;Docker version 23.0.2, build 569dd73&#39; docker compose version # Some like &#39;Docker Compose version v2.17.2&#39; Download two configuration files: serverstatus-config.json and serverstatus-monthtraffic . Modify them according to your situation.">
+
+
+		
+	
+		
+
+
+
+
+<link rel="stylesheet" href="/css/ui.css">
+
+	
+		
+
+		<script defer src="/js/dark-mode.js"></script>
+		<link disabled id="dark-mode-theme" rel="stylesheet" href="/css/dark.css">
+		<link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono|Lato|Raleway">
+
+		
+	</head>
+
+<body>
+<header class="container no-print">
+	<div class="u-header">
+		<nav class="bar">
+	<ul><li>
+			<a href="/">
+				<img class="icon-text" src="/img/prev.svg"/>
+			</a>
+		</li><li><img class="icon-text" id="dark-mode-toggle" src="/img/moon-regular.svg" alt="Toggle Dark Mode"></a></li><li><a href="/about">About</a></li><li><a href="/post/">Post</a></li></ul>
+</nav>
+
+	</div>
+</header>
+<main class="container">
+
+<article>
+	<header><hgroup id="brand">
+	<h1>Serverstatus</h1>
+	<h5>
+		
+		<time datetime="2024-02-21 18:39:50 &#43;0800 CST">Feb 21, 2024</time>
+		<span class="no-print">
+			<span>
+	</h5>
+	
+</hgroup>
+<hr class="sep" />
+</header>
+	<h3 id="build-a-server-monitor">Build a server monitor</h3>
+<h5 id="source">Source</h5>
+<p>Project: <a href="https://github.com/cppla/ServerStatus">serverstatus by cppla</a></p>
+<p>I personally mainly referenced this blog <a href="%5Bhttps://blog.tanglu.me/server-status%5D(https://blog.tanglu.me/server-status/)">post</a></p>
+<h5 id="server">Server</h5>
+<p>Install <strong>docker</strong> and <strong>docker compose</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -fsSL https://get.docker.com -o get-docker.sh <span class="o">&amp;&amp;</span> sh ./get-docker.sh
+</span></span></code></pre></div><p>Check if <strong>docker</strong> successfully installeddocker compose version</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker -v
+</span></span><span class="line"><span class="cl"><span class="c1"># Some like &#39;Docker version 23.0.2, build 569dd73&#39;</span>
+</span></span><span class="line"><span class="cl">docker compose version
+</span></span><span class="line"><span class="cl"><span class="c1"># Some like &#39;Docker Compose version v2.17.2&#39;</span>
+</span></span></code></pre></div><p>Download two configuration files: <code>serverstatus-config.json</code> and <code>serverstatus-monthtraffic</code> . Modify them according to your situation.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget --no-check-certificate -qO ~/serverstatus-config.json https://raw.githubusercontent.com/cppla/ServerStatus/master/server/config.json <span class="o">&amp;&amp;</span> mkdir ~/serverstatus-monthtraffic
+</span></span></code></pre></div><p>Run the docker container</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># For the &#39;port_1:port_2&#39;, the left one is of the host machine and the right one is of the container</span>
+</span></span><span class="line"><span class="cl">docker run -d --restart<span class="o">=</span>always --name<span class="o">=</span>serverstatus -v ~/serverstatus-config.json:/ServerStatus/server/config.json -v ~/serverstatus-monthtraffic:/usr/share/nginx/html/json -p 80:80 -p 35601:35601 cppla/serverstatus:latest
+</span></span></code></pre></div><p>Now you can have a look on the frontend page by visit <code>http://localhost:port</code></p>
+<h6 id="use-nginx-as-reverse-proxy">Use nginx as reverse proxy</h6>
+<p>Edit <code>/etc/nginx/sites-available/default</code></p>
+<pre tabindex="0"><code>location /status {
+                proxy_redirect off;
+                proxy_pass http://127.0.0.1:8080/; # don&#39;t forget the &#39;/&#39; in the end
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+        }
+</code></pre><p>Reload nginx configuration</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl reload nginx
+</span></span></code></pre></div><p>Now you could visit it through <code>ip/status/</code> or <code>domainName/status/</code></p>
+<h5 id="client">Client</h5>
+<p>Install the agent file <code>client-linux.py</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget --no-check-certificate -qO client-linux.py <span class="s1">&#39;https://raw.githubusercontent.com/cppla/ServerStatus/master/clients/client-linux.py&#39;</span>
+</span></span></code></pre></div><p>Modify it according to your needs:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">SERVER</span> <span class="o">=</span> <span class="s2">&#34;1.1.1.1&#34;</span>    <span class="c1"># IP of server</span>
+</span></span><span class="line"><span class="cl"><span class="n">USER</span> <span class="o">=</span> <span class="s2">&#34;s01&#34;</span>            <span class="c1"># username, corresponding to the username of server side</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">PASSWORD</span> <span class="o">=</span> <span class="s2">&#34;USER_DEFAULT_PASSWORD&#34;</span>        <span class="c1"># password, corresponding to the password of server side</span>
+</span></span><span class="line"><span class="cl"><span class="n">PORT</span> <span class="o">=</span> <span class="mi">45601</span>                            <span class="c1"># client port</span>
+</span></span><span class="line"><span class="cl"><span class="n">CU</span> <span class="o">=</span> <span class="s2">&#34;mall.10010.com&#34;</span>                    <span class="c1"># recommanded tcping address</span>
+</span></span><span class="line"><span class="cl"><span class="n">CT</span> <span class="o">=</span> <span class="s2">&#34;www.189.cn&#34;</span>                        <span class="c1"># recommanded tcping address</span>
+</span></span><span class="line"><span class="cl"><span class="n">CM</span> <span class="o">=</span> <span class="s2">&#34;www.bj.10086.cn&#34;</span>                    <span class="c1"># recommanded tcping address</span>
+</span></span><span class="line"><span class="cl"><span class="n">PROBEPORT</span> <span class="o">=</span> <span class="mi">80</span>                            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="n">PROBE_PROTOCOL_PREFER</span> <span class="o">=</span> <span class="s2">&#34;ipv4&#34;</span>  <span class="c1"># ipv4, ipv6 preference when ping cu ct cm</span>
+</span></span><span class="line"><span class="cl"><span class="n">PING_PACKET_HISTORY_LEN</span> <span class="o">=</span> <span class="mi">100</span>            
+</span></span><span class="line"><span class="cl"><span class="n">INTERVAL</span> <span class="o">=</span> <span class="mi">1</span>      
+</span></span></code></pre></div><p>Install <strong>python3</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># check if python3 installed</span>
+</span></span><span class="line"><span class="cl">python3 --version
+</span></span><span class="line"><span class="cl"><span class="c1"># if not, install it</span>
+</span></span><span class="line"><span class="cl">apt install python3
+</span></span></code></pre></div><p>Make it a <strong>daemon</strong></p>
+<pre tabindex="0"><code># Add a daemon /etc/systemd/system/tzstatus.service
+# replace&#39;ExecStart&#39; with your needed command
+
+#vi /etc/systemd/system/tzstatus.service
+
+[Unit]
+Description=serverstatus
+After=network.target
+
+[Service]
+ExecStart=python3 /root/client-linux.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+</article>
+<nav class="no-print post-nav">
+
+	<a class="prev-post" href="https://agmes47.github.io/post/vpses/">
+		<img class="icon-text" src="/img/prev.svg"/>Vpses</a>
+
+
+</nav>
+
+
+
+
+
+			<hr class="sep" />
+		</main>
+		<footer class="container no-print">
+			<div class="u-footer">
+				
+<a href="mailto:mail@yurizal-san.com"><img class="icon-social" src="/img/email.svg" alt="Email Me!"/></a>
+
+
+<a href="https://github.com/yursan9/"><img class="icon-social" src="/img/github.svg" alt="Github"/></a>
+
+
+<a href="https://twitter.com/yuri_boya"><img class="icon-social" src="/img/twitter.svg" alt="Twitter"/></a>
+
+<a href="https://agmes47.github.io/index.xml" target="_blank"><img class="icon-social" src="/img/feed.svg" alt="Feed"></a>
+
+
+				<p>
+					
+					Theme used: <a href="https://github.com/yursan9/manis-hugo-theme">Manis</a><br>
+					
+					
+					&copy; 2019 Yurizal Susanto
+					
+					
+					| <a href="/about/license">License</a>
+					
+				</p>
+				
+				<a href="#brand">
+					<img class="icon-text" src="/img/toup.svg" alt="To Up"/>
+					<span>Back to Up</span>
+				</a>
+				
+			</div>
+		</footer>
+		
+	</body>
+</html>
+
