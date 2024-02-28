@@ -6,10 +6,11 @@
 		<meta name="generator" content="Hugo 0.121.1">
 		<title>Having Fun - Manis</title>
 
-		<meta name="description" content="How was this blog builded [source](如何用 GitHub Pages &#43; Hugo 搭建个人博客 · 小绵尾巴 (cuttontail.blog))
-[theme](Manis | Hugo Themes (gohugo.io))
+		<meta name="description" content="How was this blog builded source
+theme
 Random Keyboard got locked A cat standing on my keyboard for a good amount of seconds and the keyboard got locked afer instant sharp &lsquo;di&rsquo; sound. The solution is press the right Shift key for more than 8 seconds. Reference: https://www.zhihu.com/question/539981785#
-VPS Basic Add a new user adduser and useradd are different.">
+VPS Basic Add a new user adduser and useradd are different. Use adduser. So applied to other similar commands, I guess.
+Add a pubkey file First generate a pair of **publicKey **and secretKey files:">
 
 
 		
@@ -60,8 +61,8 @@ VPS Basic Add a new user adduser and useradd are different.">
 <hr class="sep" />
 </header>
 	<h2 id="how-was-this-blog-builded">How was this blog builded</h2>
-<p>[source](<a href="https://cuttontail.blog/blog/create-a-wesite-using-github-pages-and-hugo/">如何用 GitHub Pages + Hugo 搭建个人博客 · 小绵尾巴 (cuttontail.blog)</a>)</p>
-<p>[theme](<a href="https://themes.gohugo.io/themes/manis-hugo-theme/">Manis | Hugo Themes (gohugo.io)</a>)</p>
+<p><a href="https://cuttontail.blog/blog/create-a-wesite-using-github-pages-and-hugo/">source</a></p>
+<p><a href="https://themes.gohugo.io/themes/manis-hugo-theme/">theme</a></p>
 <h2 id="random">Random</h2>
 <h6 id="keyboard-got-locked">Keyboard got locked</h6>
 <p>A cat standing on my keyboard for a good amount of seconds and the keyboard got locked afer instant sharp &lsquo;di&rsquo; sound. The solution is press the right <code>Shift</code> key for more than 8 seconds. Reference: <a href="https://www.zhihu.com/question/539981785#">https://www.zhihu.com/question/539981785#</a></p>
@@ -114,7 +115,7 @@ PubkeyAuthentication yes 
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>wget -qO- https://raw.githubusercontent.com/fscarmen/sba/main/sba.sh<span class="o">)</span>
 </span></span></code></pre></div><h4 id="scripts">Scripts</h4>
 <p><a href="https://bulianglin.com/archives/nicename.html">link</a></p>
-<h4 id="bbr-set-up">BBR set up</h4>
+<h5 id="bbr-set-up">BBR set up</h5>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#check the current algrithm</span>
 </span></span><span class="line"><span class="cl">sysctl net.ipv4.tcp_congestion_control
 </span></span><span class="line"><span class="cl"><span class="c1">#check the Linux version (expect to be newer than 4.9)</span>
@@ -124,6 +125,11 @@ PubkeyAuthentication yes 
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;net.core.default_qdisc=fq&#34;</span> &gt;&gt; /etc/sysctl.conf
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;net.ipv4.tcp_congestion_control=bbr&#34;</span> &gt;&gt; /etc/sysctl.conf
 </span></span><span class="line"><span class="cl">sysctl -p
+</span></span></code></pre></div><h5 id="x-ui">X-UI</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>curl -Ls https://raw.githubusercontent.com/FranzKafkaYu/x-ui/956bf85bbac978d56c0e319c5fac2d6db7df9564/install.sh<span class="o">)</span> 0.3.4.4
+</span></span></code></pre></div><h5 id="dd-operating-system">dd operating system</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#Parameters explain: -d 11(7, 8, 9, 10) Debian; -u 20.04(14.04, 16.04, 18.04) Ubuntu; -p 123 Password</span>
+</span></span><span class="line"><span class="cl">bash &lt;<span class="o">(</span>wget --no-check-certificate -qO- <span class="s1">&#39;https://raw.githubusercontent.com/MoeClub/Note/master/InstallNET.sh&#39;</span><span class="o">)</span> -d <span class="m">11</span> -v <span class="m">64</span> -p <span class="m">123456</span> -port <span class="m">22</span>
 </span></span></code></pre></div><h2 id="thoughts">Thoughts</h2>
 <p>Rules also remind me of the hibitions which lead to some kind of contrary effects.</p>
 <p>Depends on how you think.

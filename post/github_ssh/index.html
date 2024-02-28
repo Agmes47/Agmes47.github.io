@@ -6,7 +6,7 @@
 		<meta name="generator" content="Hugo 0.121.1">
 		<title>Connection to Github with SSH - Manis</title>
 
-		<meta name="description" content="Create a depository on local git init Set username and email git config --global user.name &#34;luminary&#34; git config --global user.email &#34;luminary@g.com&#34; Generate a new SSH key ssh-keygen -t ed25519 -C &#34;your_email@example.com&#34; Adding the SSH key to the ssh-agent In a new admin elevated PowerShell window, ensure the ssh-agent is running. You can start it manually:
+		<meta name="description" content="Create a depository on local git init Set username and email git config --global user.name &#34;luminary&#34;git config --global user.email &#34;luminary@g.com&#34; Generate a new SSH key ssh-keygen -t ed25519 -C &#34;your_email@example.com&#34; Adding the SSH key to the ssh-agent In a new admin elevated PowerShell window, ensure the ssh-agent is running. You can start it manually:
 # start the ssh-agent in the background Get-Service -Name ssh-agent | Set-Service -StartupType Manual Start-Service ssh-agent In a terminal window without elevated permissions, add your SSH private key to the ssh-agent.">
 
 
@@ -82,9 +82,9 @@ git config --global user.email &#34;luminary@g.com&#34;
 <pre tabindex="0"><code>Host github.com
  Hostname ssh.github.com
  Port 22
-</code></pre><p>check out this [page](<a href="https://stackoverflow.com/questions/15589682/ssh-connect-to-host-github-com-port-22-connection-timed-out">git - ssh: connect to host github.com port 22: Connection timed out - Stack Overflow</a>) for more information.</p>
+</code></pre><p>check out this <a href="https://stackoverflow.com/questions/15589682/ssh-connect-to-host-github-com-port-22-connection-timed-out">page</a> for more information.</p>
 <h6 id="source">Source</h6>
-<p>This paper is refered from [it](<a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">Connecting to GitHub with SSH - GitHub Docs</a>).</p>
+<p>This paper is refered from <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">it</a>.</p>
 
 </article>
 <nav class="no-print post-nav">

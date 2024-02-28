@@ -14,7 +14,7 @@
       <link>https://agmes47.github.io/post/config/</link>
       <pubDate>Sat, 02 Jan 2010 16:49:08 +0800</pubDate>
       <guid>https://agmes47.github.io/post/config/</guid>
-      <description>Go&amp;rsquo;s configuration in VScode [Setting up Go in Windows](配置 Visual Studio Code for Go 开发 - Go on Azure | Microsoft Learn)&#xA;Problem: Could not download VScode plugins of Go due to a famous firewall(I guess). here is the [reference](一招完美解决vscode安装go插件失败问题_installing github.com/cweill/gotests/gotests@v1.6.-CSDN博客).&#xA;Solvation:&#xA;This is the old version(abandoned):&#xA;go env -w GO111MODULE=on go env -w GOPROXY=https://goproxy.io,direct Open cmd or powershell and run the following commands:&#xA;go env -w GO111MODULE=on go env -w GOPROXY=https://proxy.</description>
+      <description>Go&amp;rsquo;s configuration in VScode Setting up Go in Windows&#xA;Problem: Could not download VScode plugins of Go due to a famous firewall(I guess). here is the reference.&#xA;Solvation:&#xA;This is the old version(abandoned):&#xA;go env -w GO111MODULE=on go env -w GOPROXY=https://goproxy.io,direct Open cmd or powershell and run the following commands:&#xA;go env -w GO111MODULE=on go env -w GOPROXY=https://proxy.golang.com.cn,direct Then restart VScode and install the Go plugins again, you should succeed.</description>
     </item>
   </channel>
 </rss>

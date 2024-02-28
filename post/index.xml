@@ -7,8 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; 2019 Yurizal Susanto</copyright>
-    <lastBuildDate>Wed, 21 Feb 2024 18:39:50 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 24 Feb 2024 16:45:57 +0800</lastBuildDate>
     <atom:link href="https://agmes47.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cloudflare_tunnel</title>
+      <link>https://agmes47.github.io/post/cloudflare_tunnel/</link>
+      <pubDate>Sat, 24 Feb 2024 16:45:57 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/cloudflare_tunnel/</guid>
+      <description>References Zapic&amp;rsquo;s Blog&#xA;Lxn-Chan&#xA;Why would I need Cloudflare Tunnel Using nginx for port forwarding, for example, configuring a location/path {} in /etc/nginx/sites-available/default, allows access to services on ports other than 80 or 443 via domain_name/path. This is suitable for services with only a root path, such as cppla&amp;rsquo;s docker version serverstatus. However, for services with multiple subpaths, this simple method may fail, such as jadenlee2019&amp;rsquo;s mynodequery. The reason is that when accessing domain_name/path for the first time, nginx performs port forwarding, and the mynodequery service returns a 302 response with location=&#39;Dashboard&#39;, so the local browser will access domain_name/Dashboard.</description>
+    </item>
     <item>
       <title>Serverstatus</title>
       <link>https://agmes47.github.io/post/serverstatus/</link>
@@ -21,7 +28,7 @@
       <link>https://agmes47.github.io/post/vpses/</link>
       <pubDate>Fri, 16 Feb 2024 22:53:00 +0800</pubDate>
       <guid>https://agmes47.github.io/post/vpses/</guid>
-      <description>Vmiss CN.HK.INTL.Basic (14cad/year) 短链&#xA;版本：2024.02.04 更新日志：VPS融合怪测试(集百家之长) &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;基础信息查询&amp;ndash;感谢所有开源项目&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; CPU 型号 : Intel Core Processor (Broadwell, IBRS) CPU 核心数 : 1 CPU 频率 : 2599.996 MHz CPU 缓存 : L1: 64.00 KB / L2: 4.00 MB / L3: 16.00 MB 硬盘空间 : 1.76 GiB / 9.81 GiB 启动盘路径 : /dev/vda1 内存 : 131.56 MiB / 979.00 MiB Swap : 1.01 MiB / 1024.00 MiB 系统在线时间 : 0 days, 6 hour 38 min 负载 : 0.</description>
+      <description>Vmiss CN.HK.INTL.Basic (14cad/year) Link&#xA;版本：2024.02.04 更新日志：VPS融合怪测试(集百家之长) &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;基础信息查询&amp;ndash;感谢所有开源项目&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; CPU 型号 : Intel Core Processor (Broadwell, IBRS) CPU 核心数 : 1 CPU 频率 : 2599.996 MHz CPU 缓存 : L1: 64.00 KB / L2: 4.00 MB / L3: 16.00 MB 硬盘空间 : 1.76 GiB / 9.81 GiB 启动盘路径 : /dev/vda1 内存 : 131.56 MiB / 979.00 MiB Swap : 1.01 MiB / 1024.00 MiB 系统在线时间 : 0 days, 6 hour 38 min 负载 : 0.</description>
     </item>
     <item>
       <title>Install g4f in Debian12</title>
@@ -49,7 +56,7 @@
       <link>https://agmes47.github.io/post/github_ssh/</link>
       <pubDate>Sun, 21 Jan 2024 12:25:29 +0800</pubDate>
       <guid>https://agmes47.github.io/post/github_ssh/</guid>
-      <description>Create a depository on local git init Set username and email git config --global user.name &amp;#34;luminary&amp;#34; git config --global user.email &amp;#34;luminary@g.com&amp;#34; Generate a new SSH key ssh-keygen -t ed25519 -C &amp;#34;your_email@example.com&amp;#34; Adding the SSH key to the ssh-agent In a new admin elevated PowerShell window, ensure the ssh-agent is running. You can start it manually:&#xA;# start the ssh-agent in the background Get-Service -Name ssh-agent | Set-Service -StartupType Manual Start-Service ssh-agent In a terminal window without elevated permissions, add your SSH private key to the ssh-agent.</description>
+      <description>Create a depository on local git init Set username and email git config --global user.name &amp;#34;luminary&amp;#34;&#xD;git config --global user.email &amp;#34;luminary@g.com&amp;#34; Generate a new SSH key ssh-keygen -t ed25519 -C &amp;#34;your_email@example.com&amp;#34; Adding the SSH key to the ssh-agent In a new admin elevated PowerShell window, ensure the ssh-agent is running. You can start it manually:&#xA;# start the ssh-agent in the background Get-Service -Name ssh-agent | Set-Service -StartupType Manual Start-Service ssh-agent In a terminal window without elevated permissions, add your SSH private key to the ssh-agent.</description>
     </item>
     <item>
       <title>hy2</title>
@@ -63,28 +70,28 @@
       <link>https://agmes47.github.io/post/wapargox/</link>
       <pubDate>Mon, 15 Jan 2024 22:29:58 +0800</pubDate>
       <guid>https://agmes47.github.io/post/wapargox/</guid>
-      <description>WARP Install warp(choose every default option)&#xA;[reference](fscarmen/warp-sh: WARP script is move to: https://gitlab.com/fscarmen/warp (github.com))&#xA;wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh &amp;amp;&amp;amp; bash menu.sh [option] [lisence/url/token] ARGOX Install argox&#xA;[reference](fscarmen/ArgoX: Argo Xray for VPS one-click script. 一键脚本 (github.com))&#xA;bash &amp;lt;(wget -qO- https://raw.githubusercontent.com/fscarmen/argox/main/argox.sh) For more details, please visit this [video](如何在ipv6的vps上搭建科学上网的节点 ipv6的vps节点搭建教程 - YouTube).&#xA;Problem The node won&amp;rsquo;t work after restarting the machine even if argo and xray will run after booting. My rough solution for this problem is reinstalling argox.</description>
+      <description>WARP Install warp(choose every default option)&#xA;Link&#xA;wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh &amp;amp;&amp;amp; bash menu.sh [option] [lisence/url/token] ARGOX Install argox&#xA;Link&#xA;bash &amp;lt;(wget -qO- https://raw.githubusercontent.com/fscarmen/argox/main/argox.sh) For more details, please visit this video.&#xA;Problem The node won&amp;rsquo;t work after restarting the machine even if argo and xray will run after booting. My rough solution for this problem is reinstalling argox.</description>
     </item>
     <item>
       <title>How to use OhMyPosh to decorate your terminal</title>
       <link>https://agmes47.github.io/post/ohmyposh_install/</link>
       <pubDate>Sat, 30 Dec 2023 19:43:57 +0800</pubDate>
       <guid>https://agmes47.github.io/post/ohmyposh_install/</guid>
-      <description>1. Powershell At the beginning, I was trying to implement it on WindowsPowershell and result in a mess which I&amp;rsquo;ve forgot(For more information about the differences between them, please check out this [page](Differences between Windows PowerShell 5.1 and PowerShell 7.x - PowerShell | Microsoft Learn)). Then I strictly follow steps on the official [document](Introduction | Oh My Posh) while at the same time still encounter some problems. Here I will show the proper way I&amp;rsquo;ve tried on to complete this task.</description>
+      <description>1. Powershell At the beginning, I was trying to implement it on WindowsPowershell and result in a mess which I&amp;rsquo;ve forgot(For more information about the differences between them, please check out this page. Then I strictly follow steps on the official document while at the same time still encounter some problems. Here I will show the proper way I&amp;rsquo;ve tried on to complete this task.&#xA;(1) Install OhMyPosh Open Powershell and execute the command:</description>
     </item>
     <item>
       <title>Some configurations</title>
       <link>https://agmes47.github.io/post/config/</link>
       <pubDate>Sat, 02 Jan 2010 16:49:08 +0800</pubDate>
       <guid>https://agmes47.github.io/post/config/</guid>
-      <description>Go&amp;rsquo;s configuration in VScode [Setting up Go in Windows](配置 Visual Studio Code for Go 开发 - Go on Azure | Microsoft Learn)&#xA;Problem: Could not download VScode plugins of Go due to a famous firewall(I guess). here is the [reference](一招完美解决vscode安装go插件失败问题_installing github.com/cweill/gotests/gotests@v1.6.-CSDN博客).&#xA;Solvation:&#xA;This is the old version(abandoned):&#xA;go env -w GO111MODULE=on go env -w GOPROXY=https://goproxy.io,direct Open cmd or powershell and run the following commands:&#xA;go env -w GO111MODULE=on go env -w GOPROXY=https://proxy.</description>
+      <description>Go&amp;rsquo;s configuration in VScode Setting up Go in Windows&#xA;Problem: Could not download VScode plugins of Go due to a famous firewall(I guess). here is the reference.&#xA;Solvation:&#xA;This is the old version(abandoned):&#xA;go env -w GO111MODULE=on go env -w GOPROXY=https://goproxy.io,direct Open cmd or powershell and run the following commands:&#xA;go env -w GO111MODULE=on go env -w GOPROXY=https://proxy.golang.com.cn,direct Then restart VScode and install the Go plugins again, you should succeed.</description>
     </item>
     <item>
       <title>Having Fun</title>
       <link>https://agmes47.github.io/post/havingfun/</link>
       <pubDate>Sat, 01 Jan 2000 00:00:00 +0800</pubDate>
       <guid>https://agmes47.github.io/post/havingfun/</guid>
-      <description>How was this blog builded [source](如何用 GitHub Pages + Hugo 搭建个人博客 · 小绵尾巴 (cuttontail.blog))&#xA;[theme](Manis | Hugo Themes (gohugo.io))&#xA;Random Keyboard got locked A cat standing on my keyboard for a good amount of seconds and the keyboard got locked afer instant sharp &amp;lsquo;di&amp;rsquo; sound. The solution is press the right Shift key for more than 8 seconds. Reference: https://www.zhihu.com/question/539981785#&#xA;VPS Basic Add a new user adduser and useradd are different.</description>
+      <description>How was this blog builded source&#xA;theme&#xA;Random Keyboard got locked A cat standing on my keyboard for a good amount of seconds and the keyboard got locked afer instant sharp &amp;lsquo;di&amp;rsquo; sound. The solution is press the right Shift key for more than 8 seconds. Reference: https://www.zhihu.com/question/539981785#&#xA;VPS Basic Add a new user adduser and useradd are different. Use adduser. So applied to other similar commands, I guess.&#xA;Add a pubkey file First generate a pair of **publicKey **and secretKey files:</description>
     </item>
   </channel>
 </rss>

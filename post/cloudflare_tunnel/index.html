@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="generator" content="Hugo 0.121.1">
+		<title>Cloudflare_tunnel - Manis</title>
+
+		<meta name="description" content="References Zapic&rsquo;s Blog
+Lxn-Chan
+Why would I need Cloudflare Tunnel Using nginx for port forwarding, for example, configuring a location/path {} in /etc/nginx/sites-available/default, allows access to services on ports other than 80 or 443 via domain_name/path. This is suitable for services with only a root path, such as cppla&rsquo;s docker version serverstatus. However, for services with multiple subpaths, this simple method may fail, such as jadenlee2019&rsquo;s mynodequery. The reason is that when accessing domain_name/path for the first time, nginx performs port forwarding, and the mynodequery service returns a 302 response with location=&#39;Dashboard&#39;, so the local browser will access domain_name/Dashboard.">
+
+
+		
+	
+		
+
+
+
+
+<link rel="stylesheet" href="/css/ui.css">
+
+	
+		
+
+		<script defer src="/js/dark-mode.js"></script>
+		<link disabled id="dark-mode-theme" rel="stylesheet" href="/css/dark.css">
+		<link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono|Lato|Raleway">
+
+		
+	</head>
+
+<body>
+<header class="container no-print">
+	<div class="u-header">
+		<nav class="bar">
+	<ul><li>
+			<a href="/">
+				<img class="icon-text" src="/img/prev.svg"/>
+			</a>
+		</li><li><img class="icon-text" id="dark-mode-toggle" src="/img/moon-regular.svg" alt="Toggle Dark Mode"></a></li><li><a href="/about">About</a></li><li><a href="/post/">Post</a></li></ul>
+</nav>
+
+	</div>
+</header>
+<main class="container">
+
+<article>
+	<header><hgroup id="brand">
+	<h1>Cloudflare_tunnel</h1>
+	<h5>
+		
+		<time datetime="2024-02-24 16:45:57 &#43;0800 CST">Feb 24, 2024</time>
+		<span class="no-print">
+			<span>
+	</h5>
+	
+</hgroup>
+<hr class="sep" />
+</header>
+	<h3 id="references">References</h3>
+<p><a href="https://blog.zapic.moe/archives/tutorial-176.html">Zapic&rsquo;s Blog</a></p>
+<p><a href="https://lxnchan.cn/cf-tunnel.html">Lxn-Chan</a></p>
+<h3 id="why-would-i-need-cloudflare-tunnel">Why would I need Cloudflare Tunnel</h3>
+<p>Using nginx for port forwarding, for example, configuring a <code>location/path {}</code> in <code>/etc/nginx/sites-available/default</code>, allows access to services on ports other than 80 or 443 via <code>domain_name/path</code>. This is suitable for services with only a root path, such as <strong>cppla</strong>&rsquo;s docker version <a href="https://github.com/cppla/ServerStatus">serverstatus</a>. However, for services with multiple subpaths, this simple method may fail, such as jadenlee2019&rsquo;s <a href="https://hub.docker.com/r/jaydenlee2019/mynodequery">mynodequery</a>. The reason is that when accessing <code>domain_name/path</code> for the first time, nginx performs port forwarding, and the mynodequery service returns a 302 response with <code>location='Dashboard'</code>, so the local browser will access <code>domain_name/Dashboard</code>. However, nginx is not configured to handle <code>/Dashboard</code>, so it is eventually handled by <code>location / {}</code>. This also means that if the port forwarding rule is placed in <code>location / {}</code> instead of <code>location /path {}</code>, you can establish contact with the mynodequery service by accessing <code>domain_name</code>. But what if <code>location / {}</code> has other services that are more important than mynodequery? You can set up a private tunnel for services on any port on the host through a <strong>cloudflare tunnel</strong>, which provides direct access to the service on that port through a specified <strong>sub domain name</strong>.</p>
+<h3 id="start">Start</h3>
+<h4 id="install-cloudflared">Install cloudflared</h4>
+<p>Visit this <a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/">page</a> to download <strong>cloudflared</strong>. For Debian 12, refer to this <a href="https://pkg.cloudflare.com/index.html">document</a> and the following:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Add cloudflare gpg key</span>
+</span></span><span class="line"><span class="cl">sudo mkdir -p --mode<span class="o">=</span><span class="m">0755</span> /usr/share/keyrings
+</span></span><span class="line"><span class="cl">curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg <span class="p">|</span> sudo tee /usr/share/keyrings/cloudflare-main.gpg &gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add this repo to your apt repositories</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared buster main&#39;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/cloudflared.list
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># install cloudflared</span>
+</span></span><span class="line"><span class="cl">sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install cloudflared
+</span></span></code></pre></div><h4 id="login-your-cloudflare-account-for-authentication">Login your cloudflare account for authentication</h4>
+<p>First run the following command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared tunnel login
+</span></span></code></pre></div><p>And there will be some prompts like this：</p>
+<pre tabindex="0"><code>Please open the following URL and log in with your Cloudflare account:
+
+https://dash.cloudflare.com/argotunnel?callback=https%3A%2F%2Flogin.argotunnel.com%2F1145141919810%3D
+
+Leave cloudflared running to download the cert automatically.
+</code></pre><p>Open the url and select a <strong>domain_name</strong> to turn on <strong>cloudflare argo tunnel</strong>.</p>
+<h4 id="create-a-tunnel">Create a tunnel</h4>
+<p>Run the following to create a tunnel:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared tunnel create &lt;tunnel_name&gt;  <span class="c1"># replace tunnel_name with what you want </span>
+</span></span></code></pre></div><p>And some helpful commands:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># manual for usage</span>
+</span></span><span class="line"><span class="cl">cloudflared tunnel -help  <span class="c1"># cloudflared tunnel -h</span>
+</span></span><span class="line"><span class="cl">cloudflared -h
+</span></span><span class="line"><span class="cl"><span class="c1"># List all the existing tunnels</span>
+</span></span><span class="line"><span class="cl">cloudflared tunnel list
+</span></span></code></pre></div><h4 id="run-the-tunnel">Run the tunnel</h4>
+<p>Run the tunnel</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># For example, cloudflared tunnel run --url http://localhost:3241 mynodequery</span>
+</span></span><span class="line"><span class="cl">cloudflared tunnel run --url &lt;Source&gt; &lt;tunnel_name/tunnel_id&gt;
+</span></span><span class="line"><span class="cl"><span class="c1"># For more usage, check out cloudflared tunnel -h</span>
+</span></span></code></pre></div><p>Default configuration file is <code>~/.cloudflared/config.yml</code>. Here is an example.</p>
+<pre tabindex="0"><code>tunnel: 6ff42ae2-765d-4adf-8112-31c55c1551ef
+credentials-file: /root/.cloudflared/6ff42ae2-765d-4adf-8112-31c55c1551ef.json
+protocol: http2
+originRequest:
+  connectTimeout: 30s
+  noTLSVerify: false
+
+ingress:
+  - hostname: gitlab.corp.tech  # replace corp.tech with your domain name
+    service: http://localhost:80
+  - hostname: gitlab-ssh.corp.tech  # replace corp.tech with your domain name
+    service: ssh://localhost:22
+  - service: http_status:404
+</code></pre><p>If you already complish your configuration file, your could execute the following command to run the tunnel instead.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared tunnel run &lt;tunnel_name/tunnel_id&gt; <span class="c1"># this would use the default configuration file</span>
+</span></span></code></pre></div><h4 id="bind-your-tunnel-with-a-domain-name">Bind your tunnel with a domain name</h4>
+<p>Run the following to bind your command with a domain name:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># For example: cloudflared tunnel route dns mynodequery mynodequery.domain_name</span>
+</span></span><span class="line"><span class="cl">cloudflared tunnel route dns &lt;tunnel_name/tunnel_id&gt; &lt;sub domain_name&gt;
+</span></span></code></pre></div><p>(Optional) After this, login in your cloudflare account (<a href="https://dash.cloudflare.com/xxx/domain_name/dns/records">https://dash.cloudflare.com/xxx/domain_name/dns/records</a>) and then you would find there is a new <strong>CNAME</strong> record that binds your <strong>sub domian name</strong> with your <strong>tunnel_id specified url</strong>.</p>
+<h4 id="visit-your-service-through-domain-name">Visit your service through domain name</h4>
+<p>For example: <strong>mynodequery.domain_name</strong></p>
+<h4 id="make-it-a-systemd-service-optinal">Make it a  systemd service (optinal)</h4>
+<p>Create and edit <code>/etc/systemd/system/cloudflared.service</code></p>
+<pre tabindex="0"><code>[Unit]
+Description=Cloudflare Tunnel
+After=network.target
+
+[Service]
+ExecStart=cloudflared tunnel run --url &lt;Source&gt; &lt;tunnel_name/tunnel_id&gt;
+Restart=always
+RestartSec=5
+StartLimitInterval=3
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><p>Make it auto start after boot</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> cloudflared.service
+</span></span></code></pre></div><p>Start the cloudflared service</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl start cloudflared.service
+</span></span></code></pre></div>
+</article>
+<nav class="no-print post-nav">
+
+	<a class="prev-post" href="https://agmes47.github.io/post/serverstatus/">
+		<img class="icon-text" src="/img/prev.svg"/>Serverstatus</a>
+
+
+</nav>
+
+
+
+
+
+			<hr class="sep" />
+		</main>
+		<footer class="container no-print">
+			<div class="u-footer">
+				
+<a href="mailto:mail@yurizal-san.com"><img class="icon-social" src="/img/email.svg" alt="Email Me!"/></a>
+
+
+<a href="https://github.com/yursan9/"><img class="icon-social" src="/img/github.svg" alt="Github"/></a>
+
+
+<a href="https://twitter.com/yuri_boya"><img class="icon-social" src="/img/twitter.svg" alt="Twitter"/></a>
+
+<a href="https://agmes47.github.io/index.xml" target="_blank"><img class="icon-social" src="/img/feed.svg" alt="Feed"></a>
+
+
+				<p>
+					
+					Theme used: <a href="https://github.com/yursan9/manis-hugo-theme">Manis</a><br>
+					
+					
+					&copy; 2019 Yurizal Susanto
+					
+					
+					| <a href="/about/license">License</a>
+					
+				</p>
+				
+				<a href="#brand">
+					<img class="icon-text" src="/img/toup.svg" alt="To Up"/>
+					<span>Back to Up</span>
+				</a>
+				
+			</div>
+		</footer>
+		
+	</body>
+</html>
+
