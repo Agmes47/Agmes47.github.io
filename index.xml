@@ -7,8 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; 2019 Yurizal Susanto</copyright>
-    <lastBuildDate>Sat, 24 Feb 2024 16:45:57 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 29 Feb 2024 20:49:26 +0800</lastBuildDate>
     <atom:link href="https://agmes47.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mynodequery</title>
+      <link>https://agmes47.github.io/post/mynodequery/</link>
+      <pubDate>Thu, 29 Feb 2024 20:49:26 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/mynodequery/</guid>
+      <description>Source Refered blog link&#xA;Project&#xA;Start install docker and docker-compose # install docker curl -fsSL https://get.docker.com -o get-docker.sh &amp;amp;&amp;amp; sh get-docker.sh &amp;amp;&amp;amp; docker --version &amp;amp;&amp;amp; systemctl start docker &amp;amp;&amp;amp; systemctl enable docker &amp;amp;&amp;amp; systemctl restart docker # install docker-compose sudo curl -L &amp;#34;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&amp;#34; -o /usr/local/bin/docker-compose &amp;amp;&amp;amp; sudo chmod +x /usr/local/bin/docker-compose &amp;amp;&amp;amp; docker-compose --version Make some configuration files mkdir ~/MyNodeQuery &amp;amp;&amp;amp; cd ~/MyNodeQuery touch docker-compose.yml touch appsettings.json Add the following to docker-compose.</description>
+    </item>
     <item>
       <title>Cloudflare_tunnel</title>
       <link>https://agmes47.github.io/post/cloudflare_tunnel/</link>
@@ -28,7 +35,7 @@
       <link>https://agmes47.github.io/post/vpses/</link>
       <pubDate>Fri, 16 Feb 2024 22:53:00 +0800</pubDate>
       <guid>https://agmes47.github.io/post/vpses/</guid>
-      <description>Vmiss CN.HK.INTL.Basic (14cad/year) Link&#xA;版本：2024.02.04 更新日志：VPS融合怪测试(集百家之长) &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;基础信息查询&amp;ndash;感谢所有开源项目&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; CPU 型号 : Intel Core Processor (Broadwell, IBRS) CPU 核心数 : 1 CPU 频率 : 2599.996 MHz CPU 缓存 : L1: 64.00 KB / L2: 4.00 MB / L3: 16.00 MB 硬盘空间 : 1.76 GiB / 9.81 GiB 启动盘路径 : /dev/vda1 内存 : 131.56 MiB / 979.00 MiB Swap : 1.01 MiB / 1024.00 MiB 系统在线时间 : 0 days, 6 hour 38 min 负载 : 0.</description>
+      <description>Vmiss CN.HK.INTL.Basic (14 cad/year) trash&#xA;Link&#xA;WAP HK2 256M VPS HK2 E5 VPS Netflix (6 usd/year) trash&#xA;Link&#xA;Cloudcone 1c 512M LA (9.5 usd/year) fine&#xA;Link&#xA;WAWO HKbgp-ipv6-768LXC (5 cny/year) unstable&#xA;link&#xA;Bytevirt NAT-214-KVM-LA (2.14 usd/year) fine&#xA;link&#xA;Gshou link</description>
     </item>
     <item>
       <title>Install g4f in Debian12</title>
