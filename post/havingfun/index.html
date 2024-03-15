@@ -105,6 +105,16 @@ PubkeyAuthentication yes 
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">swapon --show
 </span></span></code></pre></div><p>Set as auto mounting after booting</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;/swap/swapfile none swap sw 0 0&#34;</span> &gt;&gt; /etc/fstab
+</span></span></code></pre></div><h6 id="set-up-congestion-control-algorithmbbr-and-queue-scheduling-algorithmfair-queuing">Set up congestion control algorithm(bbr) and queue scheduling algorithm(fair queuing)</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#check the current algrithm</span>
+</span></span><span class="line"><span class="cl">sysctl net.ipv4.tcp_congestion_control
+</span></span><span class="line"><span class="cl"><span class="c1">#check the Linux version (expect to be newer than 4.9)</span>
+</span></span><span class="line"><span class="cl">uname -r
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#BBR set up</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;net.core.default_qdisc=fq&#34;</span> &gt;&gt; /etc/sysctl.conf
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;net.ipv4.tcp_congestion_control=bbr&#34;</span> &gt;&gt; /etc/sysctl.conf
+</span></span><span class="line"><span class="cl">sysctl -p
 </span></span></code></pre></div><h6 id="check-outbound-ip-address">Check outbound IP address</h6>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -4 ip.sb    <span class="c1"># ipv4</span>
 </span></span><span class="line"><span class="cl">curl ip.p3terx.com    <span class="c1">#ipv4 and AS</span>
@@ -118,17 +128,7 @@ PubkeyAuthentication yes 
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>wget -qO- https://raw.githubusercontent.com/fscarmen/sba/main/sba.sh<span class="o">)</span>
 </span></span></code></pre></div><h4 id="scripts">Scripts</h4>
 <p><a href="https://bulianglin.com/archives/nicename.html">link</a></p>
-<h5 id="bbr-set-up">BBR set up</h5>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#check the current algrithm</span>
-</span></span><span class="line"><span class="cl">sysctl net.ipv4.tcp_congestion_control
-</span></span><span class="line"><span class="cl"><span class="c1">#check the Linux version (expect to be newer than 4.9)</span>
-</span></span><span class="line"><span class="cl">uname -r
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#BBR set up</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;net.core.default_qdisc=fq&#34;</span> &gt;&gt; /etc/sysctl.conf
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;net.ipv4.tcp_congestion_control=bbr&#34;</span> &gt;&gt; /etc/sysctl.conf
-</span></span><span class="line"><span class="cl">sysctl -p
-</span></span></code></pre></div><h5 id="x-ui">X-UI</h5>
+<h5 id="x-ui">X-UI</h5>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>curl -Ls https://raw.githubusercontent.com/FranzKafkaYu/x-ui/956bf85bbac978d56c0e319c5fac2d6db7df9564/install.sh<span class="o">)</span> 0.3.4.4
 </span></span></code></pre></div><h5 id="dd-operating-system">dd operating system</h5>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#Parameters explain: -d 11(7, 8, 9, 10) Debian; -u 20.04(14.04, 16.04, 18.04) Ubuntu; -p 123 Password</span>

@@ -7,14 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; 2019 Yurizal Susanto</copyright>
-    <lastBuildDate>Thu, 29 Feb 2024 20:49:26 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 01 Mar 2024 16:04:57 +0800</lastBuildDate>
     <atom:link href="https://agmes47.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Smokeping</title>
+      <link>https://agmes47.github.io/post/smokeping/</link>
+      <pubDate>Fri, 01 Mar 2024 16:04:57 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/smokeping/</guid>
+      <description>Source zzz&amp;rsquo;s blog&#xA;Start Install docker and enable it. curl -fsSL https://get.docker.com -o get-docker.sh &amp;amp;&amp;amp; sh get-docker.sh &amp;amp;&amp;amp; docker --version &amp;amp;&amp;amp; systemctl start docker &amp;amp;&amp;amp; systemctl enable docker &amp;amp;&amp;amp; systemctl restart Create a directory and open a port myserve=&amp;#34;smokeping&amp;#34; sudo ufw allow 8899/tcp comment $myserve &amp;amp;&amp;amp; sudo ufw reload mkdir -p ~/myserve/$myserve &amp;amp;&amp;amp; cd ~/myserve/$myserve Create a configuration file cat &amp;gt; docker-compose.yml &amp;lt;&amp;lt; EOF version: &amp;#34;2.1&amp;#34; services: smokeping: image: lscr.io/linuxserver/smokeping:latest container_name: smokeping restart: unless-stopped environment: - PUID=1000 # 自定义，可以是用户名，也可以是 UID，如果不懂，填 root - PGID=1000 # 自定义，可以是组名，也可以是 UID，如果不懂，填 root - TZ=Asia/Shanghai volumes: - .</description>
+    </item>
     <item>
       <title>Mynodequery</title>
       <link>https://agmes47.github.io/post/mynodequery/</link>
       <pubDate>Thu, 29 Feb 2024 20:49:26 +0800</pubDate>
       <guid>https://agmes47.github.io/post/mynodequery/</guid>
       <description>Source Refered blog link&#xA;Project&#xA;Start install docker and docker-compose # install docker curl -fsSL https://get.docker.com -o get-docker.sh &amp;amp;&amp;amp; sh get-docker.sh &amp;amp;&amp;amp; docker --version &amp;amp;&amp;amp; systemctl start docker &amp;amp;&amp;amp; systemctl enable docker &amp;amp;&amp;amp; systemctl restart docker # install docker-compose sudo curl -L &amp;#34;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&amp;#34; -o /usr/local/bin/docker-compose &amp;amp;&amp;amp; sudo chmod +x /usr/local/bin/docker-compose &amp;amp;&amp;amp; docker-compose --version Make some configuration files mkdir ~/MyNodeQuery &amp;amp;&amp;amp; cd ~/MyNodeQuery touch docker-compose.yml touch appsettings.json Add the following to docker-compose.</description>
+    </item>
+    <item>
+      <title>Alpine</title>
+      <link>https://agmes47.github.io/post/alpine/</link>
+      <pubDate>Wed, 28 Feb 2024 22:29:04 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/alpine/</guid>
+      <description>Basic Allow net-working:&#xA;rc-update add networking&#xD;service networking start Scripts source&#xA;#Warp： apk update &amp;amp;&amp;amp; apk add curl &amp;amp;&amp;amp; apk add bash &amp;amp;&amp;amp; apk add wget wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh &amp;amp;&amp;amp; bash menu.sh 4 #nezha： apk add bash curl (把community源前的#删了) 使用哪吒后台一键安装命令，去掉sudu #X-UI： apk add curl&amp;amp;&amp;amp;apk add bash &amp;amp;&amp;amp; bash &amp;lt;(curl -Ls https://raw.githubusercontent.com/Lynn-Becky/Alpine-x-ui/main/alpine-xui.sh) #XrayR： apk add wget sudo curl &amp;amp;&amp;amp; wget -N https://github.com/Cd1s/alpineXrayR/releases/download/one-click/install-xrayr.sh &amp;amp;&amp;amp; chmod +x install-xrayr.sh &amp;amp;&amp;amp; bash install-xrayr.sh #ArgoX： bash &amp;lt;(wget -qO- https://raw.</description>
     </item>
     <item>
       <title>Cloudflare_tunnel</title>
@@ -35,7 +49,7 @@
       <link>https://agmes47.github.io/post/vpses/</link>
       <pubDate>Fri, 16 Feb 2024 22:53:00 +0800</pubDate>
       <guid>https://agmes47.github.io/post/vpses/</guid>
-      <description>Vmiss CN.HK.INTL.Basic (14 cad/year) trash&#xA;Link&#xA;WAP HK2 256M VPS HK2 E5 VPS Netflix (6 usd/year) trash&#xA;Link&#xA;Cloudcone 1c 512M LA (9.5 usd/year) fine&#xA;Link&#xA;WAWO HKbgp-ipv6-768LXC (5 cny/year) unstable&#xA;link&#xA;Bytevirt NAT-214-KVM-LA (2.14 usd/year) fine&#xA;link&#xA;Gshou link</description>
+      <description>Vmiss CN.HK.INTL.Basic (14 cad/year) trash&#xA;Link&#xA;WAP HK2 256M VPS HK2 E5 VPS Netflix (6 usd/year) trash&#xA;Link&#xA;Cloudcone 1c 512M LA (9.5 usd/year) fine&#xA;Link&#xA;WAWO HKbgp-ipv6-768LXC (5 cny/year) unstable&#xA;link&#xA;Bytevirt NAT-214-KVM-LA (2.14 usd/year) fine&#xA;link&#xA;Gshou link&#xA;WAWO US 4837 （60 cny/year) link&#xA;Yanhuo cloud HK (10.5 cny/mon) link</description>
     </item>
     <item>
       <title>Install g4f in Debian12</title>

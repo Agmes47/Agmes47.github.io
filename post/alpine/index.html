@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="generator" content="Hugo 0.121.1">
+		<title>Alpine - Manis</title>
+
+		<meta name="description" content="Basic Allow net-working:
+rc-update add networkingservice networking start Scripts source
+#Warp： apk update &amp;&amp; apk add curl &amp;&amp; apk add bash &amp;&amp; apk add wget wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh &amp;&amp; bash menu.sh 4 #nezha： apk add bash curl (把community源前的#删了) 使用哪吒后台一键安装命令，去掉sudu #X-UI： apk add curl&amp;&amp;apk add bash &amp;&amp; bash &lt;(curl -Ls https://raw.githubusercontent.com/Lynn-Becky/Alpine-x-ui/main/alpine-xui.sh) #XrayR： apk add wget sudo curl &amp;&amp; wget -N https://github.com/Cd1s/alpineXrayR/releases/download/one-click/install-xrayr.sh &amp;&amp; chmod &#43;x install-xrayr.sh &amp;&amp; bash install-xrayr.sh #ArgoX： bash &lt;(wget -qO- https://raw.">
+
+
+		
+	
+		
+
+
+
+
+<link rel="stylesheet" href="/css/ui.css">
+
+	
+		
+
+		<script defer src="/js/dark-mode.js"></script>
+		<link disabled id="dark-mode-theme" rel="stylesheet" href="/css/dark.css">
+		<link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono|Lato|Raleway">
+
+		
+	</head>
+
+<body>
+<header class="container no-print">
+	<div class="u-header">
+		<nav class="bar">
+	<ul><li>
+			<a href="/">
+				<img class="icon-text" src="/img/prev.svg"/>
+			</a>
+		</li><li><img class="icon-text" id="dark-mode-toggle" src="/img/moon-regular.svg" alt="Toggle Dark Mode"></a></li><li><a href="/about">About</a></li><li><a href="/post/">Post</a></li></ul>
+</nav>
+
+	</div>
+</header>
+<main class="container">
+
+<article>
+	<header><hgroup id="brand">
+	<h1>Alpine</h1>
+	<h5>
+		
+		<time datetime="2024-02-28 22:29:04 &#43;0800 CST">Feb 28, 2024</time>
+		<span class="no-print">
+			<span>
+	</h5>
+	
+</hgroup>
+<hr class="sep" />
+</header>
+	<h3 id="basic">Basic</h3>
+<p>Allow net-working:</p>
+<pre tabindex="0"><code class="language-ash" data-lang="ash">rc-update add networking
+service networking start
+</code></pre><h3 id="scripts">Scripts</h3>
+<p>source</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#Warp：</span>
+</span></span><span class="line"><span class="cl">apk update <span class="o">&amp;&amp;</span> apk add curl <span class="o">&amp;&amp;</span> apk add bash <span class="o">&amp;&amp;</span> apk add wget
+</span></span><span class="line"><span class="cl">wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh <span class="o">&amp;&amp;</span> bash menu.sh <span class="m">4</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#nezha：</span>
+</span></span><span class="line"><span class="cl">apk add bash curl <span class="o">(</span>把community源前的#删了<span class="o">)</span>
+</span></span><span class="line"><span class="cl">使用哪吒后台一键安装命令，去掉sudu
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#X-UI：</span>
+</span></span><span class="line"><span class="cl">apk add curl<span class="o">&amp;&amp;</span>apk add bash <span class="o">&amp;&amp;</span> bash &lt;<span class="o">(</span>curl -Ls https://raw.githubusercontent.com/Lynn-Becky/Alpine-x-ui/main/alpine-xui.sh<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#XrayR：</span>
+</span></span><span class="line"><span class="cl">apk add wget sudo curl <span class="o">&amp;&amp;</span> wget -N https://github.com/Cd1s/alpineXrayR/releases/download/one-click/install-xrayr.sh <span class="o">&amp;&amp;</span> chmod +x install-xrayr.sh <span class="o">&amp;&amp;</span> bash install-xrayr.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#ArgoX：</span>
+</span></span><span class="line"><span class="cl">bash &lt;<span class="o">(</span>wget -qO- https://raw.githubusercontent.com/fscarmen/argox/main/argox.sh<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#SING-BOX：</span>
+</span></span><span class="line"><span class="cl">bash &lt;<span class="o">(</span>wget -qO- https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-box.sh<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#Alpine package management</span>
+</span></span><span class="line"><span class="cl">rc-service <span class="o">[</span>package_name<span class="o">]</span> restart
+</span></span></code></pre></div><h3 id="faq">FAQ</h3>
+<h6 id="coulld-not-ban-ssh-password-log-in">Coulld not ban SSH password log in?</h6>
+<p><a href="https://superuser.com/a/1816612">reference</a>
+Execute</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sshd -T <span class="p">|</span> grep passwordauthentication     
+</span></span></code></pre></div><p>if you see output <code>passwordauthentication yes</code>, some configurations are set prior to default /etc/ssh/sshd_config, they are located in <code>/etc/ssh/sshd_config.d/</code> , you can search <code>passwordauthentication</code> from them or simply remove them by</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm /etc/ssh/sshd_config.d/*
+</span></span></code></pre></div>
+</article>
+<nav class="no-print post-nav">
+
+	<a class="prev-post" href="https://agmes47.github.io/post/cloudflare_tunnel/">
+		<img class="icon-text" src="/img/prev.svg"/>Cloudflare_tunnel</a>
+
+
+	<a class="next-post" href="https://agmes47.github.io/post/mynodequery/">Mynodequery<img class="icon-text" src="/img/next.svg"/>
+	</a>
+
+</nav>
+
+
+
+
+
+			<hr class="sep" />
+		</main>
+		<footer class="container no-print">
+			<div class="u-footer">
+				
+<a href="mailto:mail@yurizal-san.com"><img class="icon-social" src="/img/email.svg" alt="Email Me!"/></a>
+
+
+<a href="https://github.com/yursan9/"><img class="icon-social" src="/img/github.svg" alt="Github"/></a>
+
+
+<a href="https://twitter.com/yuri_boya"><img class="icon-social" src="/img/twitter.svg" alt="Twitter"/></a>
+
+<a href="https://agmes47.github.io/index.xml" target="_blank"><img class="icon-social" src="/img/feed.svg" alt="Feed"></a>
+
+
+				<p>
+					
+					Theme used: <a href="https://github.com/yursan9/manis-hugo-theme">Manis</a><br>
+					
+					
+					&copy; 2019 Yurizal Susanto
+					
+					
+					| <a href="/about/license">License</a>
+					
+				</p>
+				
+				<a href="#brand">
+					<img class="icon-text" src="/img/toup.svg" alt="To Up"/>
+					<span>Back to Up</span>
+				</a>
+				
+			</div>
+		</footer>
+		
+	</body>
+</html>
+
