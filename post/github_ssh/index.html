@@ -77,6 +77,12 @@ git config --global user.email &#34;luminary@g.com&#34;
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh -T git@github.com
 </span></span></code></pre></div><p> If it works then it would inform you that:</p>
 <p><code>Hi user! You've successfully authenticated, but GitHub does not provide shell access.</code></p>
+<h5 id="some-helpful-commands">Some helpful commands</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">ssh-keygen</span> <span class="n">-lf</span> <span class="n">file_path</span>     <span class="c"># Show the fingerprint, notation and algorithm of the key file</span>
+</span></span><span class="line"><span class="cl"><span class="nb">ssh-add</span> <span class="n">-l</span>     <span class="c"># Show all the fingerprints of the key file that we&#39;ve add to our ssh agent</span>
+</span></span><span class="line"><span class="cl"><span class="nb">ssh-add</span> <span class="n">file_path</span>     <span class="c">#Add the key file to our ssh agent</span>
+</span></span><span class="line"><span class="cl"><span class="nb">ssh-agent</span> <span class="n">-s</span>     <span class="c"># Run the ssh-agent</span>
+</span></span></code></pre></div><p>If our <strong>git</strong> CLI couldn&rsquo;t pull or push to the remote repository, we could try <a href="https://stackoverflow.com/a/69992322/18821757">this</a> out.</p>
 <h5 id="postscript">Postscript</h5>
 <p>If it still can&rsquo;t connect to github through SSH, create a <code>~/user/.ssh/config</code> file if not exists and add the following:</p>
 <pre tabindex="0"><code>Host github.com
@@ -84,7 +90,7 @@ git config --global user.email &#34;luminary@g.com&#34;
  Port 22
 </code></pre><p>check out this <a href="https://stackoverflow.com/questions/15589682/ssh-connect-to-host-github-com-port-22-connection-timed-out">page</a> for more information.</p>
 <h6 id="source">Source</h6>
-<p>This paper is refered from <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">it</a>.</p>
+<p>Check the <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">original</a> out.</p>
 
 </article>
 <nav class="no-print post-nav">

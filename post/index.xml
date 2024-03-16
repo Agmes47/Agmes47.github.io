@@ -7,8 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; 2019 Yurizal Susanto</copyright>
-    <lastBuildDate>Fri, 01 Mar 2024 16:04:57 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 16 Mar 2024 11:59:52 +0800</lastBuildDate>
     <atom:link href="https://agmes47.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Infinite_server, a rough toy</title>
+      <link>https://agmes47.github.io/post/infinite_server/</link>
+      <pubDate>Sat, 16 Mar 2024 11:59:52 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/infinite_server/</guid>
+      <description>Infinite server Project address&#xA;How does it work In normal case, PHP-FPM runs the php script forwarded by Nginx or Apache which would show the frontend when we visit the dashboard in our browser. How does the dashboard node get the status of its client nodes? There are two kinds of methods.&#xA;Pull method The dashboard node sends requests to the client node. The client uses Nginx/Apache to forward the requests of php script to PHP-FPM that would run the scripts which get the status information about their local machine.</description>
+    </item>
     <item>
       <title>Smokeping</title>
       <link>https://agmes47.github.io/post/smokeping/</link>

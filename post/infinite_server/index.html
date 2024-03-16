@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="generator" content="Hugo 0.121.1">
+		<title>Infinite_server, a rough toy - Manis</title>
+
+		<meta name="description" content="Infinite server Project address
+How does it work In normal case, PHP-FPM runs the php script forwarded by Nginx or Apache which would show the frontend when we visit the dashboard in our browser. How does the dashboard node get the status of its client nodes? There are two kinds of methods.
+Pull method The dashboard node sends requests to the client node. The client uses Nginx/Apache to forward the requests of php script to PHP-FPM that would run the scripts which get the status information about their local machine.">
+
+
+		
+	
+		
+
+
+
+
+<link rel="stylesheet" href="/css/ui.css">
+
+	
+		
+
+		<script defer src="/js/dark-mode.js"></script>
+		<link disabled id="dark-mode-theme" rel="stylesheet" href="/css/dark.css">
+		<link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono|Lato|Raleway">
+
+		
+	</head>
+
+<body>
+<header class="container no-print">
+	<div class="u-header">
+		<nav class="bar">
+	<ul><li>
+			<a href="/">
+				<img class="icon-text" src="/img/prev.svg"/>
+			</a>
+		</li><li><img class="icon-text" id="dark-mode-toggle" src="/img/moon-regular.svg" alt="Toggle Dark Mode"></a></li><li><a href="/about">About</a></li><li><a href="/post/">Post</a></li></ul>
+</nav>
+
+	</div>
+</header>
+<main class="container">
+
+<article>
+	<header><hgroup id="brand">
+	<h1>Infinite_server, a rough toy</h1>
+	<h5>
+		
+		<time datetime="2024-03-16 11:59:52 &#43;0800 CST">Mar 16, 2024</time>
+		<span class="no-print">
+			<span>
+	</h5>
+	
+</hgroup>
+<hr class="sep" />
+</header>
+	<h3 id="infinite-server">Infinite server</h3>
+<p><a href="https://gitlab.com/hzxie/infinite-server">Project address</a></p>
+<h4 id="how-does-it-work">How does it work</h4>
+<p>In normal case, <a href="https://www.php.net/manual/en/install.fpm.php">PHP-FPM</a> runs the php script forwarded by <strong>Nginx</strong> or <strong>Apache</strong> which would show the frontend when we visit the dashboard in our browser. How does the dashboard node get the status of its client nodes? There are two kinds of methods.</p>
+<h5 id="pull-method">Pull method</h5>
+<p>The dashboard node sends requests to the client node. The client uses <strong>Nginx</strong>/<strong>Apache</strong> to forward the requests of php script to PHP-FPM that would run the scripts which get the status information about their local machine.</p>
+<h5 id="push-method">Push method</h5>
+<p>The client runs the php script to get information about its local machine and send the result to the dashboard node.</p>
+<h4 id="analysis">Analysis</h4>
+<h5 id="dashboard-node">Dashboard node</h5>
+<h6 id="nginx-configuration">Nginx configuration</h6>
+<pre tabindex="0"><code>location / {
+     proxy_http_version          1.1;
+     proxy_buffering             off;
+     try_files      $uri   /infinite-server/index.php$is_args$args;
+}
+location ~ \.php$ {
+     include snippets/fastcgi-php.conf;
+     fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+}
+</code></pre><p><code>try_files uri /infinite-server/index.phpis_args$args;</code>  Tries to serve the requested URI directly, and if that fails, it rewrites the request to <code>/infinite-server/index.php</code> with any query parameters (<code>$is_args$args</code>) appended. And according to <code>location ~ .php$ {}</code>, any request ending in <code>.php</code> would be processed by <strong>php8.2-fpm</strong>.</p>
+<p>Attension: The configuration file of php8,2-fpm.sock is <code>/etc/php/8.2/fpm/pool.d/www.conf</code>. If we install the php-fpm running <code>apt install php-fpm</code>, the default path of php-fpm.sock is <code>/run/php/php-fpm.sock</code>. We need to modify it in the configuration file.</p>
+<h6 id="the-mechanism-of-the-project">The mechanism of  the project</h6>
+<p>The request would be rewrited to <code>/infinite-server/index.php</code> when we visit <code>http://ip/infinite-server</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">// infinite-server/index.php
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">include_once</span><span class="p">(</span><span class="s2">&#34;api/index.php&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><p>In <strong>pull method</strong>, <code>infinite-server/index.php</code> contains another php file, which is the key script of this project. In <code>infinite-server/api/index.php</code>, <code>case &quot;/&quot;</code> would return the <code>infinite-server/default.html</code> to the frontend. There are some javascript codes in <code>infinite-server/default.html</code> that would send request with path of <code>./servers</code> and <code>./status</code> to the dashboard node. After receiving those requests from the browser,  <code>case &quot;/servers&quot;</code> and <code>case &quot;/status&quot;</code> in <code>infinite-server/api/index.php</code> would send request to client to get their status(the client node should put <code>status.php</code> in <code>/var/www/html/</code>). So the client nodes must set up a web server and PHP environment to process the requests.  The <code>case &quot;/push&quot;</code> is to deal with the information of client nodes by <strong>push method</strong>. In <strong>push method</strong>, the client nodes run <code>status.php</code> automatically to sending information to the dashboard node. The configuration file in the dashboard node should contain the same name and token as the one of the  corresponding client node.</p>
+<h6 id="details">Details</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">// infinite-server/api/index.php
+</span></span></span><span class="line"><span class="cl"><span class="c1">// push method
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">array_key_exists</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$config</span><span class="p">[</span><span class="s2">&#34;servers&#34;</span><span class="p">])</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$config</span><span class="p">[</span><span class="s2">&#34;servers&#34;</span><span class="p">][</span><span class="nv">$name</span><span class="p">][</span><span class="s2">&#34;url&#34;</span><span class="p">]</span> <span class="o">!=</span> <span class="nv">$token</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">http_response_code</span><span class="p">(</span><span class="mi">403</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>These codes compares the <strong>node_name</strong> and <strong>token</strong> from client node with those of the dashboard node.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;node_name&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;token&#34;</span><span class="p">:</span> <span class="s2">&#34;TOKEN&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;url&#34;</span><span class="p">:</span> <span class="s2">&#34;http://dashboard_node_ip/infinite-server/push&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>In the configuration file of the <strong>client node</strong>, <strong>node_name</strong>, <strong>token</strong> and <strong>dashboard_node_ip</strong> should be contained.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;servers&#34;</span><span class="err">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//pull method
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nt">&#34;Awesome Server&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;HK&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;url&#34;</span><span class="p">:</span> <span class="s2">&#34;http://localhost/status.php&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//push method
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nt">&#34;Push Server&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;SG&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;url&#34;</span><span class="p">:</span> <span class="s2">&#34;RAMDOM-TOKEN&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>In the configuration file of the dashboard node, <strong>node_name</strong> and <strong>url</strong>(when implement <strong>pull</strong> method, its value should be the form of <code>http://client_node_ip/status.php</code>; when implement <strong>push</strong> method, its value  should be a token) should be contained.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">//infinite-server/api/helper.php
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">function</span> <span class="nf">sse_loop</span><span class="p">(</span><span class="nv">$cfg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Cache-Control: no-store&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Content-Type: text/event-stream&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">header</span><span class="p">(</span><span class="s1">&#39;X-Accel-Buffering: no&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// The event loop
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">while</span> <span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;data: &#39;</span> <span class="o">.</span> <span class="nx">json_encode</span><span class="p">(</span><span class="nx">get_server_status</span><span class="p">(</span><span class="nv">$cfg</span><span class="p">))</span> <span class="o">.</span> <span class="s2">&#34;</span><span class="se">\n\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">ob_end_flush</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">flush</span><span class="p">();</span> 
+</span></span><span class="line"><span class="cl">        <span class="c1">// Break the loop if the client aborted the connection (closed the page)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">connection_aborted</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">sleep</span><span class="p">(</span><span class="nv">$cfg</span><span class="p">[</span><span class="s2">&#34;interval&#34;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>Bug</strong>: when we close the page in our browser, <strong>connection_aborted()</strong> could not detect the disconnection. And then the <code>while</code> loop would keep running continuously. And I need restart nginx to terminate it.</p>
+<p><strong>A rough solution</strong>: embed some codes of a timer to terminate this while loop. For example, hard break it after  30 seconds.</p>
+<h6 id="more-details">More details</h6>
+<p>A interesting conversation:
+<strong>Me</strong>: For this configuration(as above) of nginx, when I visit http://ip/infinite-server/push, what would happen?
+<strong>LLM</strong>: According to this configuration file, when you visit http://ip/infinite-server/push, Nginx will attempt to locate the index.php file under the /infinite-server directory. If found, it will use FastCGI to pass the request to the PHP interpreter for processing, and the PHP interpreter will pass the request to the index.php file using the $args parameter. If the index.php file is not found, Nginx will return a 404 Not Found error.</p>
+<p><strong>Me</strong>: If index.php contains such codes(as the same as the one in the project), what would happen?</p>
+<p><strong>LLM</strong>: This index.php file is a simple PHP application that performs different operations based on the requested path. In your case, when you access http://ip/infinite-server/push, Nginx will pass the request to this index.php file for processing. Based on the code in index.php, it will check the name and token parameters in the request and process the request based on the values of these parameters. Specifically, it will validate if the name parameter exists in the server list in the configuration file and if its corresponding URL matches the token parameter. If validation passes, it will perform different actions based on whether the time parameter is present in the request, calling either dump_server_status or dump_server_info functions to handle server status information. If validation fails or the requested path does not match any of the above cases, it will return a 403 Forbidden or 404 Not Found error.
+<strong>Me</strong>: How does index.php match case &ldquo;/push&rdquo;?</p>
+<p><strong>LLM</strong>: The request path matching in index.php is achieved through the $request_path variable, which is obtained by parsing ￥_SERVER[&ldquo;REQUEST_URI&rdquo;]. When you access http://ip/infinite-server/push, the value of ￥_SERVER[&ldquo;REQUEST_URI&rdquo;] is &ldquo;/infinite-server/push&rdquo;. Therefore, after parsing, the value of ￥_request_path is &ldquo;/push&rdquo;. Subsequently, the switch statement match the value of ￥request_path and finds the corresponding case for &ldquo;/push&rdquo;, executing the code within it.</p>
+<p>(Replace the &lsquo;￥‘ with ’$&rsquo;)</p>
+
+</article>
+<nav class="no-print post-nav">
+
+	<a class="prev-post" href="https://agmes47.github.io/post/smokeping/">
+		<img class="icon-text" src="/img/prev.svg"/>Smokeping</a>
+
+
+</nav>
+
+
+
+
+
+			<hr class="sep" />
+		</main>
+		<footer class="container no-print">
+			<div class="u-footer">
+				
+<a href="mailto:mail@yurizal-san.com"><img class="icon-social" src="/img/email.svg" alt="Email Me!"/></a>
+
+
+<a href="https://github.com/yursan9/"><img class="icon-social" src="/img/github.svg" alt="Github"/></a>
+
+
+<a href="https://twitter.com/yuri_boya"><img class="icon-social" src="/img/twitter.svg" alt="Twitter"/></a>
+
+<a href="https://agmes47.github.io/index.xml" target="_blank"><img class="icon-social" src="/img/feed.svg" alt="Feed"></a>
+
+
+				<p>
+					
+					Theme used: <a href="https://github.com/yursan9/manis-hugo-theme">Manis</a><br>
+					
+					
+					&copy; 2019 Yurizal Susanto
+					
+					
+					| <a href="/about/license">License</a>
+					
+				</p>
+				
+				<a href="#brand">
+					<img class="icon-text" src="/img/toup.svg" alt="To Up"/>
+					<span>Back to Up</span>
+				</a>
+				
+			</div>
+		</footer>
+		
+	</body>
+</html>
+
