@@ -131,49 +131,35 @@ PubkeyAuthentication yes 
 <h5 id="x-ui">X-UI</h5>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>curl -Ls https://raw.githubusercontent.com/FranzKafkaYu/x-ui/956bf85bbac978d56c0e319c5fac2d6db7df9564/install.sh<span class="o">)</span> 0.3.4.4
 </span></span></code></pre></div><h5 id="dd-operating-system">dd operating system</h5>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#Parameters explain: -d 11(7, 8, 9, 10) Debian; -u 20.04(14.04, 16.04, 18.04) Ubuntu; -p 123 Password</span>
-</span></span><span class="line"><span class="cl">bash &lt;<span class="o">(</span>wget --no-check-certificate -qO- <span class="s1">&#39;https://raw.githubusercontent.com/MoeClub/Note/master/InstallNET.sh&#39;</span><span class="o">)</span> -d <span class="m">11</span> -v <span class="m">64</span> -p <span class="m">123456</span> -port <span class="m">22</span>
-</span></span></code></pre></div><h5 id="performance-testing-scripts">Performance testing scripts</h5>
+<p><a href="https://blockxyz.notion.site/DD-VPS-fb837703b3ac4011bb2362e3a56ac148">Useful source</a> and <a href="https://www.moeelf.com/archives/293.html">original script source</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>wget --no-check-certificate -qO- <span class="s1">&#39;https://moeclub.org/attachment/LinuxShell/InstallNET.sh&#39;</span><span class="o">)</span> -d <span class="m">11</span> -v <span class="m">64</span> -a -p custom_password -port custom_ssh_ports
+</span></span></code></pre></div><h6 id="various-scripts">Various scripts</h6>
 <p><a href="https://www.nodeseek.com/post-19427-1">Reference</a></p>
-<h6 id="yabs推荐github开源地址httpswwwnodeseekcomjumptohttps3a2f2fgithubcom2fmasonr2fyet-another-bench-script">YABS（推荐）<a href="https://www.nodeseek.com/jump?to=https%3A%2F%2Fgithub.com%2Fmasonr%2Fyet-another-bench-script">GitHub开源地址</a></h6>
-<pre tabindex="0"><code>wget -qO- yabs.sh | bash
-</code></pre><h6 id="流量稀缺的服务器不测试iperf网络">流量稀缺的服务器（不测试iperf网络）</h6>
-<pre tabindex="0"><code>curl -sL yabs.sh | bash -s -- -i
-</code></pre><h6 id="我更喜欢geekbench5不测试geekbench6">我更喜欢geekbench5（不测试geekbench6）</h6>
-<pre tabindex="0"><code>curl -sL yabs.sh | bash -s -- -5
-</code></pre><h6 id="我喜欢geekbench5但服务器流量稀缺不测试geekbench6不测试iperf网络">我喜欢geekbench5，但服务器流量稀缺（不测试geekbench6、不测试iperf网络）</h6>
-<pre tabindex="0"><code>curl -sL yabs.sh | bash -s -- -5 -i
-</code></pre><h6 id="geekbench-5-专测脚本github开源地址httpswwwnodeseekcomjumptohttps3a2f2fgithubcom2fi-abc2fgb5论坛大佬google-开发httpswwwnodeseekcompost-17042-1">Geekbench 5 专测脚本 <a href="https://www.nodeseek.com/jump?to=https%3A%2F%2Fgithub.com%2Fi-abc%2FGB5">GitHub开源地址</a> <a href="https://www.nodeseek.com/post-17042-1">论坛大佬@Google 开发</a></h6>
-<pre tabindex="0"><code>bash &lt;(curl -sL gb5.top)
-</code></pre><h6 id="lemonbenchgithub开源地址httpswwwnodeseekcomjumptohttps3a2f2fgithubcom2flemonbench2flemonbench">LemonBench <a href="https://www.nodeseek.com/jump?to=https%3A%2F%2Fgithub.com%2FLemonBench%2FLemonBench">GitHub开源地址</a></h6>
-<pre tabindex="0"><code>wget -qO- https://raw.githubusercontent.com/LemonBench/LemonBench/main/LemonBench.sh | bash -s -- --fast
-</code></pre><h6 id="unixbenchsh">UnixBench.sh</h6>
-<pre tabindex="0"><code>wget --no-check-certificate https://github.com/teddysun/across/raw/master/unixbench.sh
-chmod +x unixbench.sh
-./unixbench.sh
-</code></pre><h5 id="network-testing-script">Network testing script</h5>
-<p><a href="https://www.nodeseek.com/post-19427-1">Reference</a></p>
-<h6 id="hyperspeed-三网测速推荐未开源">hyperspeed 三网测速（推荐）（未开源）</h6>
-<pre tabindex="0"><code>bash &lt;(curl -Lso- https://bench.im/hyperspeed)
-</code></pre><h6 id="autotrace-三网回程线路显示推荐">AutoTrace 三网回程线路显示（推荐）</h6>
-<pre tabindex="0"><code>wget -N --no-check-certificate https://raw.githubusercontent.com/Chennhaoo/Shell_Bash/master/AutoTrace.sh &amp;&amp; chmod +x AutoTrace.sh &amp;&amp; bash AutoTrace.sh
-</code></pre><h6 id="backtrace-三网回程线路直接显示小白用这个">backtrace 三网回程线路直接显示（小白用这个）</h6>
-<pre tabindex="0"><code>curl https://raw.githubusercontent.com/zhanghanyun/backtrace/main/install.sh -sSf | sh
-</code></pre><h6 id="bench-网络带宽及硬盘读写速率国外部分国内部分节点">Bench 网络带宽及硬盘读写速率（国外部分+国内部分节点）</h6>
-<pre tabindex="0"><code>wget -qO- bench.sh | bash
-</code></pre><h6 id="superbenchsh-网络带宽及硬盘读写速率国内三网speedtestfast">SuperBench.sh 网络带宽及硬盘读写速率（国内三网+speedtest+fast）</h6>
-<pre tabindex="0"><code>wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superbench.sh | bash
-</code></pre><h5 id="streaming-media-testing-script">Streaming media testing script</h5>
-<h6 id="regionrestrictioncheck推荐">RegionRestrictionCheck（推荐）</h6>
-<pre tabindex="0"><code>bash &lt;(curl -L -s check.unlock.media)
-</code></pre><h6 id="openai解锁检测">openai解锁检测</h6>
-<pre tabindex="0"><code>bash &lt;(curl -Ls https://github.com/ludashi2020/OpenAI-Checker/raw/main/openai.sh)
-</code></pre>
+<h2 id="xray">xray</h2>
+<p><a href="https://github.com/chika0801/Xray-examples?tab=readme-ov-file">configuration tutorial</a></p>
+<h6 id="log-of-xray">Log of xray</h6>
+<p>To check the log of xray</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">journalctl -u xray -o cat -e <span class="c1"># </span>
+</span></span><span class="line"><span class="cl">journalctl -u xray -o cat -f <span class="c1">#</span>
+</span></span></code></pre></div><p>By default, what we see after running the above commands are the system service log of xray service. And they are ususally stored in <code>/var/log/journal/</code> directory as binary files. By default, these log files could grow larger and larger without any limit. To prevent they taking too much disk space, we could edit <code>/etc/systemd/journald.conf</code>.</p>
+<pre tabindex="0"><code class="language-conf" data-lang="conf"># Limit Log Size: Set a maximum size for individual journal files. For example
+SystemMaxUse=1G
+# Limit Disk Usage: Set a maximum disk space usage for all journal files combined.  For example:
+SystemMaxFileSize=100M
+# Enable Time-based Rotation. For example, to keep logs for 1 week, use:
+SystemKeepLogs=1week
+# Adjust Vacuuming Frequency: systemd provides automatic vacuuming of journal files, which removes older log data to keep within the configured limits. You can adjust the frequency of vacuuming by setting the SystemMaxFileSec option in /etc/systemd/journald.conf. For example, to vacuum journal files every day, use:
+SystemMaxFileSec=1day
+</code></pre><p><strong>Triggering Rotation Manually</strong>: You can also manually trigger log rotation using the <code>journalctl</code> command. For example, to rotate the journal files immediately, use:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">journalctl --rotate
+</span></span></code></pre></div><p>After making changes to the <code>journald.conf</code> file, you need to restart the <code>systemd-journald</code> service for the changes to take effect:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl restart systemd-journald
+</span></span></code></pre></div>
 </article>
 <nav class="no-print post-nav">
 
 
-	<a class="next-post" href="https://agmes47.github.io/post/config/">Some configurations<img class="icon-text" src="/img/next.svg"/>
+	<a class="next-post" href="https://agmes47.github.io/post/thoughts/">Thoughts<img class="icon-text" src="/img/next.svg"/>
 	</a>
 
 </nav>

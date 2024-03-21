@@ -7,8 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; 2019 Yurizal Susanto</copyright>
-    <lastBuildDate>Sat, 16 Mar 2024 11:59:52 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 19 Mar 2024 16:22:49 +0800</lastBuildDate>
     <atom:link href="https://agmes47.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Learning git</title>
+      <link>https://agmes47.github.io/post/git/</link>
+      <pubDate>Tue, 19 Mar 2024 16:22:49 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/git/</guid>
+      <description>Useful commands View all files that have been modified but not yet added to the stagging area&#xA;git status git status --procelain # only shows the files which have been modified View the contents that could be committed&#xA;git diff --cached The above command will show the differences between the changes that have been staged and the last commit. We can also use git status command to check the files in the stagging area.</description>
+    </item>
     <item>
       <title>Infinite_server, a rough toy</title>
       <link>https://agmes47.github.io/post/infinite_server/</link>
@@ -113,6 +120,13 @@
       <pubDate>Sat, 02 Jan 2010 16:49:08 +0800</pubDate>
       <guid>https://agmes47.github.io/post/config/</guid>
       <description>Go&amp;rsquo;s configuration in VScode Setting up Go in Windows&#xA;Problem: Could not download VScode plugins of Go due to a famous firewall(I guess). here is the reference.&#xA;Solvation:&#xA;This is the old version(abandoned):&#xA;go env -w GO111MODULE=on go env -w GOPROXY=https://goproxy.io,direct Open cmd or powershell and run the following commands:&#xA;go env -w GO111MODULE=on go env -w GOPROXY=https://proxy.golang.com.cn,direct Then restart VScode and install the Go plugins again, you should succeed.</description>
+    </item>
+    <item>
+      <title>Thoughts</title>
+      <link>https://agmes47.github.io/post/thoughts/</link>
+      <pubDate>Thu, 21 Mar 2002 10:28:31 +0800</pubDate>
+      <guid>https://agmes47.github.io/post/thoughts/</guid>
+      <description>Blew out my mind Hey.&#xA;Individuals necessitate companions for emotional exchange and the acquisition of fortitude. Unbeknownst to us, our minds engage in a subtle dance with our companions, shaping and reshaping our thoughts in an intricate ballet. When confronted with a pluralitu of individuals, it becomes imperative to recognize the intricate tapestry of thoughts intertwining, transcending the boundaries of singular entities.&#xA;Articles How To Start Google. Just two things: build stuff and do well in school.</description>
     </item>
     <item>
       <title>Having Fun</title>
