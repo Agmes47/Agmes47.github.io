@@ -8,7 +8,7 @@
 
 		<meta name="description" content="Useful commands View all files that have been modified but not yet added to the stagging area
 git status git status --procelain # only shows the files which have been modified View the contents that could be committed
-git diff --cached The above command will show the differences between the changes that have been staged and the last commit. We can also use git status command to check the files in the stagging area.">
+# check the difference between the staging area and the last commit git diff --cached # Show the difference between currently modified content in the working directory and the staging area git diff # Show the difference between working directory and stagging are of a specified file git diff path/to/file The above command will show the differences between the changes that have been staged and the last commit.">
 
 
 		
@@ -63,7 +63,12 @@ git diff --cached The above command will show the differences between the change
 <pre tabindex="0"><code class="language-git" data-lang="git">git status
 git status --procelain # only shows the files which have been modified
 </code></pre><p>View the contents that could be committed</p>
-<pre tabindex="0"><code class="language-git" data-lang="git">git diff --cached
+<pre tabindex="0"><code class="language-git" data-lang="git"># check the difference between the staging area and the last commit
+git diff --cached
+# Show the difference between currently modified content in the working directory and the staging area
+git diff
+# Show the difference between working directory and stagging are of a specified file
+git diff path/to/file
 </code></pre><p>The above command will show the differences between the changes that have been staged and the last commit. We can also use <code>git status</code> command to check the files in the stagging area. It will list all the files staged and files haven&rsquo;t been staged.</p>
 <pre tabindex="0"><code class="language-git" data-lang="git">git status
 </code></pre><p>Show commit history</p>
@@ -75,6 +80,9 @@ git status --procelain # only shows the files which have been modified
 	<a class="prev-post" href="https://agmes47.github.io/post/infinite_server/">
 		<img class="icon-text" src="/img/prev.svg"/>Infinite_server, a rough toy</a>
 
+
+	<a class="next-post" href="https://agmes47.github.io/post/docker/">Play with Docker<img class="icon-text" src="/img/next.svg"/>
+	</a>
 
 </nav>
 

@@ -6,10 +6,10 @@
 		<meta name="generator" content="Hugo 0.121.1">
 		<title>hy2 - Manis</title>
 
-		<meta name="description" content="Related links V2ray: https://github.com/2dust/v2rayN/releases/latest
-Hysteria 2下载：https://github.com/apernet/hysteria/releases
-Hysteria 2文档：https://v2.hysteria.network/zh/
-Install hysteria 2 bash &lt;(curl -fsSL https://get.hy2.sh/) Generate Self-Signed Certification openssl req -x509 -nodes -newkey ec:&lt;(openssl ecparam -name prime256v1) -keyout /etc/hysteria/server.key -out /etc/hysteria/server.crt -subj &#34;/CN=bing.com&#34; -days 36500 &amp;&amp; sudo chown hysteria /etc/hysteria/server.key &amp;&amp; sudo chown hysteria /etc/hysteria/server.crt All the commands might need #启动Hysteria2 systemctl start hysteria-server.service #重启Hysteria2 systemctl restart hysteria-server.service #查看Hysteria2状态 systemctl status hysteria-server.service #停止Hysteria2 systemctl stop hysteria-server.service #设置开机自启 systemctl enable hysteria-server.service #查看日志 journalctl -u hysteria-server.">
+		<meta name="description" content="Related links V2rayN: https://github.com/2dust/v2rayN/releases/latest
+Hysteria 2 project：https://github.com/apernet/hysteria/releases
+Hysteria 2 document：https://v2.hysteria.network/zh/
+Install hysteria 2 bash &lt;(curl -fsSL https://get.hy2.sh/) Generate Self-Signed Certification openssl req -x509 -nodes -newkey ec:&lt;(openssl ecparam -name prime256v1) -keyout /etc/hysteria/server.key -out /etc/hysteria/server.crt -subj &#34;/CN=bing.com&#34; -days 36500 &amp;&amp; sudo chown hysteria /etc/hysteria/server.key &amp;&amp; sudo chown hysteria /etc/hysteria/server.crt All the commands might need #start Hysteria2 systemctl start hysteria-server.service #restart Hysteria2 systemctl restart hysteria-server.service #status of Hysteria2 systemctl status hysteria-server.service #stop Hysteria2 systemctl stop hysteria-server.">
 
 
 		
@@ -60,49 +60,49 @@ Install hysteria 2 bash &lt;(curl -fsSL https://get.hy2.sh/) Generate Self-Signe
 <hr class="sep" />
 </header>
 	<h6 id="related-links">Related links</h6>
-<p>V2ray: <a href="https://github.com/2dust/v2rayN/releases/latest">https://github.com/2dust/v2rayN/releases/latest</a></p>
-<p>Hysteria 2下载：<a href="https://github.com/apernet/hysteria/releases">https://github.com/apernet/hysteria/releases</a></p>
-<p>Hysteria 2文档：<a href="https://v2.hysteria.network/zh/">https://v2.hysteria.network/zh/</a></p>
+<p>V2rayN: <a href="https://github.com/2dust/v2rayN/releases/latest">https://github.com/2dust/v2rayN/releases/latest</a></p>
+<p>Hysteria 2 project：<a href="https://github.com/apernet/hysteria/releases">https://github.com/apernet/hysteria/releases</a></p>
+<p>Hysteria 2 document：<a href="https://v2.hysteria.network/zh/">https://v2.hysteria.network/zh/</a></p>
 <h5 id="install-hysteria-2">Install hysteria 2</h5>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>curl -fsSL https://get.hy2.sh/<span class="o">)</span>
 </span></span></code></pre></div><h5 id="generate-self-signed-certification">Generate Self-Signed Certification</h5>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">openssl req -x509 -nodes -newkey ec:&lt;<span class="o">(</span>openssl ecparam -name prime256v1<span class="o">)</span> -keyout /etc/hysteria/server.key -out /etc/hysteria/server.crt -subj <span class="s2">&#34;/CN=bing.com&#34;</span> -days <span class="m">36500</span> <span class="o">&amp;&amp;</span> sudo chown hysteria /etc/hysteria/server.key <span class="o">&amp;&amp;</span> sudo chown hysteria /etc/hysteria/server.crt
 </span></span></code></pre></div><h6 id="all-the-commands-might-need">All the commands might need</h6>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#启动Hysteria2</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#start Hysteria2</span>
 </span></span><span class="line"><span class="cl">systemctl start hysteria-server.service
-</span></span><span class="line"><span class="cl"><span class="c1">#重启Hysteria2</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#restart Hysteria2</span>
 </span></span><span class="line"><span class="cl">systemctl restart hysteria-server.service
-</span></span><span class="line"><span class="cl"><span class="c1">#查看Hysteria2状态</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#status of Hysteria2</span>
 </span></span><span class="line"><span class="cl">systemctl status hysteria-server.service
-</span></span><span class="line"><span class="cl"><span class="c1">#停止Hysteria2</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#stop Hysteria2</span>
 </span></span><span class="line"><span class="cl">systemctl stop hysteria-server.service
-</span></span><span class="line"><span class="cl"><span class="c1">#设置开机自启</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#enable auto start after booting</span>
 </span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> hysteria-server.service
-</span></span><span class="line"><span class="cl"><span class="c1">#查看日志</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#check the logs</span>
 </span></span><span class="line"><span class="cl">journalctl -u hysteria-server.service
 </span></span></code></pre></div><h5 id="the-configuration-of-server">The configuration of server</h5>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; /etc/hysteria/config.yaml
-</span></span></span><span class="line"><span class="cl"><span class="s">listen: :443 #监听端口
+</span></span></span><span class="line"><span class="cl"><span class="s">listen: :443 #port
 </span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">#使用CA证书
+</span></span></span><span class="line"><span class="cl"><span class="s">#use CA certificate
 </span></span></span><span class="line"><span class="cl"><span class="s">#acme:
 </span></span></span><span class="line"><span class="cl"><span class="s">#  domains:
-</span></span></span><span class="line"><span class="cl"><span class="s">#    - a.com #你的域名，需要先解析到服务器ip
+</span></span></span><span class="line"><span class="cl"><span class="s">#    - a.com #Your domain that has been resolved
 </span></span></span><span class="line"><span class="cl"><span class="s">#  email: test@sharklasers.com
 </span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">#使用自签证书
+</span></span></span><span class="line"><span class="cl"><span class="s">#or use self-signed certificate
 </span></span></span><span class="line"><span class="cl"><span class="s">#tls:
 </span></span></span><span class="line"><span class="cl"><span class="s">#  cert: /etc/hysteria/server.crt
 </span></span></span><span class="line"><span class="cl"><span class="s">#  key: /etc/hysteria/server.key
 </span></span></span><span class="line"><span class="cl"><span class="s">
 </span></span></span><span class="line"><span class="cl"><span class="s">auth:
 </span></span></span><span class="line"><span class="cl"><span class="s">  type: password
-</span></span></span><span class="line"><span class="cl"><span class="s">  password: 123456 #设置认证密码
+</span></span></span><span class="line"><span class="cl"><span class="s">  password: 123456    #Custom your password
 </span></span></span><span class="line"><span class="cl"><span class="s">
 </span></span></span><span class="line"><span class="cl"><span class="s">masquerade:
 </span></span></span><span class="line"><span class="cl"><span class="s">  type: proxy
 </span></span></span><span class="line"><span class="cl"><span class="s">  proxy:
-</span></span></span><span class="line"><span class="cl"><span class="s">    url: https://bing.com #伪装网址
+</span></span></span><span class="line"><span class="cl"><span class="s">    url: https://bing.com     #Replace it with what you want
 </span></span></span><span class="line"><span class="cl"><span class="s">    rewriteHost: true
 </span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
 </span></span></code></pre></div><h5 id="the-configuration-of-client">The configuration of client</h5>
@@ -115,7 +115,7 @@ Install hysteria 2 bash &lt;(curl -fsSL https://get.hy2.sh/) Generate Self-Signe
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">tls:
 </span></span><span class="line"><span class="cl">  sni: a.com
-</span></span><span class="line"><span class="cl">  insecure: <span class="nb">false</span> <span class="c1">#使用自签时需要改成true</span>
+</span></span><span class="line"><span class="cl">  insecure: <span class="nb">false</span> <span class="c1">#set to &#39;true&#39; when using self-signed certificated</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">socks5:
 </span></span><span class="line"><span class="cl">  listen: 127.0.0.1:1080
