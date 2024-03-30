@@ -118,6 +118,14 @@ PubkeyAuthentication yes 
 </span></span></code></pre></div><h6 id="check-outbound-ip-address">Check outbound IP address</h6>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -4 ip.sb    <span class="c1"># ipv4</span>
 </span></span><span class="line"><span class="cl">curl ip.p3terx.com    <span class="c1">#ipv4 and AS</span>
+</span></span></code></pre></div><h6 id="timezone">Timezone</h6>
+<p><a href="https://zhuanlan.zhihu.com/p/137122724">source</a></p>
+<p>Check the current time zone</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">timedatectl
+</span></span></code></pre></div><p>List all the time zone candidates</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">timedatectl list-timezones
+</span></span></code></pre></div><p>Set a new timezone</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo timedatectl set-timezone Africa/Accra
 </span></span></code></pre></div><h4 id="advance">Advance</h4>
 <h6 id="for-ipv6-only-vps">For <strong>ipv6</strong> only VPS:</h6>
 <p>Modify to Google DNS server:</p>
@@ -126,7 +134,32 @@ PubkeyAuthentication yes 
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh <span class="o">&amp;&amp;</span> bash menu.sh <span class="m">4</span>
 </span></span></code></pre></div><p><strong>Sing-box</strong> + <strong>argo</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>wget -qO- https://raw.githubusercontent.com/fscarmen/sba/main/sba.sh<span class="o">)</span>
-</span></span></code></pre></div><h4 id="scripts">Scripts</h4>
+</span></span></code></pre></div><h4 id="pandoras-box">Pandora&rsquo;s box</h4>
+<h6 id="daily-automatic-check-in-in-nodeseek-by-session-cookie">Daily automatic check-in in nodeseek by session cookie</h6>
+<p>Install the <a href="https://github.com/lwthiker/curl-impersonate#pre-compiled-binaries">pre-compiled binaris</a> (this step is to pass through TLS fingerprint detection.)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Ubuntu/Debian</span>
+</span></span><span class="line"><span class="cl">sudo apt install libnss3 nss-plugin-pem ca-certificates
+</span></span></code></pre></div><p>Download and unzip to get the executable binaries from <a href="https://github.com/lwthiker/curl-impersonate/releases">release page</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Download zip</span>
+</span></span><span class="line"><span class="cl">wget https://github.com/lwthiker/curl-impersonate/releases/download/v0.6.1/curl-impersonate-v0.6.1.x86_64-linux-gnu.tar.gz
+</span></span><span class="line"><span class="cl"><span class="c1"># Unzip them to the current directory</span>
+</span></span><span class="line"><span class="cl">tar -zxvf curl-impersonate-v0.6.1.x86_64-linux-gnu.tar.gz
+</span></span></code></pre></div><p>Get your session cookie by <code>F12</code> -&gt; <code>Application</code> -&gt; <code>Storage/Cookies</code></p>
+<p>Test a binary</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Replace xxx with your session cookie</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># If success, it will return some JSOM data</span>
+</span></span><span class="line"><span class="cl">curl_chrome116 <span class="s1">&#39;https://www.nodeseek.com/api/attendance?random=true&#39;</span> --compressed -X POST -H <span class="s1">&#39;Cookie: session=xxx&#39;</span>
+</span></span></code></pre></div><p>(Optional) I personally like to wrap this command into a shell script and then automatically run it uising <strong>cron</strong>.</p>
+<p>Edit a <code>name.sh</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>/path/to/curl_impersonate/curl_chrome110 <span class="s1">&#39;https://www.nodeseek.com/api/attendance?random=true&#39;</span> --compressed -X POST -H <span class="s1">&#39;Cookie: session=xxx&#39;</span>
+</span></span></code></pre></div><p>Edit <strong>crontab</strong> by running <code>crontab -e</code></p>
+<pre tabindex="0"><code># Add the following line
+1 0 * * * /path/to/name.sh
+# If you want to log the information, consider adding the following(create log.txt firstly)
+1 0 * * * /path/to/name.sh 2&gt;&amp;1 | grep -oP &#39;\{[^{}]+\}&#39;  &gt;&gt; /path/to/log.txt
+</code></pre><p>So far, it seems like the the expiration of the session cookie is just one month. I may need to update it every month or after changing the login password or login or logout each time.</p>
+<h4 id="scripts">Scripts</h4>
 <p><a href="https://bulianglin.com/archives/nicename.html">link</a></p>
 <h5 id="x-ui">X-UI</h5>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>curl -Ls https://raw.githubusercontent.com/FranzKafkaYu/x-ui/956bf85bbac978d56c0e319c5fac2d6db7df9564/install.sh<span class="o">)</span> 0.3.4.4
@@ -154,7 +187,33 @@ SystemMaxFileSec=1day
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">journalctl --rotate
 </span></span></code></pre></div><p>After making changes to the <code>journald.conf</code> file, you need to restart the <code>systemd-journald</code> service for the changes to take effect:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl restart systemd-journald
-</span></span></code></pre></div>
+</span></span></code></pre></div><h2 id="iptables">iptables</h2>
+<p>要禁止或允许特定IP地址对您的机器进行访问，您可以使用iptables。以下是一些基本的iptables命令示例：</p>
+<ol>
+<li>
+<p>禁止特定IP地址访问您的机器：</p>
+<p>bash</p>
+<p><code>sudo iptables -A INPUT -s 192.168.1.100 -j DROP</code></p>
+<p>这会将IP地址<code>192.168.1.100</code>添加到输入链中，并将其动作设置为<code>DROP</code>，从而拒绝来自该IP地址的所有流量。</p>
+</li>
+<li>
+<p>允许特定IP地址访问您的机器：</p>
+<p>bash</p>
+<p><code>sudo iptables -A INPUT -s 192.168.1.100 -j ACCEPT</code></p>
+<p>这会将IP地址<code>192.168.1.100</code>添加到输入链中，并将其动作设置为<code>ACCEPT</code>，从而允许来自该IP地址的所有流量。</p>
+</li>
+</ol>
+<p>请注意，这些规则将在系统重启后失效。如果您想要永久性地保存这些规则，您需要将规则保存到iptables规则文件中。您可以使用以下命令保存规则：</p>
+<p>bash</p>
+<p><code>sudo iptables-save &gt; /etc/iptables/rules.v4</code></p>
+<p>要确保这些规则在系统启动时自动加载，请确保在<code>/etc/network/interfaces</code>中包含以下行：</p>
+<p>javascript</p>
+<p><code>pre-up iptables-restore &lt; /etc/iptables/rules.v4</code></p>
+<p>或者，如果您的系统使用<code>systemd</code>，您可以使用以下命令：</p>
+<p>bash</p>
+<p><code>sudo iptables-save &gt; /etc/iptables/rules.v4 sudo systemctl restart iptables</code></p>
+<p>这将保存规则并重启iptables服务，以便规则在系统启动时自动加载。</p>
+
 </article>
 <nav class="no-print post-nav">
 

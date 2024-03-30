@@ -73,7 +73,39 @@ git diff path/to/file
 <pre tabindex="0"><code class="language-git" data-lang="git">git status
 </code></pre><p>Show commit history</p>
 <pre tabindex="0"><code class="language-git" data-lang="git">git log --oneline
-</code></pre>
+</code></pre><h5 id="gitignore">.gitignore</h5>
+<p>在Git中，<code>.gitignore</code>文件中的更改会立即生效，但这种生效是指对未跟踪（untracked）文件的处理。该文件指定了Git应该忽略的文件或目录模式。一旦你编辑并保存了<code>.gitignore</code>文件，Git将使用新的忽略规则来确定哪些文件应该被忽略。</p>
+<p>但是，对于已经被跟踪（tracked）的文件（即已经被Git纳入版本控制的文件），更改<code>.gitignore</code>是不会自动生效的。如果你的<code>.gitignore</code>文件中新增了规则来忽略已跟踪的文件，你需要手动从跟踪状态中移除（untrack）这些文件，使更改生效。这可以通过<code>git rm --cached</code>命令来完成，这样文件会保留在磁盘中，但不会再被Git跟踪。</p>
+<p>例如，假设你已经将<code>log.txt</code>文件提交到了Git仓库中，之后你决定应该忽略它，你在<code>.gitignore</code>中添加了<code>log.txt</code>规则，为了让这个更改生效，你需要执行：</p>
+<p>sh</p>
+<pre tabindex="0"><code class="language-git" data-lang="git">git rm --cached log.txt
+git commit -m &#34;Stop tracking log.txt&#34;
+</code></pre><p>之后，<code>log.txt</code>文件将不会再被Git跟踪，<code>.gitignore</code>中的规则将适用于它。新的忽略规则也会从这一刻开始适用于你的工作目录中的未跟踪文件。</p>
+<p>要查看所有已跟踪的文件，你可以使用Git的<code>ls-files</code>命令。打开命令行或者终端，切换到你的Git仓库目录下，然后执行下面的命令：</p>
+<p>sh</p>
+<pre tabindex="0"><code class="language-git" data-lang="git">git ls-files
+</code></pre><p>这个命令会列出所有当前被Git跟踪的文件。这些文件是在你的工作目录中，且之前已经被添加到Git索引（通过<code>git add</code>命令）的文件。</p>
+<p>如果你想要查看包括在子模块中的已跟踪文件，可以使用<code>--recurse-submodules</code>选项：</p>
+<p>sh</p>
+<pre tabindex="0"><code class="language-git" data-lang="git">git ls-files --recurse-submodules
+</code></pre><p>这些命令会列出你的Git仓库中所有已跟踪的文件，帮助你了解哪些文件是Git正管理的。</p>
+<p>要忽略一个已经被跟踪的文件夹及其目录下的所有内容，如<code>bin/</code>目录，你需要执行两个步骤：</p>
+<ol>
+<li>首先，在你的<code>.gitignore</code>文件中添加规则来指定忽略该文件夹。打开<code>.gitignore</code>文件并添加以下内容：</li>
+</ol>
+<p>plaintext</p>
+<pre tabindex="0"><code class="language-git" data-lang="git">   bin/
+</code></pre><p>这条规则告诉Git忽略<code>bin</code>目录及其所有内容。如果<code>.gitignore</code>文件不存在，你需要创建它。</p>
+<ol start="2">
+<li>然后，你需要从Git跟踪中移除（但不删除文件）这个文件夹。在命令行或终端中，使用以下命令：</li>
+</ol>
+<p>sh</p>
+<pre tabindex="0"><code class="language-git" data-lang="git">   git rm -r --cached bin/
+   git commit -m &#34;Untrack bin/ directory&#34;
+</code></pre><p><code>git rm -r --cached</code>命令会递归地从Git索引中移除<code>bin/</code>目录和其下的所有文件，但实际文件会保留在你的工作目录中。<code>--cached</code>选项确保只是从跟踪状态中移除，而不会删除物理文件。</p>
+<p>然后，使用<code>git commit</code>来提交这个变更。这将更新你的仓库，以反映这个文件夹不再被跟踪。</p>
+<p>之后，<code>bin/</code>目录及其内容就不会被Git跟踪了，并且任何对<code>.gitignore</code>的更新将立即应用于未跟踪的文件和目录。</p>
+
 </article>
 <nav class="no-print post-nav">
 

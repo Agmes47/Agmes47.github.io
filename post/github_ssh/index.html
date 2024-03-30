@@ -71,7 +71,14 @@ git config --global user.email &#34;luminary@g.com&#34;
 </span></span><span class="line"><span class="cl"><span class="nb">Start-Service</span> <span class="nb">ssh-agent</span>
 </span></span></code></pre></div><p>In a terminal window without elevated permissions, add your SSH private key to the ssh-agent. If you created your key with a different name, or if you are adding an existing key that has a different name, replace <em>id_ed25519</em> in the command with the name of your private key file.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">ssh-add</span> <span class="n">c:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">YOU</span><span class="p">\.</span><span class="n">ssh</span><span class="p">\</span><span class="n">id_ed25519</span>
-</span></span></code></pre></div><h5 id="adding-a-new-ssh-key-to-github-account">Adding a new SSH key to Github account</h5>
+</span></span></code></pre></div><h5 id="make-ssh-agent-auto-start-on-debian">Make ssh-agent auto start on Debian</h5>
+<p>要在 Debian 上实现 <code>ssh-agent</code> 的开机自启动，您可以将以下命令添加到您的 <code>~/.bashrc</code> 或 <code>~/.bash_profile</code> 文件中：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$SSH_AUTH_SOCK</span><span class="s2">&#34;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">eval</span> <span class="k">$(</span>ssh-agent<span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span> 
+</span></span></code></pre></div><p>这段代码会检查是否已经设置了 <code>SSH_AUTH_SOCK</code> 环境变量（即检查 <code>ssh-agent</code> 是否已经在当前 shell 中运行），如果没有设置，则启动一个新的 <code>ssh-agent</code> 进程。</p>
+<p>请注意，这种方法会在每次打开新的终端时启动一个新的 <code>ssh-agent</code> 进程。如果您希望 <code>ssh-agent</code> 在系统启动时就启动并一直运行，可以考虑将启动 <code>ssh-agent</code> 的命令添加到系统的启动脚本中。</p>
+<h5 id="adding-a-new-ssh-key-to-github-account">Adding a new SSH key to Github account</h5>
 <p>Open your github personal <strong>settings</strong> and choose the <strong>SSH and GPG keys</strong>. Then click the <strong>New SSH key</strong> button, give your key a <strong>title</strong> as you like and paste all the contents of the <strong>id_ed25519.pub</strong> file into the <strong>key</strong> section. Finally click the <strong>Add SSH key</strong> button to complete adding.</p>
 <h5 id="test-ssh-connection">Test SSH connection</h5>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh -T git@github.com
