@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="generator" content="Hugo 0.121.1">
+		<meta name="generator" content="Hugo 0.92.2" />
 		<title>How to use OhMyPosh to decorate your terminal - Manis</title>
 
 		<meta name="description" content="1. Powershell At the beginning, I was trying to implement it on WindowsPowershell and result in a mess which I&rsquo;ve forgot(For more information about the differences between them, please check out this page. Then I strictly follow steps on the official document while at the same time still encounter some problems. Here I will show the proper way I&rsquo;ve tried on to complete this task.
@@ -61,22 +61,22 @@
 <p>At the beginning, I was trying to implement it on WindowsPowershell and result in a mess which I&rsquo;ve forgot(For more information about the differences between them, please check out this <a href="https://learn.microsoft.com/en-us/powershell/scripting/whats-new/differences-from-windows-powershell?view=powershell-7.3">page</a>. Then I strictly follow steps on the official <a href="https://ohmyposh.dev/docs/">document</a> while at  the same time still encounter some problems. Here I will show the proper way I&rsquo;ve tried on to complete this task.</p>
 <h6 id="1-install-ohmyposh">(1) Install OhMyPosh</h6>
 <p>Open Powershell and execute the command:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">winget</span> <span class="n">install</span> <span class="n">JanDeDobbeleer</span><span class="p">.</span><span class="py">OhMyPosh</span> <span class="n">-s</span> <span class="n">winget</span>
-</span></span></code></pre></div><h6 id="2-install-a-font">(2) Install a font</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">winget</span> <span class="n">install</span> <span class="n">JanDeDobbeleer</span><span class="p">.</span><span class="n">OhMyPosh</span> <span class="n">-s</span> <span class="n">winget</span>
+</code></pre></div><h6 id="2-install-a-font">(2) Install a font</h6>
 <p>The way official document recommands didn&rsquo;t apply to me, when I execute the  command as adminstrator:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">oh-my</span><span class="n">-posh</span> <span class="n">font</span> <span class="n">install</span>
-</span></span></code></pre></div><p>And then select a ramdon one from the list:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">C:</span> <span class="p">\</span><span class="n">Windowssystem32</span><span class="p">&gt;</span> <span class="nb">oh-my</span><span class="n">-posh</span> <span class="n">font</span> <span class="n">install</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Select </span><span class="n">font</span>
-</span></span><span class="line"><span class="cl"><span class="n">Oxproto</span>
-</span></span><span class="line"><span class="cl"><span class="mf">3270</span>
-</span></span><span class="line"><span class="cl"><span class="n">Agave</span>
-</span></span><span class="line"><span class="cl"><span class="n">Anonymouspro</span>
-</span></span><span class="line"><span class="cl"><span class="err">〉</span> <span class="n">Arimo</span>
-</span></span><span class="line"><span class="cl"><span class="n">AurulentSansMono</span>
-</span></span><span class="line"><span class="cl"><span class="n">BigBlueTerminal</span>
-</span></span><span class="line"><span class="cl"><span class="n">BitstreamVerasansMono</span>
-</span></span></code></pre></div><p>Use default shortcut <code>Ctrl + Shift + ,</code> to open the <code>setting.json</code> file and add the name of the font I&rsquo;ve just downloaded as the document says. After that, the error  immediately occured as:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">oh-my</span><span class="n">-posh</span> <span class="n">font</span> <span class="n">install</span>
+</code></pre></div><p>And then select a ramdon one from the list:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">PS </span><span class="n">C:</span> <span class="p">\</span><span class="n">Windowssystem32</span><span class="p">&gt;</span> <span class="nb">oh-my</span><span class="n">-posh</span> <span class="n">font</span> <span class="n">install</span>
+<span class="nb">Select </span><span class="n">font</span>
+<span class="n">Oxproto</span>
+<span class="n">3270</span>
+<span class="n">Agave</span>
+<span class="n">Anonymouspro</span>
+<span class="err">〉</span> <span class="n">Arimo</span>
+<span class="n">AurulentSansMono</span>
+<span class="n">BigBlueTerminal</span>
+<span class="n">BitstreamVerasansMono</span>
+</code></pre></div><p>Use default shortcut <code>Ctrl + Shift + ,</code> to open the <code>setting.json</code> file and add the name of the font I&rsquo;ve just downloaded as the document says. After that, the error  immediately occured as:</p>
 <blockquote>
 <p><strong>Warning</strong></p>
 <p>Unable to find the selected font &ldquo;MeslolLGL Nerd Fon&rdquo;.</p>
@@ -86,10 +86,10 @@
 <p>After trying other different fonts I still got the same result, so I try to <a href="https://www.nerdfonts.com/font-downloads">download</a> and manually install a font and finally succeed(remember to add it in the &lsquo;setting.json&rsquo; as before after install your font).</p>
 <h6 id="3-prompt">(3) Prompt</h6>
 <p>Use this command to create a profile for your Powershell if you haven&rsquo;t got one</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">New-Item</span> <span class="n">-Path</span> <span class="nv">$PROFILE</span> <span class="n">-Type</span> <span class="n">File</span> <span class="n">-Force</span>
-</span></span></code></pre></div><p>Use this command to open the profile you just create with notepad.exe</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">notepad</span> <span class="nv">$PROFILE</span>
-</span></span></code></pre></div><p>Then I add the following line to my profile as the document said(it didn&rsquo;t apply to me)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">New-Item</span> <span class="n">-Path</span> <span class="nv">$PROFILE</span> <span class="n">-Type</span> <span class="n">File</span> <span class="n">-Force</span>
+</code></pre></div><p>Use this command to open the profile you just create with notepad.exe</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">notepad</span> <span class="nv">$PROFILE</span>
+</code></pre></div><p>Then I add the following line to my profile as the document said(it didn&rsquo;t apply to me)</p>
 <pre tabindex="0"><code>oh-my-posh init pwsh | Invoke-Expression
 </code></pre><p>After that, some errors occured(sorry about forgetting them, but adding the OhMyPosh.exe to my Anti-Virus software&rsquo;s whitelist didn&rsquo;t help any). For some good hours I finally found the proper solution on a platform(Thank you, bilibili comments) that I was almost desperate to look for. And the problem is that I got some unicode characters in my OhMyPosh.exe path(if you&rsquo;re curious, they are&quot;鑽ｈ€&quot;). The solution is in the <a href="https://ohmyposh.dev/docs/faq">OhMyPosh FAQ page</a>. Just simply change the line I&rsquo;ve put in profile to the following one.</p>
 <pre tabindex="0"><code>$previousOutputEncoding = [Console]::OutputEncoding
@@ -110,15 +110,15 @@ try {
 <p><a href="https://blog.csdn.net/hys__handsome/article/details/125697108">Reference</a>. Due to the mysterious awfle connection between my WSL2 and github, I went to the github release <a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases">page</a> and downloaded the <a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.3.0/posh-linux-arm64">posh-linux-arm64</a> and then moved it to &lsquo;/usr/local/bin/oh-my-posh&rsquo; and used <code>chmod + x</code> to make it  executable(Assuming you&rsquo;ve known some basic Linux commands).</p>
 <h6 id="3-customize">(3) Customize</h6>
 <p>create a folder to store your theme on your current user&rsquo;s path</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir ~/.poshthemes
-</span></span></code></pre></div><p>for the same reason above I have to download the theme.zip file manually(in the same page also and if you couldn&rsquo;t find it, I&rsquo;ve got <a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.3.0/themes.zip">it</a> for you), and then <code>unzip</code> it in the folder I just created.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">unzip ~/.poshthemes/theme.zip -d ~/.poshthemes
-</span></span></code></pre></div><p>make them all readable and writtable</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod u+rw ~/.poshthemes/*.omp.*
-</span></span></code></pre></div><p>then you could delete the zip file if you like</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm ~/.poshthemes/theme.zip
-</span></span></code></pre></div><p>To enable OhMyPosh auto-start, add the following line at the end of &lsquo;/etc/profile&rsquo;. (remember to replace the &rsquo;theme_name&rsquo; with a real one)</p>
-<pre tabindex="0"><code>eval &#34;$(oh-my-posh --init --shell bash --config ~/.poshthemes/theme_name.omp.json)&#34;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mkdir ~/.poshthemes
+</code></pre></div><p>for the same reason above I have to download the theme.zip file manually(in the same page also and if you couldn&rsquo;t find it, I&rsquo;ve got <a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v19.3.0/themes.zip">it</a> for you), and then <code>unzip</code> it in the folder I just created.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">unzip ~/.poshthemes/theme.zip -d ~/.poshthemes
+</code></pre></div><p>make them all readable and writtable</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">chmod u+rw ~/.poshthemes/*.omp.*
+</code></pre></div><p>then you could delete the zip file if you like</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">rm ~/.poshthemes/theme.zip
+</code></pre></div><p>To enable OhMyPosh auto-start, add the following line at the end of &lsquo;/etc/profile&rsquo;. (remember to replace the &lsquo;theme_name&rsquo; with a real one)</p>
+<pre tabindex="0"><code>eval &quot;$(oh-my-posh --init --shell bash --config ~/.poshthemes/theme_name.omp.json)&quot;
 </code></pre><h5 id="postscripse">Postscripse</h5>
 <p>All the themes seem too garish for me and just change back to default after all the working. Just for fun. Limited to the author&rsquo;s knowledge, there might be some wrong stuff on blog which you might need to corret them by yourself.</p>
 

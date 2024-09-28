@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="generator" content="Hugo 0.121.1">
+		<meta name="generator" content="Hugo 0.92.2" />
 		<title>hy2 - Manis</title>
 
 		<meta name="description" content="Related links V2rayN: https://github.com/2dust/v2rayN/releases/latest
@@ -64,64 +64,64 @@ Install hysteria 2 bash &lt;(curl -fsSL https://get.hy2.sh/) Generate Self-Signe
 <p>Hysteria 2 project：<a href="https://github.com/apernet/hysteria/releases">https://github.com/apernet/hysteria/releases</a></p>
 <p>Hysteria 2 document：<a href="https://v2.hysteria.network/zh/">https://v2.hysteria.network/zh/</a></p>
 <h5 id="install-hysteria-2">Install hysteria 2</h5>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>curl -fsSL https://get.hy2.sh/<span class="o">)</span>
-</span></span></code></pre></div><h5 id="generate-self-signed-certification">Generate Self-Signed Certification</h5>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">openssl req -x509 -nodes -newkey ec:&lt;<span class="o">(</span>openssl ecparam -name prime256v1<span class="o">)</span> -keyout /etc/hysteria/server.key -out /etc/hysteria/server.crt -subj <span class="s2">&#34;/CN=bing.com&#34;</span> -days <span class="m">36500</span> <span class="o">&amp;&amp;</span> sudo chown hysteria /etc/hysteria/server.key <span class="o">&amp;&amp;</span> sudo chown hysteria /etc/hysteria/server.crt
-</span></span></code></pre></div><h6 id="all-the-commands-might-need">All the commands might need</h6>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#start Hysteria2</span>
-</span></span><span class="line"><span class="cl">systemctl start hysteria-server.service
-</span></span><span class="line"><span class="cl"><span class="c1">#restart Hysteria2</span>
-</span></span><span class="line"><span class="cl">systemctl restart hysteria-server.service
-</span></span><span class="line"><span class="cl"><span class="c1">#status of Hysteria2</span>
-</span></span><span class="line"><span class="cl">systemctl status hysteria-server.service
-</span></span><span class="line"><span class="cl"><span class="c1">#stop Hysteria2</span>
-</span></span><span class="line"><span class="cl">systemctl stop hysteria-server.service
-</span></span><span class="line"><span class="cl"><span class="c1">#enable auto start after booting</span>
-</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> hysteria-server.service
-</span></span><span class="line"><span class="cl"><span class="c1">#check the logs</span>
-</span></span><span class="line"><span class="cl">journalctl -u hysteria-server.service
-</span></span></code></pre></div><h5 id="the-configuration-of-server">The configuration of server</h5>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; /etc/hysteria/config.yaml
-</span></span></span><span class="line"><span class="cl"><span class="s">listen: :443 #port
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">#use CA certificate
-</span></span></span><span class="line"><span class="cl"><span class="s">#acme:
-</span></span></span><span class="line"><span class="cl"><span class="s">#  domains:
-</span></span></span><span class="line"><span class="cl"><span class="s">#    - a.com #Your domain that has been resolved
-</span></span></span><span class="line"><span class="cl"><span class="s">#  email: test@sharklasers.com
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">#or use self-signed certificate
-</span></span></span><span class="line"><span class="cl"><span class="s">#tls:
-</span></span></span><span class="line"><span class="cl"><span class="s">#  cert: /etc/hysteria/server.crt
-</span></span></span><span class="line"><span class="cl"><span class="s">#  key: /etc/hysteria/server.key
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">auth:
-</span></span></span><span class="line"><span class="cl"><span class="s">  type: password
-</span></span></span><span class="line"><span class="cl"><span class="s">  password: 123456    #Custom your password
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">masquerade:
-</span></span></span><span class="line"><span class="cl"><span class="s">  type: proxy
-</span></span></span><span class="line"><span class="cl"><span class="s">  proxy:
-</span></span></span><span class="line"><span class="cl"><span class="s">    url: https://bing.com     #Replace it with what you want
-</span></span></span><span class="line"><span class="cl"><span class="s">    rewriteHost: true
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></div><h5 id="the-configuration-of-client">The configuration of client</h5>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">server: <span class="o">[</span>ip<span class="o">]</span>:443
-</span></span><span class="line"><span class="cl">auth: <span class="m">123456</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">bandwidth:
-</span></span><span class="line"><span class="cl">  up: <span class="m">20</span> mbps
-</span></span><span class="line"><span class="cl">  down: <span class="m">100</span> mbps
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tls:
-</span></span><span class="line"><span class="cl">  sni: a.com
-</span></span><span class="line"><span class="cl">  insecure: <span class="nb">false</span> <span class="c1">#set to &#39;true&#39; when using self-signed certificated</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">socks5:
-</span></span><span class="line"><span class="cl">  listen: 127.0.0.1:1080
-</span></span><span class="line"><span class="cl">http:
-</span></span><span class="line"><span class="cl">  listen: 127.0.0.1:8080
-</span></span></code></pre></div><p>Source: <a href="https://bulianglin.com/archives/hysteria2.html">reference</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">bash &lt;<span class="o">(</span>curl -fsSL https://get.hy2.sh/<span class="o">)</span>
+</code></pre></div><h5 id="generate-self-signed-certification">Generate Self-Signed Certification</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">openssl req -x509 -nodes -newkey ec:&lt;<span class="o">(</span>openssl ecparam -name prime256v1<span class="o">)</span> -keyout /etc/hysteria/server.key -out /etc/hysteria/server.crt -subj <span class="s2">&#34;/CN=bing.com&#34;</span> -days <span class="m">36500</span> <span class="o">&amp;&amp;</span> sudo chown hysteria /etc/hysteria/server.key <span class="o">&amp;&amp;</span> sudo chown hysteria /etc/hysteria/server.crt
+</code></pre></div><h6 id="all-the-commands-might-need">All the commands might need</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#start Hysteria2</span>
+systemctl start hysteria-server.service
+<span class="c1">#restart Hysteria2</span>
+systemctl restart hysteria-server.service
+<span class="c1">#status of Hysteria2</span>
+systemctl status hysteria-server.service
+<span class="c1">#stop Hysteria2</span>
+systemctl stop hysteria-server.service
+<span class="c1">#enable auto start after booting</span>
+systemctl <span class="nb">enable</span> hysteria-server.service
+<span class="c1">#check the logs</span>
+journalctl -u hysteria-server.service
+</code></pre></div><h5 id="the-configuration-of-server">The configuration of server</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cat <span class="s">&lt;&lt; EOF &gt; /etc/hysteria/config.yaml
+</span><span class="s">listen: :443 #port
+</span><span class="s">
+</span><span class="s">#use CA certificate
+</span><span class="s">#acme:
+</span><span class="s">#  domains:
+</span><span class="s">#    - a.com #Your domain that has been resolved
+</span><span class="s">#  email: test@sharklasers.com
+</span><span class="s">
+</span><span class="s">#or use self-signed certificate
+</span><span class="s">#tls:
+</span><span class="s">#  cert: /etc/hysteria/server.crt
+</span><span class="s">#  key: /etc/hysteria/server.key
+</span><span class="s">
+</span><span class="s">auth:
+</span><span class="s">  type: password
+</span><span class="s">  password: 123456    #Custom your password
+</span><span class="s">
+</span><span class="s">masquerade:
+</span><span class="s">  type: proxy
+</span><span class="s">  proxy:
+</span><span class="s">    url: https://bing.com     #Replace it with what you want
+</span><span class="s">    rewriteHost: true
+</span><span class="s">EOF</span>
+</code></pre></div><h5 id="the-configuration-of-client">The configuration of client</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">server: <span class="o">[</span>ip<span class="o">]</span>:443
+auth: <span class="m">123456</span>
+
+bandwidth:
+  up: <span class="m">20</span> mbps
+  down: <span class="m">100</span> mbps
+
+tls:
+  sni: a.com
+  insecure: <span class="nb">false</span> <span class="c1">#set to &#39;true&#39; when using self-signed certificated</span>
+
+socks5:
+  listen: 127.0.0.1:1080
+http:
+  listen: 127.0.0.1:8080
+</code></pre></div><p>Source: <a href="https://bulianglin.com/archives/hysteria2.html">reference</a></p>
 
 </article>
 <nav class="no-print post-nav">

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="generator" content="Hugo 0.121.1">
+		<meta name="generator" content="Hugo 0.92.2" />
 		<title>Vmess &#43; CF &#43; WEB - Manis</title>
 
 		<meta name="description" content="Prerequisite A vps running x-ui, a domain utilizing Cloudflare for DNS resolution and CDN services.
@@ -70,7 +70,7 @@ port: random
 #add a user
 #----------
 network: ws
-path: /example #replace &#39;example&#39; with something you can memorize
+path: /example #replace 'example' with something you can memorize
 </code></pre><h4 id="step-2">Step 2</h4>
 <p>Copy the configuration link and import into v2ray. And make the following modification.</p>
 <pre tabindex="0"><code>address: *.*.*.*     #the IP of your vps
@@ -94,22 +94,22 @@ tls: tls
                 proxy_ssl_server_name on;
                 proxy_redirect off;
                 sub_filter_once off;
-                sub_filter &#34;www.bing.com&#34; $server_name;
-                proxy_set_header Host &#34;www.bing.com&#34;;
+                sub_filter &quot;www.bing.com&quot; $server_name;
+                proxy_set_header Host &quot;www.bing.com&quot;;
                 proxy_set_header Referer $http_referer;
                 proxy_set_header X-Real-IP $remote_addr;
                 proxy_set_header User-Agent $http_user_agent;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                 proxy_set_header X-Forwarded-Proto https;
-                proxy_set_header Accept-Encoding &#34;&#34;;
-                proxy_set_header Accept-Language &#34;zh-CN&#34;;
+                proxy_set_header Accept-Encoding &quot;&quot;;
+                proxy_set_header Accept-Language &quot;zh-CN&quot;;
         }
         location /example {                        #replace the path
                 proxy_redirect off;
                 proxy_pass http://127.0.0.1:52321;     #replace the port num
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
-                proxy_set_header Connection &#34;upgrade&#34;;
+                proxy_set_header Connection &quot;upgrade&quot;;
                 proxy_set_header Host $host;
                 proxy_set_header X-Real-IP $remote_addr;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

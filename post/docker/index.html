@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="generator" content="Hugo 0.121.1">
+		<meta name="generator" content="Hugo 0.92.2" />
 		<title>Play with Docker - Manis</title>
 
 		<meta name="description" content="hey
@@ -63,46 +63,46 @@ Commands Build a image
 	<p>hey</p>
 <h4 id="commands">Commands</h4>
 <p>Build a image</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># . means the current directory, so the example command would use ./Dockerfile to build a image</span>
-</span></span><span class="line"><span class="cl">docker build -t image_name .
-</span></span></code></pre></div><p>Run a docker container using a image</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># -d means run in the background</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># --name container_name specifies the containner name</span>
-</span></span><span class="line"><span class="cl">docker run -d --name container_name image_name
-</span></span></code></pre></div><p>Show containners</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># show the containers that are running</span>
-</span></span><span class="line"><span class="cl">docker ps
-</span></span><span class="line"><span class="cl"><span class="c1"># show all the containners</span>
-</span></span><span class="line"><span class="cl">docker ps -a
-</span></span></code></pre></div><p>Show the logs of a container</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker logs container_name
-</span></span></code></pre></div><p>To be continue</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># . means the current directory, so the example command would use ./Dockerfile to build a image</span>
+docker build -t image_name .
+</code></pre></div><p>Run a docker container using a image</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># -d means run in the background</span>
+<span class="c1"># --name container_name specifies the containner name</span>
+docker run -d --name container_name image_name
+</code></pre></div><p>Show containners</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># show the containers that are running</span>
+docker ps
+<span class="c1"># show all the containners</span>
+docker ps -a
+</code></pre></div><p>Show the logs of a container</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker logs container_name
+</code></pre></div><p>To be continue</p>
 <h6 id="makefile">Makefile</h6>
 <p>A binary built on a Debian system may not work on an Alpine container due to differences in the underlying system libraries. Alpine uses <code>musl libc</code> instead of <code>glibc</code> which is commonly used in other distributions like Debian. As a result, a binary compiled against <code>glibc</code> might not work on Alpine.</p>
 <p>To build a binary that is compatible with Alpine, you need to statically compile your Go application with <code>CGO_ENABLED=0</code> to not link against <code>c</code> libraries and ensure all dependencies are included in the binary itself.</p>
 <p>Here&rsquo;s how you can modify your Makefile to build a statically linked binary that will run on Alpine:</p>
 <p>makefile</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nf">build</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        @CGO_ENABLED<span class="o">=</span><span class="m">0</span> <span class="nv">GOOS</span><span class="o">=</span>linux go build -a -installsuffix cgo -o bin/servi .
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nf">run</span><span class="o">:</span> <span class="n">build</span>
-</span></span><span class="line"><span class="cl">        ./bin/servi
-</span></span></code></pre></div><p>The <code>CGO_ENABLED=0</code> disables CGO, <code>GOOS=linux</code> ensures that the binary is built for Linux, <code>-a</code> forces rebuilding of all packages, and <code>-installsuffix cgo</code> adds a suffix to the package path to ensure a unique binary name. This will produce a binary that should work in your Alpine Docker container.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="nf">build</span><span class="o">:</span>
+        @CGO_ENABLED<span class="o">=</span><span class="m">0</span> <span class="nv">GOOS</span><span class="o">=</span>linux go build -a -installsuffix cgo -o bin/servi .
+
+<span class="nf">run</span><span class="o">:</span> <span class="n">build</span>
+        ./bin/servi
+</code></pre></div><p>The <code>CGO_ENABLED=0</code> disables CGO, <code>GOOS=linux</code> ensures that the binary is built for Linux, <code>-a</code> forces rebuilding of all packages, and <code>-installsuffix cgo</code> adds a suffix to the package path to ensure a unique binary name. This will produce a binary that should work in your Alpine Docker container.</p>
 <h6 id="dockerfile">Dockerfile</h6>
 <p>An example:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="c"># Use a specific version of the minimal Alpine base image</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> alpine:3.15</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Set the working directory inside the container</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Copy the binary file of your Go application into the container</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Ensure that the binary has executable permissions before building the Docker image</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> bin/servi /app/servi<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Set the entry point of the container to your Go application binary</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;./servi&#34;</span><span class="p">]</span><span class="err">
-</span></span></span></code></pre></div><p>Remember to replace <code>3.15</code> with the version of Alpine that you want to use. Also, before building the Docker image, make sure your <code>servi</code> binary is executable by running <code>chmod +x bin/servi</code> on your host machine if necessary.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="c"># Use a specific version of the minimal Alpine base image</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> alpine:3.15</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="c"># Set the working directory inside the container</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="c"># Copy the binary file of your Go application into the container</span><span class="err">
+</span><span class="err"></span><span class="c"># Ensure that the binary has executable permissions before building the Docker image</span><span class="err">
+</span><span class="err"></span><span class="k">COPY</span> bin/servi /app/servi<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="c"># Set the entry point of the container to your Go application binary</span><span class="err">
+</span><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;./servi&#34;</span><span class="p">]</span><span class="err">
+</span></code></pre></div><p>Remember to replace <code>3.15</code> with the version of Alpine that you want to use. Also, before building the Docker image, make sure your <code>servi</code> binary is executable by running <code>chmod +x bin/servi</code> on your host machine if necessary.</p>
 
 </article>
 <nav class="no-print post-nav">

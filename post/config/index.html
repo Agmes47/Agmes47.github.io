@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="generator" content="Hugo 0.121.1">
+		<meta name="generator" content="Hugo 0.92.2" />
 		<title>Some configurations - Manis</title>
 
 		<meta name="description" content="Go&rsquo;s configuration in VScode Setting up Go in Windows
@@ -69,54 +69,54 @@ go env -w GO111MODULE=on go env -w GOPROXY=https://proxy.golang.com.cn,direct Th
 <p><strong>Problem</strong>: Could not download VScode plugins of Go due to a famous firewall(I guess). here is the <a href="https://blog.csdn.net/qq_41065919/article/details/107710144">reference</a>.</p>
 <p>Solvation:</p>
 <p>This is the old version(abandoned):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">go</span> <span class="n">env</span> <span class="n">-w</span> <span class="n">GO111MODULE</span><span class="p">=</span><span class="n">on</span>
-</span></span><span class="line"><span class="cl"><span class="n">go</span> <span class="n">env</span> <span class="n">-w</span> <span class="n">GOPROXY</span><span class="p">=</span><span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">goproxy</span><span class="p">.</span><span class="n">io</span><span class="p">,</span><span class="n">direct</span>
-</span></span></code></pre></div><p>Open cmd or powershell and run the following commands:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">go</span> <span class="n">env</span> <span class="n">-w</span> <span class="n">GO111MODULE</span><span class="p">=</span><span class="n">on</span>
-</span></span><span class="line"><span class="cl"><span class="n">go</span> <span class="n">env</span> <span class="n">-w</span> <span class="n">GOPROXY</span><span class="p">=</span><span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">proxy</span><span class="p">.</span><span class="py">golang</span><span class="p">.</span><span class="py">com</span><span class="p">.</span><span class="n">cn</span><span class="p">,</span><span class="n">direct</span>
-</span></span></code></pre></div><p>Then restart VScode and install the Go plugins again, you should succeed.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">go</span> <span class="n">env</span> <span class="n">-w</span> <span class="n">GO111MODULE</span><span class="p">=</span><span class="n">on</span>
+<span class="n">go</span> <span class="n">env</span> <span class="n">-w</span> <span class="n">GOPROXY</span><span class="p">=</span><span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">goproxy</span><span class="p">.</span><span class="n">io</span><span class="p">,</span><span class="n">direct</span>
+</code></pre></div><p>Open cmd or powershell and run the following commands:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">go</span> <span class="n">env</span> <span class="n">-w</span> <span class="n">GO111MODULE</span><span class="p">=</span><span class="n">on</span>
+<span class="n">go</span> <span class="n">env</span> <span class="n">-w</span> <span class="n">GOPROXY</span><span class="p">=</span><span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">proxy</span><span class="p">.</span><span class="n">golang</span><span class="p">.</span><span class="n">com</span><span class="p">.</span><span class="n">cn</span><span class="p">,</span><span class="n">direct</span>
+</code></pre></div><p>Then restart VScode and install the Go plugins again, you should succeed.</p>
 <h3 id="modify-powershells-default-lauch-size-in-window11">Modify Powershell&rsquo;s default lauch size in Window11</h3>
 <p>Can&rsquo;t believe these old ways and nonsense on the Internet even though it&rsquo;s pretty easy. Open Powershell and then right click the window bar and go into <strong>settings</strong>. Scroll down and find out the <strong>Lauch size</strong></p>
 <h3 id="install-mysql-and-modify-password-for-user-root">Install Mysql and modify password for user root</h3>
 <p>Update the package tool:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt update
-</span></span></code></pre></div><p>Download and install Mysql(<a href="https://zhuanlan.zhihu.com/p/550946252">reference</a>)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt install mysql-server -y
-</span></span></code></pre></div><p>To update the user <strong>root</strong>&rsquo;s password in mysql, switch to <strong>root</strong> in Linux (<a href="https://blog.csdn.net/james_8/article/details/113375068">reference</a>)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">su root
-</span></span></code></pre></div><p>Use your Linux <strong>root</strong> password to login mysql as <strong>root</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mysql -u root -p
-</span></span></code></pre></div><p>Ensure the way of login as <strong>root</strong> with password never expires</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="n">EXPIRE</span><span class="w"> </span><span class="n">NEVER</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><p>Use the mysql_native_password plugin and alter the password of root in Mysql as you like (in this example, the new password is &rsquo;love&rsquo;). For more about the plugin, check in <a href="https://dev.mysql.com/doc/refman/8.0/en/sha256-pluggable-authentication.html">reference</a>.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">mysql_native_password</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;love&#39;</span><span class="w">
-</span></span></span></code></pre></div><p>Refreshing to ensure the new priviledges</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">FLUSH</span><span class="w"> </span><span class="n">PRIVILEDGES</span><span class="w">
-</span></span></span></code></pre></div><p>Then you can use your new password to login with the following command</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo mysql -u root -p
-</span></span></code></pre></div><p>For more knowledge, a brief <a href="https://zhuanlan.zhihu.com/p/146502753">introduction</a> to the C/S framework of Mysql.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt update
+</code></pre></div><p>Download and install Mysql(<a href="https://zhuanlan.zhihu.com/p/550946252">reference</a>)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt install mysql-server -y
+</code></pre></div><p>To update the user <strong>root</strong>&rsquo;s password in mysql, switch to <strong>root</strong> in Linux (<a href="https://blog.csdn.net/james_8/article/details/113375068">reference</a>)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">su root
+</code></pre></div><p>Use your Linux <strong>root</strong> password to login mysql as <strong>root</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">mysql -u root -p
+</code></pre></div><p>Ensure the way of login as <strong>root</strong> with password never expires</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="n">EXPIRE</span><span class="w"> </span><span class="n">NEVER</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>Use the mysql_native_password plugin and alter the password of root in Mysql as you like (in this example, the new password is &lsquo;love&rsquo;). For more about the plugin, check in <a href="https://dev.mysql.com/doc/refman/8.0/en/sha256-pluggable-authentication.html">reference</a>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">mysql_native_password</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;love&#39;</span><span class="w">
+</span></code></pre></div><p>Refreshing to ensure the new priviledges</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">FLUSH</span><span class="w"> </span><span class="n">PRIVILEDGES</span><span class="w">
+</span></code></pre></div><p>Then you can use your new password to login with the following command</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo mysql -u root -p
+</code></pre></div><p>For more knowledge, a brief <a href="https://zhuanlan.zhihu.com/p/146502753">introduction</a> to the C/S framework of Mysql.</p>
 <h6 id="go-sql-driver">Go-sql-driver</h6>
 <p>If you&rsquo;re learning about  Go accessing a relational database <a href="https://go.dev/doc/tutorial/database-access">tutorial</a>, you should add the  following code after the initiation of <code>cfg</code>. For more information, please check on <a href="https://github.com/go-sql-driver/mysql/issues/625">page</a>.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">cfg</span><span class="p">.</span><span class="nx">Params</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;allowNativePasswords&#34;</span><span class="p">:</span> <span class="s">&#34;true&#34;</span><span class="p">}</span>
-</span></span></code></pre></div><h3 id="conflict-of-ublcok-visual-modeu-and-upasteu-using-vim-in-wsl">Conflict of <!-- raw HTML omitted -->blcok visual mode<!-- raw HTML omitted --> and <!-- raw HTML omitted -->paste<!-- raw HTML omitted --> using vim in WSL</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">cfg</span><span class="p">.</span><span class="nx">Params</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;allowNativePasswords&#34;</span><span class="p">:</span> <span class="s">&#34;true&#34;</span><span class="p">}</span>
+</code></pre></div><h3 id="conflict-of-ublcok-visual-modeu-and-upasteu-using-vim-in-wsl">Conflict of <!-- raw HTML omitted -->blcok visual mode<!-- raw HTML omitted --> and <!-- raw HTML omitted -->paste<!-- raw HTML omitted --> using vim in WSL</h3>
 <p>Open a windows terminal, and press <code>ctrl + shift + ,</code> to open <code>settings.json</code>. Then comment the following line:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">&#34;actions&#34;</span><span class="err">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">    <span class="err">...</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// { &#34;command&#34;: {&#34;action&#34;: &#34;paste&#34;, ...}, &#34;keys&#34;: &#34;ctrl+v&#34; }, &lt;------ THIS LINE
-</span></span></span></code></pre></div><p>After doing this, you can switch to visual block mode as usual and paste with <code>CTRL + SHIFT + v</code>. For more information, please check out the <a href="https://stackoverflow.com/questions/61824177/visual-block-mode-not-working-in-vim-with-c-v-on-wslwindows-10">reference</a>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json">  <span class="s2">&#34;actions&#34;</span><span class="err">:</span> <span class="p">[</span>
+    <span class="err">...</span>
+    <span class="c1">// { &#34;command&#34;: {&#34;action&#34;: &#34;paste&#34;, ...}, &#34;keys&#34;: &#34;ctrl+v&#34; }, &lt;------ THIS LINE
+</span></code></pre></div><p>After doing this, you can switch to visual block mode as usual and paste with <code>CTRL + SHIFT + v</code>. For more information, please check out the <a href="https://stackoverflow.com/questions/61824177/visual-block-mode-not-working-in-vim-with-c-v-on-wslwindows-10">reference</a>.</p>
 <h6 id="anecdote">Anecdote</h6>
-<p>Before I found the kludge above, I&rsquo;ve tried to modify the <code>~/.vimrc</code>. In my case, I wan&rsquo;t have such a file in my user path <code>~/</code> initially. So I created one and add <code>map &lt;C+K&gt; &lt;C+V&gt;</code> into the it and then run <code>source ~/.vimrc</code> which resulted in error: <!-- raw HTML omitted -->-bash: /home/user_name/.vimrc: line 1: syntax error near unexpected token <code>&lt;' -bash: /home/user_name/.vimrc: line 1: </code>map &lt;C+K&gt; &lt;C+V&gt;&rsquo;<!-- raw HTML omitted -->. So I give up this way and just deleted the line I&rsquo;ve added in and preserve the <code>~/.vimrc</code>. After the problem was solved, I continued learning Go using <strong>vi</strong> and suddenly found the auto indentation with which I felt comfortable failed. This was way more painful than the conflict between  paste and block vision and I was anxiously to it. Firstly I thought it was dued to the modification I had done in windows terminal&rsquo;s <code>settings.json</code> file and I found the original version online and recovered it(Next time if I&rsquo;m going to modify such kind of file I should copy a backup before implementing any modification.). But it doesn&rsquo;t help. And then I tried to add <code>set autoindent</code> into <code>~/.vimrc</code>. It kind of worked but not as the same as what I&rsquo;ve been used to.(Seems like a fixed but not flexible indentation as the original one. I mean, the orignal one knows I writting Go codes.) After hours of searching and thinking, I thought maybe <code>~/.vimrc</code> is the root cause since it was the first thing I had tried to add to relative configuration. So I just simply deleted it and it worked. Evething was back. I guessed <code>~/.vimrc</code> would take over the configuraion of <strong>vi</strong> or <strong>vim</strong> even it&rsquo;s empty which means do nothing that lead to the disfunction of auto indentaion. Go&rsquo;s own rules would then prevail after the deletion of <code>~/.vimrc</code>.</p>
+<p>Before I found the kludge above, I&rsquo;ve tried to modify the <code>~/.vimrc</code>. In my case, I wan&rsquo;t have such a file in my user path <code>~/</code> initially. So I created one and add <code>map &lt;C+K&gt; &lt;C+V&gt;</code> into the it and then run <code>source ~/.vimrc</code> which resulted in error: <!-- raw HTML omitted -->-bash: /home/user_name/.vimrc: line 1: syntax error near unexpected token <code>&lt;' -bash: /home/user_name/.vimrc: line 1: </code>map &lt;C+K&gt; &lt;C+V&gt;'<!-- raw HTML omitted -->. So I give up this way and just deleted the line I&rsquo;ve added in and preserve the <code>~/.vimrc</code>. After the problem was solved, I continued learning Go using <strong>vi</strong> and suddenly found the auto indentation with which I felt comfortable failed. This was way more painful than the conflict between  paste and block vision and I was anxiously to it. Firstly I thought it was dued to the modification I had done in windows terminal&rsquo;s <code>settings.json</code> file and I found the original version online and recovered it(Next time if I&rsquo;m going to modify such kind of file I should copy a backup before implementing any modification.). But it doesn&rsquo;t help. And then I tried to add <code>set autoindent</code> into <code>~/.vimrc</code>. It kind of worked but not as the same as what I&rsquo;ve been used to.(Seems like a fixed but not flexible indentation as the original one. I mean, the orignal one knows I writting Go codes.) After hours of searching and thinking, I thought maybe <code>~/.vimrc</code> is the root cause since it was the first thing I had tried to add to relative configuration. So I just simply deleted it and it worked. Evething was back. I guessed <code>~/.vimrc</code> would take over the configuraion of <strong>vi</strong> or <strong>vim</strong> even it&rsquo;s empty which means do nothing that lead to the disfunction of auto indentaion. Go&rsquo;s own rules would then prevail after the deletion of <code>~/.vimrc</code>.</p>
 <h3 id="choco-and-make">Choco and make</h3>
 <p><a href="https://developer.aliyun.com/article/1212970">Source</a></p>
 <p>Operating system: <strong>windows 11</strong></p>
 <p>Terminal: <strong>Powershell</strong></p>
 <h6 id="install-chocolatey">Install Chocolatey</h6>
 <p>Open powershell as administrator and execute the following</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">iex </span><span class="p">((</span><span class="nb">new-object</span> <span class="n">net</span><span class="p">.</span><span class="n">webclient</span><span class="p">).</span><span class="py">DownloadString</span><span class="p">(</span><span class="s1">&#39;https://chocolatey.org/install.ps1&#39;</span><span class="p">))</span>
-</span></span></code></pre></div><h6 id="using-chocolatey-to-install-make">Using Chocolatey to install make</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">iex </span><span class="p">((</span><span class="nb">new-object</span> <span class="n">net</span><span class="p">.</span><span class="n">webclient</span><span class="p">).</span><span class="n">DownloadString</span><span class="p">(</span><span class="s1">&#39;https://chocolatey.org/install.ps1&#39;</span><span class="p">))</span>
+</code></pre></div><h6 id="using-chocolatey-to-install-make">Using Chocolatey to install make</h6>
 <p>You may need to reopen powershell as administrator after installing Chocolatey and run the following</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">choco</span> <span class="n">install</span> <span class="n">make</span>
-</span></span></code></pre></div><h3 id="message-forwarding-bot-in-telegram">Message forwarding bot in Telegram</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">choco</span> <span class="n">install</span> <span class="n">make</span>
+</code></pre></div><h3 id="message-forwarding-bot-in-telegram">Message forwarding bot in Telegram</h3>
 <ol>
 <li>
 <p>Ask <strong>Botfather</strong> for a <strong>token</strong></p>
@@ -131,7 +131,26 @@ go env -w GO111MODULE=on go env -w GOPROXY=https://proxy.golang.com.cn,direct Th
 <p><strong>Attention</strong>:  The owner of the bot need to reply the message someone else sending to the bot so that the none-bot-owner can view the message from the bot owner. For example, let&rsquo;s  assume Alice is the owner of the bot. When Bob sends some messages to Alice&rsquo;s bot, Alice should reply to one of the messages from Bob using right click so that Bob could see Alice&rsquo;s replying.</p>
 <h3 id="openssh-for-windows">Openssh for windows</h3>
 <p><a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=powershell">link</a></p>
-
+<h4 id="problems-within-the-installation-and-configuration-of-neovim-on-wsl2-ubuntu">Problems within the installation and configuration of Neovim on WSL2 Ubuntu</h4>
+<p><strong>Problem 1</strong>: Keyword(like <code>vim.keymap</code>) indentification failed.
+<strong>Solution</strong>:
+Just install unstable neovim version:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fish" data-lang="fish"><span class="nf">sudo</span> <span class="nf">add-apt-repository</span> ppa:neovim-ppa/unstable
+<span class="nf">sudo</span> <span class="nf">apt-get</span> update
+<span class="nf">sudo</span> <span class="nf">apt-get</span> install neovim
+</code></pre></div><p><a href="https://stackoverflow.com/a/76199901">reference</a>
+<strong>Problem 2</strong>: Unable to download Lazy vim.
+<strong>Solution</strong>:
+autocrlf should be set to false not true. This is not a LazyVim bug. This is a problem with Neovim itself. Just don&rsquo;t set this git global to true. Or set it to false temporarily to download and install LazyVim and then set it back to true again. But whenever you want to install or update plugins it should be set to false. The issue that I linked has detailed information about this problem.
+PS: Set autocrlf to false, delete ~/.local/share/nvim and restart Neovim to install everything from scratch.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fish" data-lang="fish"><span class="nf">git</span> config <span class="na">--global</span> core.autocrlf false
+</code></pre></div><p><a href="https://github.com/LazyVim/LazyVim/issues/3072">reference</a></p>
+<h4 id="different-syntax-in-fish-from-bash">Different syntax in fish from bash</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fish" data-lang="fish"><span class="c"># fish
+</span><span class="c"></span><span class="nb">eval</span> <span class="o">(</span><span class="nf">ssh-agent</span> <span class="na">-c</span><span class="o">)</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># bash</span>
+<span class="nb">eval</span> <span class="k">$(</span>ssh-agent -s<span class="k">)</span>
+</code></pre></div>
 </article>
 <nav class="no-print post-nav">
 

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="generator" content="Hugo 0.121.1">
+		<meta name="generator" content="Hugo 0.92.2" />
 		<title>Learning git - Manis</title>
 
 		<meta name="description" content="Useful commands View all files that have been modified but not yet added to the stagging area
@@ -79,7 +79,7 @@ git diff path/to/file
 <p>例如，假设你已经将<code>log.txt</code>文件提交到了Git仓库中，之后你决定应该忽略它，你在<code>.gitignore</code>中添加了<code>log.txt</code>规则，为了让这个更改生效，你需要执行：</p>
 <p>sh</p>
 <pre tabindex="0"><code class="language-git" data-lang="git">git rm --cached log.txt
-git commit -m &#34;Stop tracking log.txt&#34;
+git commit -m &quot;Stop tracking log.txt&quot;
 </code></pre><p>之后，<code>log.txt</code>文件将不会再被Git跟踪，<code>.gitignore</code>中的规则将适用于它。新的忽略规则也会从这一刻开始适用于你的工作目录中的未跟踪文件。</p>
 <p>要查看所有已跟踪的文件，你可以使用Git的<code>ls-files</code>命令。打开命令行或者终端，切换到你的Git仓库目录下，然后执行下面的命令：</p>
 <p>sh</p>
@@ -101,7 +101,7 @@ git commit -m &#34;Stop tracking log.txt&#34;
 </ol>
 <p>sh</p>
 <pre tabindex="0"><code class="language-git" data-lang="git">   git rm -r --cached bin/
-   git commit -m &#34;Untrack bin/ directory&#34;
+   git commit -m &quot;Untrack bin/ directory&quot;
 </code></pre><p><code>git rm -r --cached</code>命令会递归地从Git索引中移除<code>bin/</code>目录和其下的所有文件，但实际文件会保留在你的工作目录中。<code>--cached</code>选项确保只是从跟踪状态中移除，而不会删除物理文件。</p>
 <p>然后，使用<code>git commit</code>来提交这个变更。这将更新你的仓库，以反映这个文件夹不再被跟踪。</p>
 <p>之后，<code>bin/</code>目录及其内容就不会被Git跟踪了，并且任何对<code>.gitignore</code>的更新将立即应用于未跟踪的文件和目录。</p>

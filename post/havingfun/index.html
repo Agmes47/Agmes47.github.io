@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="generator" content="Hugo 0.121.1">
+		<meta name="generator" content="Hugo 0.92.2" />
 		<title>Having Fun - Manis</title>
 
 		<meta name="description" content="How was this blog builded source
@@ -72,12 +72,12 @@ Add a pubkey file First generate a pair of **publicKey **and secretKey files:">
 <p><code>adduser</code> and <code>useradd</code> are different. Use <code>adduser</code>. So applied to other similar commands, I guess.</p>
 <h6 id="add-a-pubkey-file">Add a pubkey file</h6>
 <p>First generate a pair of **publicKey **and <strong>secretKey</strong> files:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#Windows</span>
-</span></span><span class="line"><span class="cl"><span class="nb">ssh-keygen</span> <span class="n">-t</span> <span class="n">rsa</span> <span class="n">-b</span> <span class="mf">4096</span>
-</span></span></code></pre></div><p>Then upload the pubkey file to <code>~/</code>, and then put it in the correct position as following:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> ~ <span class="o">&amp;&amp;</span> mkdir .ssh
-</span></span><span class="line"><span class="cl">$ mv pubkey_file .ssh/authorized_keys
-</span></span></code></pre></div><h6 id="modify-ssh-configuration">Modify SSH configuration</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="c">#Windows</span>
+<span class="nb">ssh-keygen</span> <span class="n">-t</span> <span class="n">rsa</span> <span class="n">-b</span> <span class="n">4096</span>
+</code></pre></div><p>Then upload the pubkey file to <code>~/</code>, and then put it in the correct position as following:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nb">cd</span> ~ <span class="o">&amp;&amp;</span> mkdir .ssh
+$ mv pubkey_file .ssh/authorized_keys
+</code></pre></div><h6 id="modify-ssh-configuration">Modify SSH configuration</h6>
 <p>In <code>/etc/ssh/sshd_config</code></p>
 <pre tabindex="0"><code>Port 22     # replace it with a high number port
 PermitRootLogin no
@@ -87,94 +87,96 @@ PubkeyAuthentication yes 
 <p>in <code>~/.bashrc</code>, add the following:</p>
 <pre tabindex="0"><code>export PATH=$PATH:/usr/sbin
 </code></pre><h6 id="set-up-firewall">Set up firewall</h6>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install ufw
-</span></span><span class="line"><span class="cl">$ sudo ufw <span class="nb">enable</span>
-</span></span></code></pre></div><h6 id="swap">Swap</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ sudo apt install ufw
+$ sudo ufw <span class="nb">enable</span>
+</code></pre></div><h6 id="swap">Swap</h6>
 <p>Abort the previous one if necessary</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">swapoff swapfile     <span class="c1"># Assumed we&#39;re in the directory of &#39;swapfile&#39;</span>
-</span></span><span class="line"><span class="cl">rm swapfile
-</span></span></code></pre></div><p>Create a directory <code>/swap</code> for the new one</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> / <span class="o">&amp;&amp;</span> mkdir swap <span class="o">&amp;&amp;</span> <span class="nb">cd</span> swap
-</span></span></code></pre></div><p>Create a <code>swapfile</code></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>swapfile <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span><span class="m">1024</span>     <span class="c1"># adjust &#39;count&#39; as you wish</span>
-</span></span></code></pre></div><p>Mark it as swap space and activate it</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkswap swapfile
-</span></span><span class="line"><span class="cl">swapon swapfile
-</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> swapfile     <span class="c1"># for safety cocnern</span>
-</span></span></code></pre></div><p>Check if it&rsquo;s activatted</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">swapon --show
-</span></span></code></pre></div><p>Set as auto mounting after booting</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;/swap/swapfile none swap sw 0 0&#34;</span> &gt;&gt; /etc/fstab
-</span></span></code></pre></div><h6 id="set-up-congestion-control-algorithmbbr-and-queue-scheduling-algorithmfair-queuing">Set up congestion control algorithm(bbr) and queue scheduling algorithm(fair queuing)</h6>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#check the current algrithm</span>
-</span></span><span class="line"><span class="cl">sysctl net.ipv4.tcp_congestion_control
-</span></span><span class="line"><span class="cl"><span class="c1">#check the Linux version (expect to be newer than 4.9)</span>
-</span></span><span class="line"><span class="cl">uname -r
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#BBR set up</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;net.core.default_qdisc=fq&#34;</span> &gt;&gt; /etc/sysctl.conf
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;net.ipv4.tcp_congestion_control=bbr&#34;</span> &gt;&gt; /etc/sysctl.conf
-</span></span><span class="line"><span class="cl">sysctl -p
-</span></span></code></pre></div><h6 id="check-outbound-ip-address">Check outbound IP address</h6>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -4 ip.sb    <span class="c1"># ipv4</span>
-</span></span><span class="line"><span class="cl">curl ip.p3terx.com    <span class="c1">#ipv4 and AS</span>
-</span></span></code></pre></div><h6 id="timezone">Timezone</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">swapoff swapfile     <span class="c1"># Assumed we&#39;re in the directory of &#39;swapfile&#39;</span>
+rm swapfile
+</code></pre></div><p>Create a directory <code>/swap</code> for the new one</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> / <span class="o">&amp;&amp;</span> mkdir swap <span class="o">&amp;&amp;</span> <span class="nb">cd</span> swap
+</code></pre></div><p>Create a <code>swapfile</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>swapfile <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span><span class="m">1024</span>     <span class="c1"># adjust &#39;count&#39; as you wish</span>
+</code></pre></div><p>Mark it as swap space and activate it</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mkswap swapfile
+swapon swapfile
+chmod <span class="m">600</span> swapfile     <span class="c1"># for safety cocnern</span>
+</code></pre></div><p>Check if it&rsquo;s activatted</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">swapon --show
+</code></pre></div><p>Set as auto mounting after booting</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;/swap/swapfile none swap sw 0 0&#34;</span> &gt;&gt; /etc/fstab
+</code></pre></div><h6 id="set-up-congestion-control-algorithmbbr-and-queue-scheduling-algorithmfair-queuing">Set up congestion control algorithm(bbr) and queue scheduling algorithm(fair queuing)</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#check the current algrithm</span>
+sysctl net.ipv4.tcp_congestion_control
+<span class="c1">#check the Linux version (expect to be newer than 4.9)</span>
+uname -r
+
+<span class="c1">#BBR set up</span>
+<span class="nb">echo</span> <span class="s2">&#34;net.core.default_qdisc=fq&#34;</span> &gt;&gt; /etc/sysctl.conf
+<span class="nb">echo</span> <span class="s2">&#34;net.ipv4.tcp_congestion_control=bbr&#34;</span> &gt;&gt; /etc/sysctl.conf
+sysctl -p
+</code></pre></div><h6 id="check-outbound-ip-address">Check outbound IP address</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">curl -4 ip.sb    <span class="c1"># ipv4</span>
+curl ip.p3terx.com    <span class="c1">#ipv4 and AS</span>
+</code></pre></div><h6 id="timezone">Timezone</h6>
 <p><a href="https://zhuanlan.zhihu.com/p/137122724">source</a></p>
 <p>Check the current time zone</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">timedatectl
-</span></span></code></pre></div><p>List all the time zone candidates</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">timedatectl list-timezones
-</span></span></code></pre></div><p>Set a new timezone</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo timedatectl set-timezone Africa/Accra
-</span></span></code></pre></div><h4 id="advance">Advance</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">timedatectl
+</code></pre></div><p>List all the time zone candidates</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">timedatectl list-timezones
+</code></pre></div><p>Set a new timezone</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo timedatectl set-timezone Africa/Accra
+</code></pre></div><h4 id="advance">Advance</h4>
 <h6 id="for-ipv6-only-vps">For <strong>ipv6</strong> only VPS:</h6>
 <p>Modify to Google DNS server:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp /etc/resolv.conf<span class="o">{</span>,.bak<span class="o">}</span><span class="p">;</span> <span class="nb">echo</span> -e <span class="s2">&#34;nameserver 2a00:1098:2b::1\nnameserver 2a01:4f9:c010:3f02::1\nnameserver 2a01:4f8:c2c:123f::1\nnameserver 2a00:1098:2c::1&#34;</span> &gt; /etc/resolv.conf
-</span></span></code></pre></div><p>Add an outbound IPv4 Address to an IPv6 VPS via <strong>Warp</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh <span class="o">&amp;&amp;</span> bash menu.sh <span class="m">4</span>
-</span></span></code></pre></div><p><strong>Sing-box</strong> + <strong>argo</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>wget -qO- https://raw.githubusercontent.com/fscarmen/sba/main/sba.sh<span class="o">)</span>
-</span></span></code></pre></div><h4 id="pandoras-box">Pandora&rsquo;s box</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cp /etc/resolv.conf<span class="o">{</span>,.bak<span class="o">}</span><span class="p">;</span> <span class="nb">echo</span> -e <span class="s2">&#34;nameserver 2a00:1098:2b::1\nnameserver 2a01:4f9:c010:3f02::1\nnameserver 2a01:4f8:c2c:123f::1\nnameserver 2a00:1098:2c::1&#34;</span> &gt; /etc/resolv.conf
+</code></pre></div><p>Add an outbound IPv4 Address to an IPv6 VPS via <strong>Warp</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh <span class="o">&amp;&amp;</span> bash menu.sh <span class="m">4</span>
+</code></pre></div><p><strong>Sing-box</strong> + <strong>argo</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">bash &lt;<span class="o">(</span>wget -qO- https://raw.githubusercontent.com/fscarmen/sba/main/sba.sh<span class="o">)</span>
+</code></pre></div><h4 id="pandoras-box">Pandora&rsquo;s box</h4>
 <h6 id="daily-automatic-check-in-in-nodeseek-by-session-cookie">Daily automatic check-in in nodeseek by session cookie</h6>
 <p>Install the <a href="https://github.com/lwthiker/curl-impersonate#pre-compiled-binaries">pre-compiled binaris</a> (this step is to pass through TLS fingerprint detection.)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Ubuntu/Debian</span>
-</span></span><span class="line"><span class="cl">sudo apt install libnss3 nss-plugin-pem ca-certificates
-</span></span></code></pre></div><p>Download and unzip to get the executable binaries from <a href="https://github.com/lwthiker/curl-impersonate/releases">release page</a></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Download zip</span>
-</span></span><span class="line"><span class="cl">wget https://github.com/lwthiker/curl-impersonate/releases/download/v0.6.1/curl-impersonate-v0.6.1.x86_64-linux-gnu.tar.gz
-</span></span><span class="line"><span class="cl"><span class="c1"># Unzip them to the current directory</span>
-</span></span><span class="line"><span class="cl">tar -zxvf curl-impersonate-v0.6.1.x86_64-linux-gnu.tar.gz
-</span></span></code></pre></div><p>Get your session cookie by <code>F12</code> -&gt; <code>Application</code> -&gt; <code>Storage/Cookies</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Ubuntu/Debian</span>
+sudo apt install libnss3 nss-plugin-pem ca-certificates
+</code></pre></div><p>Download and unzip to get the executable binaries from <a href="https://github.com/lwthiker/curl-impersonate/releases">release page</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Download zip</span>
+wget https://github.com/lwthiker/curl-impersonate/releases/download/v0.6.1/curl-impersonate-v0.6.1.x86_64-linux-gnu.tar.gz
+<span class="c1"># Unzip them to the current directory</span>
+tar -zxvf curl-impersonate-v0.6.1.x86_64-linux-gnu.tar.gz
+</code></pre></div><p>Get your session cookie by <code>F12</code> -&gt; <code>Application</code> -&gt; <code>Storage/Cookies</code></p>
 <p>Test a binary</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Replace xxx with your session cookie</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># If success, it will return some JSOM data</span>
-</span></span><span class="line"><span class="cl">curl_chrome116 <span class="s1">&#39;https://www.nodeseek.com/api/attendance?random=true&#39;</span> --compressed -X POST -H <span class="s1">&#39;Cookie: session=xxx&#39;</span>
-</span></span></code></pre></div><p>(Optional) I personally like to wrap this command into a shell script and then automatically run it uising <strong>cron</strong>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Replace xxx with your session cookie</span>
+<span class="c1"># If success, it will return some JSOM data</span>
+curl_chrome116 <span class="s1">&#39;https://www.nodeseek.com/api/attendance?random=true&#39;</span> --compressed -X POST -H <span class="s1">&#39;Cookie: session=xxx&#39;</span>
+</code></pre></div><p>(Optional) I personally like to wrap this command into a shell script and then automatically run it uising <strong>cron</strong>.</p>
 <p>Edit a <code>name.sh</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>/path/to/curl_impersonate/curl_chrome110 <span class="s1">&#39;https://www.nodeseek.com/api/attendance?random=true&#39;</span> --compressed -X POST -H <span class="s1">&#39;Cookie: session=xxx&#39;</span>
-</span></span></code></pre></div><p>Edit <strong>crontab</strong> by running <code>crontab -e</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>/path/to/curl_impersonate/curl_chrome110 <span class="s1">&#39;https://www.nodeseek.com/api/attendance?random=true&#39;</span> --compressed -X POST -H <span class="s1">&#39;Cookie: session=xxx&#39;</span>
+</code></pre></div><p>Edit <strong>crontab</strong> by running <code>crontab -e</code></p>
 <pre tabindex="0"><code># Add the following line
 1 0 * * * /path/to/name.sh
 # If you want to log the information, consider adding the following(create log.txt firstly)
-1 0 * * * /path/to/name.sh 2&gt;&amp;1 | grep -oP &#39;\{[^{}]+\}&#39;  &gt;&gt; /path/to/log.txt
+1 0 * * * /path/to/name.sh 2&gt;&amp;1 | grep -oP '\{[^{}]+\}'  &gt;&gt; /path/to/log.txt
 </code></pre><p>So far, it seems like the the expiration of the session cookie is just one month. I may need to update it every month or after changing the login password or login or logout each time.</p>
-<h4 id="scripts">Scripts</h4>
+<h6 id="self-signed-certificate">Self-signed certificate</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">openssl req -x509 -nodes -newkey ec:&lt;<span class="o">(</span>openssl ecparam -name prime256v1<span class="o">)</span> -keyout /home/bauk/server.key -out /home/bauk/server.crt -subj <span class="s2">&#34;/CN=bing.com&#34;</span> -days <span class="m">3650</span> <span class="o">&amp;&amp;</span> sudo chown bauk /home/bauk/server.key <span class="o">&amp;&amp;</span> sudo chown bauk /home/bauk/server.crt
+</code></pre></div><h4 id="scripts">Scripts</h4>
 <p><a href="https://bulianglin.com/archives/nicename.html">link</a></p>
 <h5 id="x-ui">X-UI</h5>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>curl -Ls https://raw.githubusercontent.com/FranzKafkaYu/x-ui/956bf85bbac978d56c0e319c5fac2d6db7df9564/install.sh<span class="o">)</span> 0.3.4.4
-</span></span></code></pre></div><h5 id="dd-operating-system">dd operating system</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">bash &lt;<span class="o">(</span>curl -Ls https://raw.githubusercontent.com/FranzKafkaYu/x-ui/956bf85bbac978d56c0e319c5fac2d6db7df9564/install.sh<span class="o">)</span> 0.3.4.4
+</code></pre></div><h5 id="dd-operating-system">dd operating system</h5>
 <p><a href="https://blockxyz.notion.site/DD-VPS-fb837703b3ac4011bb2362e3a56ac148">Useful source</a> and <a href="https://www.moeelf.com/archives/293.html">original script source</a></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash &lt;<span class="o">(</span>wget --no-check-certificate -qO- <span class="s1">&#39;https://moeclub.org/attachment/LinuxShell/InstallNET.sh&#39;</span><span class="o">)</span> -d <span class="m">11</span> -v <span class="m">64</span> -a -p custom_password -port custom_ssh_ports
-</span></span></code></pre></div><h6 id="various-scripts">Various scripts</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">bash &lt;<span class="o">(</span>wget --no-check-certificate -qO- <span class="s1">&#39;https://moeclub.org/attachment/LinuxShell/InstallNET.sh&#39;</span><span class="o">)</span> -d <span class="m">11</span> -v <span class="m">64</span> -a -p custom_password -port custom_ssh_ports
+</code></pre></div><h6 id="various-scripts">Various scripts</h6>
 <p><a href="https://www.nodeseek.com/post-19427-1">Reference</a></p>
 <h2 id="xray">xray</h2>
 <p><a href="https://github.com/chika0801/Xray-examples?tab=readme-ov-file">configuration tutorial</a></p>
 <h6 id="log-of-xray">Log of xray</h6>
 <p>To check the log of xray</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">journalctl -u xray -o cat -e <span class="c1"># </span>
-</span></span><span class="line"><span class="cl">journalctl -u xray -o cat -f <span class="c1">#</span>
-</span></span></code></pre></div><p>By default, what we see after running the above commands are the system service log of xray service. And they are ususally stored in <code>/var/log/journal/</code> directory as binary files. By default, these log files could grow larger and larger without any limit. To prevent they taking too much disk space, we could edit <code>/etc/systemd/journald.conf</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">journalctl -u xray -o cat -e <span class="c1"># </span>
+journalctl -u xray -o cat -f <span class="c1">#</span>
+</code></pre></div><p>By default, what we see after running the above commands are the system service log of xray service. And they are ususally stored in <code>/var/log/journal/</code> directory as binary files. By default, these log files could grow larger and larger without any limit. To prevent they taking too much disk space, we could edit <code>/etc/systemd/journald.conf</code>.</p>
 <pre tabindex="0"><code class="language-conf" data-lang="conf"># Limit Log Size: Set a maximum size for individual journal files. For example
 SystemMaxUse=1G
 # Limit Disk Usage: Set a maximum disk space usage for all journal files combined.  For example:
@@ -184,10 +186,10 @@ SystemKeepLogs=1week
 # Adjust Vacuuming Frequency: systemd provides automatic vacuuming of journal files, which removes older log data to keep within the configured limits. You can adjust the frequency of vacuuming by setting the SystemMaxFileSec option in /etc/systemd/journald.conf. For example, to vacuum journal files every day, use:
 SystemMaxFileSec=1day
 </code></pre><p><strong>Triggering Rotation Manually</strong>: You can also manually trigger log rotation using the <code>journalctl</code> command. For example, to rotate the journal files immediately, use:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">journalctl --rotate
-</span></span></code></pre></div><p>After making changes to the <code>journald.conf</code> file, you need to restart the <code>systemd-journald</code> service for the changes to take effect:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl restart systemd-journald
-</span></span></code></pre></div><h2 id="iptables">iptables</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">journalctl --rotate
+</code></pre></div><p>After making changes to the <code>journald.conf</code> file, you need to restart the <code>systemd-journald</code> service for the changes to take effect:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo systemctl restart systemd-journald
+</code></pre></div><h2 id="iptables">iptables</h2>
 <p>要禁止或允许特定IP地址对您的机器进行访问，您可以使用iptables。以下是一些基本的iptables命令示例：</p>
 <ol>
 <li>

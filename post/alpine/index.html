@@ -3,11 +3,11 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="generator" content="Hugo 0.121.1">
+		<meta name="generator" content="Hugo 0.92.2" />
 		<title>Alpine - Manis</title>
 
 		<meta name="description" content="Basic Allow net-working:
-rc-update add networkingservice networking start Scripts source
+rc-update add networkingservice networking startScripts source
 #Warp： apk update &amp;&amp; apk add curl &amp;&amp; apk add bash &amp;&amp; apk add wget wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh &amp;&amp; bash menu.sh 4 #nezha： apk add bash curl &lt;url&gt; #X-UI： apk add curl&amp;&amp;apk add bash &amp;&amp; bash &lt;(curl -Ls https://raw.githubusercontent.com/Lynn-Becky/Alpine-x-ui/main/alpine-xui.sh) #XrayR： apk add wget sudo curl &amp;&amp; wget -N https://github.com/Cd1s/alpineXrayR/releases/download/one-click/install-xrayr.sh &amp;&amp; chmod &#43;x install-xrayr.sh &amp;&amp; bash install-xrayr.sh #ArgoX： bash &lt;(wget -qO- https://raw.">
 
 
@@ -64,35 +64,48 @@ rc-update add networkingservice networking start Scripts source
 service networking start
 </code></pre><h3 id="scripts">Scripts</h3>
 <p>source</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#Warp：</span>
-</span></span><span class="line"><span class="cl">apk update <span class="o">&amp;&amp;</span> apk add curl <span class="o">&amp;&amp;</span> apk add bash <span class="o">&amp;&amp;</span> apk add wget
-</span></span><span class="line"><span class="cl">wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh <span class="o">&amp;&amp;</span> bash menu.sh <span class="m">4</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#nezha：</span>
-</span></span><span class="line"><span class="cl">apk add bash curl &lt;url&gt;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#X-UI：</span>
-</span></span><span class="line"><span class="cl">apk add curl<span class="o">&amp;&amp;</span>apk add bash <span class="o">&amp;&amp;</span> bash &lt;<span class="o">(</span>curl -Ls https://raw.githubusercontent.com/Lynn-Becky/Alpine-x-ui/main/alpine-xui.sh<span class="o">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#XrayR：</span>
-</span></span><span class="line"><span class="cl">apk add wget sudo curl <span class="o">&amp;&amp;</span> wget -N https://github.com/Cd1s/alpineXrayR/releases/download/one-click/install-xrayr.sh <span class="o">&amp;&amp;</span> chmod +x install-xrayr.sh <span class="o">&amp;&amp;</span> bash install-xrayr.sh
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#ArgoX：</span>
-</span></span><span class="line"><span class="cl">bash &lt;<span class="o">(</span>wget -qO- https://raw.githubusercontent.com/fscarmen/argox/main/argox.sh<span class="o">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#SING-BOX：</span>
-</span></span><span class="line"><span class="cl">bash &lt;<span class="o">(</span>wget -qO- https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-box.sh<span class="o">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#Alpine package management</span>
-</span></span><span class="line"><span class="cl">rc-service <span class="o">[</span>package_name<span class="o">]</span> restart
-</span></span></code></pre></div><h3 id="faq">FAQ</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#Warp：</span>
+apk update <span class="o">&amp;&amp;</span> apk add curl <span class="o">&amp;&amp;</span> apk add bash <span class="o">&amp;&amp;</span> apk add wget
+wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh <span class="o">&amp;&amp;</span> bash menu.sh <span class="m">4</span>
+
+<span class="c1">#nezha：</span>
+apk add bash curl &lt;url&gt;
+
+<span class="c1">#X-UI：</span>
+apk add curl<span class="o">&amp;&amp;</span>apk add bash <span class="o">&amp;&amp;</span> bash &lt;<span class="o">(</span>curl -Ls https://raw.githubusercontent.com/Lynn-Becky/Alpine-x-ui/main/alpine-xui.sh<span class="o">)</span>
+
+<span class="c1">#XrayR：</span>
+apk add wget sudo curl <span class="o">&amp;&amp;</span> wget -N https://github.com/Cd1s/alpineXrayR/releases/download/one-click/install-xrayr.sh <span class="o">&amp;&amp;</span> chmod +x install-xrayr.sh <span class="o">&amp;&amp;</span> bash install-xrayr.sh
+
+<span class="c1">#ArgoX：</span>
+bash &lt;<span class="o">(</span>wget -qO- https://raw.githubusercontent.com/fscarmen/argox/main/argox.sh<span class="o">)</span>
+
+<span class="c1">#SING-BOX：</span>
+bash &lt;<span class="o">(</span>wget -qO- https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-box.sh<span class="o">)</span>
+
+<span class="c1">#Alpine package management</span>
+rc-service <span class="o">[</span>package_name<span class="o">]</span> restart
+</code></pre></div><h3 id="faq">FAQ</h3>
 <h6 id="coulld-not-ban-ssh-password-log-in">Coulld not ban SSH password log in?</h6>
 <p><a href="https://superuser.com/a/1816612">reference</a>
 Execute</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sshd -T <span class="p">|</span> grep passwordauthentication     
-</span></span></code></pre></div><p>if you see output <code>passwordauthentication yes</code>, some configurations are set prior to default /etc/ssh/sshd_config, they are located in <code>/etc/ssh/sshd_config.d/</code> , you can search <code>passwordauthentication</code> from them or simply remove them by</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm /etc/ssh/sshd_config.d/*
-</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sshd -T <span class="p">|</span> grep passwordauthentication     
+</code></pre></div><p>if you see output <code>passwordauthentication yes</code>, some configurations are set prior to default /etc/ssh/sshd_config, they are located in <code>/etc/ssh/sshd_config.d/</code> , you can search <code>passwordauthentication</code> from them or simply remove them by</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">rm /etc/ssh/sshd_config.d/*
+</code></pre></div><h5 id="apline-的库">Apline 的库</h5>
+<p>Alpine Linux 使用的是 <code>musl</code> libc 而不是大多数 Linux 分发版使用的 <code>glibc</code>。因此，在为 Alpine Linux 构建静态可执行文件时，需要确保你的应用链接到 <code>musl</code> 而不是 <code>glibc</code>。</p>
+<p>你的 <code>Makefile</code> 中的 <code>CGO_ENABLED=1</code> 表明你可能需要 CGO 来编译 C 代码。如果你的 Go 应用依赖于 C 库，并且这些库在 Alpine Linux 上存在或者可以被 <code>musl</code> 正确处理，可能需要进行一些调整。</p>
+<p>这里有一个在 Alpine Linux 上构建 Go 应用的示例：</p>
+<p>Makefile</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="nf">build</span><span class="o">:</span>
+    @CGO_ENABLED<span class="o">=</span><span class="m">0</span> <span class="nv">GOOS</span><span class="o">=</span>linux go build -a -tags netgo -ldflags <span class="s1">&#39;-w -extldflags &#34;-static&#34;&#39;</span> -o bin/servi .
+
+<span class="nf">run</span><span class="o">:</span> <span class="n">build</span>
+    ./bin/servi
+</code></pre></div><p>这里，我们设置 <code>CGO_ENABLED=0</code> 来禁用 CGO，这通常是创建一个完全静态链接的可执行文件的推荐方式。我们也添加了 <code>-tags netgo</code> 和一些 <code>ldflags</code> 来确保所有的网络相关的代码使用纯 Go 的实现，并且所有的 C 代码都被静态链接。</p>
+<p>如果你的程序确实需要 CGO，并且需要链接到 C 库，那么你可能需要安装 <code>musl</code> 的交叉编译工具链，并且在构建时指定它。这通常是一个更高级的主题，可能需要根据你的具体需求调整构建过程。</p>
+<p>请根据你的项目的具体需求来决定是否需要对 <code>Makefile</code> 进行这样的修改。如果你确实需要进行修改，还需要确保你的项目依赖项都能够在 Alpine Linux 上正确运行。</p>
+
 </article>
 <nav class="no-print post-nav">
 

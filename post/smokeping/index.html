@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="generator" content="Hugo 0.121.1">
+		<meta name="generator" content="Hugo 0.92.2" />
 		<title>Smokeping - Manis</title>
 
 		<meta name="description" content="Source zzz&rsquo;s blog
@@ -61,34 +61,34 @@ Start Install docker and enable it. curl -fsSL https://get.docker.com -o get-doc
 <p><a href="https://blog.captainz.cc/posts/smokeping_install.html">zzz&rsquo;s blog</a></p>
 <h3 id="start">Start</h3>
 <h6 id="install-docker-and-enable-it">Install docker and enable it.</h6>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -fsSL https://get.docker.com -o get-docker.sh <span class="o">&amp;&amp;</span> sh get-docker.sh <span class="o">&amp;&amp;</span> docker --version <span class="o">&amp;&amp;</span> systemctl start docker <span class="o">&amp;&amp;</span> systemctl <span class="nb">enable</span> docker <span class="o">&amp;&amp;</span> systemctl restart
-</span></span></code></pre></div><h6 id="create-a-directory-and-open-a-port">Create a directory and open a port</h6>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">myserve</span><span class="o">=</span><span class="s2">&#34;smokeping&#34;</span>
-</span></span><span class="line"><span class="cl">sudo ufw allow 8899/tcp comment <span class="nv">$myserve</span> <span class="o">&amp;&amp;</span> sudo ufw reload
-</span></span><span class="line"><span class="cl">mkdir -p ~/myserve/<span class="nv">$myserve</span> <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ~/myserve/<span class="nv">$myserve</span>
-</span></span></code></pre></div><h6 id="create-a-configuration-file">Create a configuration file</h6>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat &gt; docker-compose.yml <span class="s">&lt;&lt; EOF
-</span></span></span><span class="line"><span class="cl"><span class="s">version: &#34;2.1&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">services:
-</span></span></span><span class="line"><span class="cl"><span class="s">  smokeping:
-</span></span></span><span class="line"><span class="cl"><span class="s">    image: lscr.io/linuxserver/smokeping:latest
-</span></span></span><span class="line"><span class="cl"><span class="s">    container_name: smokeping
-</span></span></span><span class="line"><span class="cl"><span class="s">    restart: unless-stopped
-</span></span></span><span class="line"><span class="cl"><span class="s">    environment:
-</span></span></span><span class="line"><span class="cl"><span class="s">      - PUID=root   # Customized, user name or UID.
-</span></span></span><span class="line"><span class="cl"><span class="s">      - PGID=root   # Customized, group name or GID.
-</span></span></span><span class="line"><span class="cl"><span class="s">      - TZ=Asia/Shanghai
-</span></span></span><span class="line"><span class="cl"><span class="s">    volumes:
-</span></span></span><span class="line"><span class="cl"><span class="s">      - ./config:/config
-</span></span></span><span class="line"><span class="cl"><span class="s">      - ./data:/data
-</span></span></span><span class="line"><span class="cl"><span class="s">    ports:
-</span></span></span><span class="line"><span class="cl"><span class="s">      - 8899:80
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></div><h6 id="pull-down-the-image-of-the-project">Pull down the image of the project</h6>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker compose pull
-</span></span></code></pre></div><h6 id="run-the-project-in-docker">Run the project in docker</h6>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker compose up -d
-</span></span></code></pre></div><h4 id="custom">Custom</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">curl -fsSL https://get.docker.com -o get-docker.sh <span class="o">&amp;&amp;</span> sh get-docker.sh <span class="o">&amp;&amp;</span> docker --version <span class="o">&amp;&amp;</span> systemctl start docker <span class="o">&amp;&amp;</span> systemctl <span class="nb">enable</span> docker <span class="o">&amp;&amp;</span> systemctl restart
+</code></pre></div><h6 id="create-a-directory-and-open-a-port">Create a directory and open a port</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">myserve</span><span class="o">=</span><span class="s2">&#34;smokeping&#34;</span>
+sudo ufw allow 8899/tcp comment <span class="nv">$myserve</span> <span class="o">&amp;&amp;</span> sudo ufw reload
+mkdir -p ~/myserve/<span class="nv">$myserve</span> <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ~/myserve/<span class="nv">$myserve</span>
+</code></pre></div><h6 id="create-a-configuration-file">Create a configuration file</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cat &gt; docker-compose.yml <span class="s">&lt;&lt; EOF
+</span><span class="s">version: &#34;2.1&#34;
+</span><span class="s">services:
+</span><span class="s">  smokeping:
+</span><span class="s">    image: lscr.io/linuxserver/smokeping:latest
+</span><span class="s">    container_name: smokeping
+</span><span class="s">    restart: unless-stopped
+</span><span class="s">    environment:
+</span><span class="s">      - PUID=root   # Customized, user name or UID.
+</span><span class="s">      - PGID=root   # Customized, group name or GID.
+</span><span class="s">      - TZ=Asia/Shanghai
+</span><span class="s">    volumes:
+</span><span class="s">      - ./config:/config
+</span><span class="s">      - ./data:/data
+</span><span class="s">    ports:
+</span><span class="s">      - 8899:80
+</span><span class="s">EOF</span>
+</code></pre></div><h6 id="pull-down-the-image-of-the-project">Pull down the image of the project</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker compose pull
+</code></pre></div><h6 id="run-the-project-in-docker">Run the project in docker</h6>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker compose up -d
+</code></pre></div><h4 id="custom">Custom</h4>
 <h6 id="the-name-of-the-node-of-the-host-machine">The name of the node of the host machine</h6>
 <p>Modify <code>config/General</code></p>
 <pre tabindex="0"><code>*** General ***
@@ -115,13 +115,13 @@ binary = /usr/sbin/fping
 packetsize = 1000
 
 + FPing6
-binary = /bin/ping6   # Can&#39;t work fine.
+binary = /bin/ping6   # Can't work fine.
 
 + DNS
 binary = /usr/bin/dig
 lookup = baidu.com
-pings = 5             # this &#39;pings&#39; would cover the one in config/Database
-step = 300            #this &#39;step&#39; would cover the one in config/Database
+pings = 5             # this 'pings' would cover the one in config/Database
+step = 300            #this 'step' would cover the one in config/Database
 
 + Curl
 binary = /usr/bin/curl
@@ -130,9 +130,9 @@ offset = 50%
 </code></pre><h6 id="probing-targets">Probing targets</h6>
 <p>Modify <code>config/Targets</code> according to this <a href="https://raw.githubusercontent.com/AhFeil/bash-script/main/smokeping-Targets">page</a>.</p>
 <h5 id="restart-the-docker-container-to-apply-new-configuration">Restart the docker container to apply new configuration</h5>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker compose down
-</span></span><span class="line"><span class="cl">docker compose up -d
-</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker compose down
+docker compose up -d
+</code></pre></div>
 </article>
 <nav class="no-print post-nav">
 

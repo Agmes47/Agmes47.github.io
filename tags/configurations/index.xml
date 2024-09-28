@@ -5,16 +5,21 @@
     <link>https://agmes47.github.io/tags/configurations/</link>
     <description>Recent content in configurations on Manis</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
     <copyright>&amp;copy; 2019 Yurizal Susanto</copyright>
-    <lastBuildDate>Sat, 02 Jan 2010 16:49:08 +0800</lastBuildDate>
-    <atom:link href="https://agmes47.github.io/tags/configurations/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Jan 2010 16:49:08 +0800</lastBuildDate><atom:link href="https://agmes47.github.io/tags/configurations/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Some configurations</title>
       <link>https://agmes47.github.io/post/config/</link>
       <pubDate>Sat, 02 Jan 2010 16:49:08 +0800</pubDate>
+      
       <guid>https://agmes47.github.io/post/config/</guid>
-      <description>Go&amp;rsquo;s configuration in VScode Setting up Go in Windows&#xA;Problem: Could not download VScode plugins of Go due to a famous firewall(I guess). here is the reference.&#xA;Solvation:&#xA;This is the old version(abandoned):&#xA;go env -w GO111MODULE=on go env -w GOPROXY=https://goproxy.io,direct Open cmd or powershell and run the following commands:&#xA;go env -w GO111MODULE=on go env -w GOPROXY=https://proxy.golang.com.cn,direct Then restart VScode and install the Go plugins again, you should succeed.</description>
+      <description>Go&amp;rsquo;s configuration in VScode Setting up Go in Windows
+Problem: Could not download VScode plugins of Go due to a famous firewall(I guess). here is the reference.
+Solvation:
+This is the old version(abandoned):
+go env -w GO111MODULE=on go env -w GOPROXY=https://goproxy.io,direct Open cmd or powershell and run the following commands:
+go env -w GO111MODULE=on go env -w GOPROXY=https://proxy.golang.com.cn,direct Then restart VScode and install the Go plugins again, you should succeed.</description>
     </item>
+    
   </channel>
 </rss>

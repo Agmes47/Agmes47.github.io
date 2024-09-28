@@ -3,12 +3,12 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="generator" content="Hugo 0.121.1">
+		<meta name="generator" content="Hugo 0.92.2" />
 		<title>Naive - Manis</title>
 
-		<meta name="description" content="Server Update and upgrade apt update &amp;&amp; apt upgrade Prerequisite Make sure the memory of your machine is larger than 1 GB. You may try swap if not.
-A domain name that has been resolved(no CND).
-Network tools for downloading apt-get install socat Installing Go environment wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz #replace &#39;go1.21.1.linux-amd64.tar.gz&#39; with the new go version tar -C /usr/local -xzf go1.21.1.linux-amd64.tar.gz #replace &#39;go1.21.1.linux-amd64.tar.gz&#39; with the new go version export PATH=&#34;/usr/local/go/bin:$PATH&#34; #temporary environment variable go env -w GO111MODULE=on #Set the Go module model as default behavior rm -f go1.">
+		<meta name="description" content="Server Update and upgrade apt update &amp;&amp; apt upgrade Prerequisite   Make sure the memory of your machine is larger than 1 GB. You may try swap if not.
+  A domain name that has been resolved(no CND).
+  Network tools for downloading apt-get install socat Installing Go environment wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz #replace &#39;go1.21.1.linux-amd64.tar.gz&#39; with the new go version tar -C /usr/local -xzf go1.21.1.linux-amd64.tar.gz #replace &#39;go1.21.1.linux-amd64.tar.gz&#39; with the new go version export PATH=&#34;/usr/local/go/bin:$PATH&#34; #temporary environment variable go env -w GO111MODULE=on #Set the Go module model as default behavior rm -f go1.">
 
 
 		
@@ -60,8 +60,8 @@ Network tools for downloading apt-get install socat Installing Go environment wg
 </header>
 	<h2 id="server">Server</h2>
 <h3 id="update-and-upgrade">Update and upgrade</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt update <span class="o">&amp;&amp;</span> apt upgrade
-</span></span></code></pre></div><h3 id="prerequisite">Prerequisite</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">apt update <span class="o">&amp;&amp;</span> apt upgrade
+</code></pre></div><h3 id="prerequisite">Prerequisite</h3>
 <ol>
 <li>
 <p>Make sure the memory of your machine is larger than 1 GB. You may try <strong>swap</strong> if not.</p>
@@ -71,35 +71,35 @@ Network tools for downloading apt-get install socat Installing Go environment wg
 </li>
 </ol>
 <h4 id="network-tools-for-downloading">Network tools for downloading</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt-get install socat
-</span></span></code></pre></div><h4 id="installing-go-environment">Installing Go environment</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz    <span class="c1">#replace &#39;go1.21.1.linux-amd64.tar.gz&#39; with the new go version</span>
-</span></span><span class="line"><span class="cl">tar -C /usr/local -xzf go1.21.1.linux-amd64.tar.gz    <span class="c1">#replace &#39;go1.21.1.linux-amd64.tar.gz&#39; with the new go version</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;/usr/local/go/bin:</span><span class="nv">$PATH</span><span class="s2">&#34;</span>    <span class="c1">#temporary environment variable</span>
-</span></span><span class="line"><span class="cl">go env -w <span class="nv">GO111MODULE</span><span class="o">=</span>on    <span class="c1">#Set the Go module model as default behavior</span>
-</span></span><span class="line"><span class="cl">rm -f go1.21.1.linux-amd64.tar.gz    <span class="c1">#you may want to delete it</span>
-</span></span></code></pre></div><h4 id="installing-caddy-within-naive-plugin">Installing <strong>caddy</strong> within <strong>naive</strong> plugin</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> <span class="o">&amp;&amp;</span> go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest   
-</span></span><span class="line"><span class="cl">~/go/bin/xcaddy build --with github.com/caddyserver/forwardproxy@caddy2<span class="o">=</span>github.com/klzgrad/forwardproxy@naive     <span class="c1">#buuild caddy with xcaddy</span>
-</span></span><span class="line"><span class="cl">rm -rf go    <span class="c1">#you may want to delete it</span>
-</span></span></code></pre></div><h4 id="running-caddy-as-a-daemon-process">Running caddy as a daemon process</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">apt-get install socat
+</code></pre></div><h4 id="installing-go-environment">Installing Go environment</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz    <span class="c1">#replace &#39;go1.21.1.linux-amd64.tar.gz&#39; with the new go version</span>
+tar -C /usr/local -xzf go1.21.1.linux-amd64.tar.gz    <span class="c1">#replace &#39;go1.21.1.linux-amd64.tar.gz&#39; with the new go version</span>
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;/usr/local/go/bin:</span><span class="nv">$PATH</span><span class="s2">&#34;</span>    <span class="c1">#temporary environment variable</span>
+go env -w <span class="nv">GO111MODULE</span><span class="o">=</span>on    <span class="c1">#Set the Go module model as default behavior</span>
+rm -f go1.21.1.linux-amd64.tar.gz    <span class="c1">#you may want to delete it</span>
+</code></pre></div><h4 id="installing-caddy-within-naive-plugin">Installing <strong>caddy</strong> within <strong>naive</strong> plugin</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> <span class="o">&amp;&amp;</span> go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest   
+~/go/bin/xcaddy build --with github.com/caddyserver/forwardproxy@caddy2<span class="o">=</span>github.com/klzgrad/forwardproxy@naive     <span class="c1">#buuild caddy with xcaddy</span>
+rm -rf go    <span class="c1">#you may want to delete it</span>
+</code></pre></div><h4 id="running-caddy-as-a-daemon-process">Running caddy as a daemon process</h4>
 <p>Executilize caddy and move it to <code>/usr/bin/</code></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod a+x caddy
-</span></span><span class="line"><span class="cl">mv caddy /usr/bin/
-</span></span></code></pre></div><p>Create a directory</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir /etc/caddy
-</span></span></code></pre></div><p>Create user and group</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">groupadd --system caddy
-</span></span><span class="line"><span class="cl">useradd --system <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --gid caddy <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --create-home <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --home-dir /var/lib/caddy <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --shell /usr/sbin/nologin <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --comment <span class="s2">&#34;Caddy web server&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    caddy
-</span></span></code></pre></div><p>Create <code>caddy.service</code> in <code>/etc/systemd/system/</code></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vi /etc/systemd/system/caddy.service
-</span></span></code></pre></div><p>And paste the following</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">chmod a+x caddy
+mv caddy /usr/bin/
+</code></pre></div><p>Create a directory</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mkdir /etc/caddy
+</code></pre></div><p>Create user and group</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">groupadd --system caddy
+useradd --system <span class="se">\
+</span><span class="se"></span>    --gid caddy <span class="se">\
+</span><span class="se"></span>    --create-home <span class="se">\
+</span><span class="se"></span>    --home-dir /var/lib/caddy <span class="se">\
+</span><span class="se"></span>    --shell /usr/sbin/nologin <span class="se">\
+</span><span class="se"></span>    --comment <span class="s2">&#34;Caddy web server&#34;</span> <span class="se">\
+</span><span class="se"></span>    caddy
+</code></pre></div><p>Create <code>caddy.service</code> in <code>/etc/systemd/system/</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">vi /etc/systemd/system/caddy.service
+</code></pre></div><p>And paste the following</p>
 <pre tabindex="0"><code>[Unit]
 Description=Caddy
 Documentation=https://caddyserver.com/docs/
@@ -121,8 +121,8 @@ AmbientCapabilities=CAP_NET_BIND_SERVICE
 [Install]
 WantedBy=multi-user.target
 </code></pre><p>Configurations for caddy</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nano /etc/caddy/Caddyfile
-</span></span></code></pre></div><p>Paste the following</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">nano /etc/caddy/Caddyfile
+</code></pre></div><p>Paste the following</p>
 <pre tabindex="0"><code>:443, example.domain.com #domain name
 tls example@example.com #email
 route {
@@ -145,36 +145,36 @@ route {
     }
 }
 </code></pre><p>Format Caddyfile</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">caddy fmt --overwrite /etc/caddy/Caddyfile
-</span></span></code></pre></div><p>Apply for a certification</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl https://get.acme.sh <span class="p">|</span> sh
-</span></span><span class="line"><span class="cl">ln -s /root/.acme.sh/acme.sh /usr/local/bin/acme.sh
-</span></span><span class="line"><span class="cl">acme.sh --set-default-ca --server letsencrypt
-</span></span><span class="line"><span class="cl"><span class="c1">#substitute &#39;example.domain.com&#39; with uour domain</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#attention：add &#39;--listen-v6&#39; for some ipv6 hosts like hax.co.id/ for the following commands</span>
-</span></span><span class="line"><span class="cl">acme.sh --issue -d example.domain.com --keylength ec-256 --standalone --insecure --force
-</span></span><span class="line"><span class="cl">acme.sh --install-cert -d example.domain.com --ecc <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>        --key-file       /etc/caddy/example.domain.com.key  <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>        --fullchain-file /etc/caddy/example.domain.com.pem
-</span></span></code></pre></div><h4 id="start-caddy">Start caddy</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chown -R caddy:caddy /etc/caddy/
-</span></span><span class="line"><span class="cl">systemctl daemon-reload
-</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> caddy
-</span></span><span class="line"><span class="cl">systemctl start caddy
-</span></span><span class="line"><span class="cl"><span class="c1">#check out current status</span>
-</span></span><span class="line"><span class="cl">systemctl status caddy
-</span></span><span class="line"><span class="cl"><span class="c1">#reload caddy once modified Caddyfile</span>
-</span></span><span class="line"><span class="cl">systemctl reload caddy
-</span></span></code></pre></div><h2 id="client">Client</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">caddy fmt --overwrite /etc/caddy/Caddyfile
+</code></pre></div><p>Apply for a certification</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">curl https://get.acme.sh <span class="p">|</span> sh
+ln -s /root/.acme.sh/acme.sh /usr/local/bin/acme.sh
+acme.sh --set-default-ca --server letsencrypt
+<span class="c1">#substitute &#39;example.domain.com&#39; with uour domain</span>
+<span class="c1">#attention：add &#39;--listen-v6&#39; for some ipv6 hosts like hax.co.id/ for the following commands</span>
+acme.sh --issue -d example.domain.com --keylength ec-256 --standalone --insecure --force
+acme.sh --install-cert -d example.domain.com --ecc <span class="se">\
+</span><span class="se"></span>        --key-file       /etc/caddy/example.domain.com.key  <span class="se">\
+</span><span class="se"></span>        --fullchain-file /etc/caddy/example.domain.com.pem
+</code></pre></div><h4 id="start-caddy">Start caddy</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">chown -R caddy:caddy /etc/caddy/
+systemctl daemon-reload
+systemctl <span class="nb">enable</span> caddy
+systemctl start caddy
+<span class="c1">#check out current status</span>
+systemctl status caddy
+<span class="c1">#reload caddy once modified Caddyfile</span>
+systemctl reload caddy
+</code></pre></div><h2 id="client">Client</h2>
 <h4 id="download-and-configuration">Download and configuration</h4>
 <p>Client <a href="https://github.com/klzgrad/naiveproxy/releases/latest">Download</a></p>
 <p><code>config.json</code></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">Bash</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;listen&#34;</span><span class="p">:</span> <span class="s2">&#34;socks://127.0.0.1:1080&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;proxy&#34;</span><span class="p">:</span> <span class="s2">&#34;https://user:password@example.domain.com&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h4 id="apply-v2rayn">Apply V2rayn</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="err">Bash</span>
+<span class="p">{</span>
+  <span class="nt">&#34;listen&#34;</span><span class="p">:</span> <span class="s2">&#34;socks://127.0.0.1:1080&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;proxy&#34;</span><span class="p">:</span> <span class="s2">&#34;https://user:password@example.domain.com&#34;</span>
+<span class="p">}</span>
+</code></pre></div><h4 id="apply-v2rayn">Apply V2rayn</h4>
 <p>Please check it out in the sources.</p>
 <p>Sources:</p>
 <p><a href="https://www.kkiikk.top/index.php/archives/211/">1</a></p>
