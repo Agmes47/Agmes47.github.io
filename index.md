@@ -1,13 +1,7 @@
 ---
 layout: home
-title: My Blog
+title: Agmes47's Blog
 description: Welcome to my blog! Here, I share my thoughts, tutorials, and experiences.
----
-
-# Welcome to My Blog!
-
-Hi, I'm Agmes, and this is my blog. I write about everything. Feel free to explore my posts below!
-
 ---
 
 ## Recent Posts
