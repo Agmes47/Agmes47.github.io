@@ -1,0 +1,135 @@
++++
+title = 'Tuic'
+date = 2024-11-07T07:33:00+08:00
+draft = true
++++
+
+
+## Commit 37dbb
+
+`tuic-client/src/client.rs`
+
+What the start() function does is:
+
+1. Do a quic handshake with the hypothetical server(here is local), if success
+2. Init a sock5 server to listen on a specific port(here 8887)
+3. When the sock5 server receive a connection request, wrap it with the customed tuic protocol and relay it to the hypothetical server. If the hypothetical server accept this connection request:
+4. Pick a random available port to subsititute the current socks5 connection port, and then `shutdown` the current socks5 connection. After that, **syncronize** the new socks5 connection(with a new port) with the established quic connection with the hypothetical server(the following code sippet shows this action).
+
+one thing that still confuses me is that the port would change after the connection between the client program and its socks5 server is establish(from 8887 to a ramdon one). Is that what the socks5 protocol aclaims?
+
+        let remote_to_local = tokio::io::copy(&mut recv, &mut local_send);
+        let local_to_remote = tokio::io::copy(&mut local_recv, &mut send);
+
+**********
+**client** ----
+**********    -
+**socks5** <---             ----> proxy
+**********                  -
+        -                   -
+        -       (quic)      -
+        ---------------------
+
+
+## Commit 60237
+
+Now the transportation structure became:
+
+client program -> socks5 -> connection_manageer -> proxy
+
+----------------------------------------------
+
+With the same machine(ip)
+
+The communication between the socks5 server and the connnection_manager is established on a `tokio::sync::mpsc::channel(8)`. And look at how he did those things:
+
+    pub struct ConnectionManager {
+        endpoint: Endpoint,
+        channel: mpsc::Receiver<ChannelMessage>,
+    }
+    pub enum ChannelMessage {
+        GetConnection(oneshot::Sender<Connection>),
+        ConnectionClosed(usize),
+    }
+
+The socks5 server would send the nested **sender** to the connection_manager, which the connection_manager would use to send back a quic connection object:
+
+    // The two corresponding function
+    // get_tuic_connection send the **sender**
+    async fn get_tuic_connection(&self) -> Result<Connection, Error> {
+        let (get_conn_msg, conn_receiver) = ChannelMessage::get_connection();
+        self.channel
+            .send(get_conn_msg)
+            .await
+            .map_err(|_| ())
+            .unwrap();
+        let conn = conn_receiver.await.map_err(|_| ()).unwrap();
+        Ok(conn)
+    }
+    // The connection_manager use the received **sender** to ship back the quic connection.
+    pub async fn run(mut self) {
+        tokio::spawn(async move {
+            let mut conn = self.connect("localhost", 5000).await.unwrap();
+
+            while let Some(msg) = self.channel.recv().await {
+                match msg {
+                    ChannelMessage::GetConnection(conn_sender) => {
+                        let conn = conn.clone();
+                        conn_sender.send(conn).map_err(|_| ()).unwrap();
+                    }
+                    ChannelMessage::ConnectionClosed(closed_conn_id) => {
+                        if conn.id() == closed_conn_id {
+                            conn = self.connect("localhost", 5000).await.unwrap()
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+## Commit a362
+
+The structute remain the same, while the message transferred between the top channel is modified(In kind way that it's boring to exlain every detail). And in the previous commit(60237), the quic connection just cloned and passed to the receiver(top level). But it would perform a new handshake to establish the same(?) quic conneciton in this commit.
+
+
+## Commit 318cd
+
+This `transmute()` and `MaybeUninit` attracts me.
+
+    async fn establish_connection(&self) -> Connection {
+        let (mut addrs, server_name) = match &self.server_addr {
+            ServerAddr::HostnameAddr { hostname, .. } => (
+                unsafe { mem::transmute(MaybeUninit::<IntoIter<SocketAddr>>::uninit()) }, hostname,
+            ),
+
+Seems like there is the performing of DNS resolution, which I could not find any vestige of them in the codes I have traced through.
+
+Ok, I found out **libc** finnally(but why would the telescope or rust-analyzer need to work with Internet connection)
+
+    match (hostname.as_str(), *server_port).to_socket_addrs() {
+
+You know what, it is very painful to watch unanotated codes. I would much rather write the codes from scratch by myself someday later.
+
+I finally found out the full structure of the entire program. There is socks5 protocl, quic protocol(although roughly just some APIs and data structures) and a customed procotol, which I used to mess up before. I should list some points which I have taken much effor to understand:
+
+- The successful TCP relay request would got a pair of send api and receive api in the local socks5 server, which is `(mut remote_send, mut remote_recv)` in the original codes. And then the socks5 server just organize them with the client program's connection. The source codes are shown bellow. The dataflow would looks like: **client_programm -> (of cause there is the relaying by local socks5 server) -> remote relay server -> destination host**
+
+        let remote_to_local = io::copy(&mut remote_recv, &mut local_send);
+        let local_to_remote = io::copy(&mut local_recv, &mut remote_send);
+
+- In the socks5 server, the UDP relay request would contain two oneside end of two different channels, one for sending packets and one for receiving packet(as shown in # 1). And it worths noticed that the local **socks5 server** would create a new UDP socket to relay packets back and forth(as shown in # 2). So the dataflow looks like: **client_program -> local socks5_server_UDPsocket -> remote relay server -> dst host**.
+
+        # 1
+        let (relay_req, pkt_send_tx, pkt_receive_rx) = RelayRequest::new_associate();
+        # 2
+        let socket = Arc::new(socket);
+
+- The UDP listenning task in the client side has been set up once the quic connection is establish(source codes are shown bellow).
+
+        match udp_mode {
+            UdpMode::Native => tokio::spawn(Self::listen_datagrams(conn.clone(), datagrams)),
+            UdpMode::Quic => tokio::spawn(Self::listen_uni_streams(conn.clone(), uni_streams)),
+        };
+
+I should checkout the socks protocol RFC. it seems really straight forward.
+
